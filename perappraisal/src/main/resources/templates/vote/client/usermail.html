@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h"
+        style="background-color: #fd5353 !important;">
+    <div class="ui-header-c fl f30 w59" style="width: 100%;">
+        邮箱填写
+    </div>
+</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        *{padding:0; margin:0;}
+        body{ color:#555;}
+        .customer h2{
+            font-size:16px;
+            height:32px;
+            line-height:32px;
+            background:#F4C39B;
+            color:#fff;
+            margin:10px 0;
+            padding-left:15px;
+        }
+        .customer p{
+            font-size:14px;
+            padding:0 15px;
+            line-height:36px;
+
+        }
+        .customer input{
+            height:30px;
+            border:1px solid #ccc;
+            padding:0 10px;
+            border-radius: 4px;
+            width:50%;
+        }
+        .customer label{
+            width: 40%;
+            display: inline-block;
+            font-weight: 400;
+        }
+        .state{
+            padding:15px;
+            font-size:15px;
+            color:#555555;
+            border-top:1px solid #E6E5E4;
+            margin-top:20px;
+        }
+        .state b{
+            margin-bottom: 8px;
+            display: block;
+        }
+        .state p{
+            line-height:26px;
+        }
+        .btn{
+            padding:0 15px;
+        }
+        button{
+            height:30px;
+            background:#ff4f3f;
+            color:#fff;
+            text-align: center;
+            width:100%;
+            border:0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="state">
+    <b style="text-align: center;font-size: 18px;">公告</b>
+    <b>尊敬的出借人：</b>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了使每一位出借人充分了解《“高新普惠”平台清兑方案》内容，合法自愿的选择兑付方式，考虑到疫情期间公司需按要求暂停现场大规模接待以避免人员聚集风险的现实情况，<span style="color: #ff4f3f">请各位出借人即日起登陆微信公众号“高新普惠服务平台”，绑定平台账户后点击“邮箱填写”，填写并提交个人电子邮箱号。</span>该邮箱号将作为下一步高新普惠发送《清兑方案》、收集每一位出借人的意思选择和意见建议、强化与出借人沟通交流的主要渠道之一。
+    </p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“高新普惠”平台清退以来，我们始终本着积极面对、解决问题的态度推进各项工作。我们希望尽快明确清兑方案，在大多数出借人的认可下有序开展良性清退工作，尽早完成兑付、尽可能维护出借人财产权益。但随着行业整体环境的恶化，催收手段有限和催收成本的不断增加，逾期诉讼立案难甚至有被认定为“职业放贷人”的法律风险，加之突发疫情对中小企业借款人还款能力造成的较大影响，均是清退工作面临的巨大挑战和压力。近期，在主要监管部门和公司股东会的指导下，公司本着实事求是、克服困难的态度，兼顾承担社会责任和争取形成有能力执行、可落地的清退方案，以最大化的保护出借人财产权益的考虑，细化了《清兑方案》内容，出借人可根据自身情况选择兑付方案，公司将积极做好支持配合工作。
+    </p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为保障大家的健康，公司将在疫情趋缓后，尽早恢复现场接待。在此期间，建议广大出借人通过客服电话、电子邮箱等非接触方式与公司取得联系。平台与出借人的利益是一致的，近期我们关注到一些谣言，希望大家不信谣不传谣，保持自己的独立判断，我们需要同舟共济、共度难关。公司不会跑路失联，我们不会放弃努力。
+    </p>
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客服电话： 0351-7739570</b>
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工作时间：周一至周五
+    </b>
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上午8:30-11:30
+        下午2:00-5：30</b>
+</div>
+<div class="customer">
+    <h2 style=" background: #fd5353">客户信息</h2>
+    <p>
+        <label>客户姓名:</label>
+        <span id="chineseName" th:text="${userasset.chineseName}">张三</span>
+    </p>
+    <p>
+        <label>证件类型:</label>
+        <span id="documentType" >身份证</span>
+    </p>
+    <p>
+        <label>证件号码:</label>
+        <span id="documentId" th:text="${userasset.documentId}">1212121212121</span>
+    </p>
+    <p>
+        <label>邮箱:</label>
+        <input type="text" id="mail" th:value="${userasset.mail}" placeholder="请填写邮箱">
+    </p>
+    <input type="hidden" id="custid" th:value="${userasset.custid}" >
+    <input type="hidden" id="openid" th:value="${userasset.openid}" >
+</div>
+
+<div class="btn">
+    <button th:if="${status== '0'}" th:onclick="'save()'">确认提交</button>
+    <button th:if="${status== '1'}" th:onclick="'update()'">确认修改</button>
+</div>
+
+</body>
+<script type="text/javascript">
+    //跳转投票页面
+    function save(){
+
+        var mail = $("#mail").val();
+        if (mail == ""){
+            layer.msg("邮箱不能为空");
+            return;
+        }
+        $.ajax({
+            url:"/usermail/save",
+            type:"get",
+            async:false,
+            data:{
+                custid:$("#custid").val(),
+                openid:$("#openid").val(),
+                chineseName:$("#chineseName").text(),
+                documentType:'1',
+                documentId:$("#documentId").text(),
+                mail:mail
+            },
+            success:function (r) {
+                layer.msg(r.msg, function () {
+                    window.location.href = "/usermail/client?tag="+$("#openid").val();
+                })
+            }
+        })
+    }
+    function update(){
+        var mail = $("#mail").val();
+        if (mail == ""){
+            layer.msg("邮箱不能为空");
+            return;
+        }
+
+        $.ajax({
+            url:"/usermail/update",
+            type:"get",
+            async:false,
+            data:{
+                custid:$("#custid").val(),
+                openid:$("#openid").val(),
+                chineseName:$("#chineseName").text(),
+                documentType:'1',
+                documentId:$("#documentId").text(),
+                mail:mail
+            },
+            success:function (r) {
+                layer.msg(r.msg, function () {
+                    window.location.href = "/usermail/client?tag="+$("#openid").val();
+                })
+            }
+
+        })
+    }
+</script>
+</html>

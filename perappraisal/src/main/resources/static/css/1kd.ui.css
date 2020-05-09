@@ -1,0 +1,358 @@
+@CHARSET "UTF-8";
+
+/*路径导航开始*/
+.pageNav {
+	color: #333;
+	padding: 4px 0;
+	border-bottom: 1px solid #DDD;
+	font-family: 微软雅黑;
+}
+
+.pageNav a {
+	margin: 0 5px;
+}
+
+.pageNav .current {
+	margin: 0 5px;
+	color: #787878;
+	font-weight: bold;
+}
+/*路径导航结束*/
+
+input:text, input:password {
+	width: 205px;
+	height: 32px;
+	color: #333333;
+	padding: 0 5px;
+	font-size: 12px;
+	line-height: 32px;
+	border: 1px solid #DDDDDD;
+}
+
+select {
+	width: 218px;
+	height: 34px;
+	color: #333333;
+	font-size: 12px;
+	line-height: 32px;
+	line-height: 24px\9;
+	vertical-align: middle;
+	padding-bottom: 8px\9;
+	border: 1px solid #DDDDDD;
+}
+
+textarea {
+	width: 212px;
+	height: 85px;
+	color: #333333;
+	padding: 0 5px;
+	font-size: 12px;
+	vertical-align: middle;
+	border: 1px solid #DDDDDD;
+	resize:none;
+}
+
+input:text:hover, input:password:hover, select:hover, textarea:hover {
+	box-shadow: 0 0 10px #a8e5fb;
+}
+
+input:text:focus, input:password:focus, select:focus, textarea:focus {
+	border: 1px solid #01739d;
+	outline: 2px solid #a8e5fb;
+}
+
+input:disabled, input.readonly, select:disabled, select.readonly, textarea:disabled, textarea.readonly {
+	font-weight: bold;
+	color: #8A8383!important;
+	background: #ebebe4!important;
+	border: 1px solid #dddddd!important;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+	box-shadow: 0 0 10px #a8e5fb;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+	border: 1px solid #01739d;
+	outline: 2px solid #a8e5fb;
+}
+
+.kdmall-btn {
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 3px;
+	display: inline-block;
+	color: #535353!important;
+	padding: 4px 12px 4px 12px;
+	*padding: 1px 8px 1px 8px;
+	font-family: Microsoft Yahei;
+	text-decoration: none!important;
+	vertical-align: middle;
+	
+	border: 1px solid #d3d3d3;
+	background-color: #fbfbfb;
+	background: linear-gradient(#fbfbfb, #e5e5e5);
+	background: -o-linear-gradient(#fbfbfb, #e5e5e5);
+	background: -ms-linear-gradient(#fbfbfb, #e5e5e5);
+	background: -moz-linear-gradient(#fbfbfb, #e5e5e5);
+	background: -webkit-linear-gradient(#fbfbfb, #e5e5e5);
+}
+
+.kdmall-btn:hover {
+    color: #666666!important;
+    box-shadow: 0 0 8px #e1e1e1;
+    background-color: #f1f1f1!important;
+    background: linear-gradient(#f1f1f1, #cfcfcf)!important;
+    background: -o-linear-gradient(#f1f1f1, #cfcfcf)!important;
+    background: -ms-linear-gradient(#f1f1f1, #cfcfcf)!important;
+    background: -moz-linear-gradient(#f1f1f1, #cfcfcf)!important;
+	background: -webkit-linear-gradient(#f1f1f1, #cfcfcf)!important;
+}
+
+.kd-outer-box {
+	width: 870px;
+	padding: 20px;
+	background: #FFF;
+	border: 1px solid #E7E7E7;
+	text-align: left !important;
+	box-shadow: 0 0 10px #C7C5C5;
+}
+
+.kd-outer-box-title {
+	width: 100%;
+	height: 30px;
+	line-height: 35px;
+	border-bottom: 2px solid #E0E0E0;
+	background-color: #FFF;
+}
+
+.kd-outer-box-title h {
+	font-size: 18px;
+	font-weight: bold;
+	height: 50px;
+	overflow: hidden;
+	color: #333;
+	border-bottom: 2px solid #F50;
+}
+
+.kd-form-style {
+	font-family: Microsoft Yahei;
+}
+
+.kd-form-style-item {
+	clear: left;
+	float: left;
+	width: 426px;
+	line-height: 35px;
+}
+
+.kd-form-style-itemnew {
+	clear: left;
+	float: left;
+	width: 600px;
+	line-height: 35px;
+}
+.kd-form-style-item.clear-left {
+	clear: none;
+}
+
+.kd-form-style-item em {
+	display: none;
+}
+
+.kd-form-style-label {
+	float: left;
+	width: 120px;
+	color: #585858;
+	font-size: 13px;
+	text-align: right;
+	line-height: 35px;
+	margin: 4px!important;
+}
+
+.kd-form-style-value {
+	padding-left: 4px;
+	min-height: 42px;
+}
+
+.kd-form-style-value input {
+	margin: 4px!important;
+}
+
+.kd-form-style-value i {
+	font-size: 13px!important;
+	line-height: 43px;
+}
+
+.kd-form-style-item.need em {
+	display: inline;
+	color: red !important;
+}
+
+.kd-form-style .input {
+	border: 1px solid #DDDDDD;
+	color: #333333;
+	font-size: 12px;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 5px;
+	width: 205px;
+}
+
+.kd-form-style .select {
+	border: 1px solid #DDDDDD;
+	color: #333333;
+	font-size: 12px;
+	height: 34px;
+	line-height: 32px;
+	width: 218px;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+.kd-form-style .textarea {
+	border: 1px solid #DDDDDD;
+	color: #333333;
+	font-size: 12px;
+	height: 85px;
+	width: 212px;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+.kd-form-style .input:hover,
+.kd-form-style .select:hover,
+.kd-form-style .textarea:hover {
+	box-shadow: 0 0 10px #a8e5fb;
+}
+
+.kd-form-style .input:focus,
+.kd-form-style .select:focus,
+.kd-form-style .textarea:focus {
+	border: 1px solid #01739d;
+	outline: 2px solid #a8e5fb;
+}
+
+
+.kd-form-style-item.oneline {
+	clear: none;
+	width: 360px
+}
+
+.kd-form-style-item.oneline .kd-form-style-label,
+.kd-form-style-item.oneline .kd-form-style-value {
+	clear: both;
+	display: block;
+}
+
+.kd-form-style-item.oneline .kd-form-style-label {
+	width: 300px;
+	font-size: 16px;
+	text-align: left;
+	padding-left: 4px;
+}
+
+.kd-form-style-item.oneline input {
+	width: 336px;
+}
+
+.kd-form-style-item.oneline select {
+	width: 348px;
+}
+
+.kd-form-style-item.oneline textarea {
+	width: 336px;
+}
+
+.kd-form-style-item.oneline input[type="checkbox"],
+.kd-form-style-item.oneline input[type="radio"] {
+	width: 20px;
+}
+
+
+.kd-form-style-item.long {
+	width: 730px;
+}
+
+.kd-form-style-item.long input {
+	width: 696px;
+}
+
+.kd-form-style-item.long select {
+	width: 643px;
+}
+
+.kd-form-style-item.long textarea {
+	width: 695px;
+}
+
+.kd-form-style a {
+	color: #00a2e8;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.kd-form-style a:hover, .kd-form-style a:active {
+	color: #FF5500;
+}
+
+/* 表格样式开始 */
+.table {
+	border: 1px solid #E9E9E9;
+	border-bottom: 0px solid #E9E9E9;
+	width: 100%;
+	font-size: 14px;
+	margin: 0px auto;
+}
+
+.table tr.even {
+	background: #F9F9F9;
+}
+
+.table th {
+	height: 35px;
+	line-height: 35px;
+	font-weight: bold;
+	background: #F5F5F5;
+	padding-left: 5px;
+	border-bottom: 1px solid #E9E9E9;
+}
+
+.table tr td {
+    padding-left: 5px;
+    border-bottom: 1px solid #E9E9E9;
+    height: 38px;
+	line-height: 38px;
+	margin-left:2px;
+}
+
+.table tr td div {
+    white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.table tr td a {
+    color: #666;
+}
+
+.table tr td a:hover {
+    color: #F50;
+    text-decoration: underline;
+}
+
+.table tr:hover {
+	background: #F5F5F5;
+}
+
+.table tr.last-col td {
+    border: none;
+}
+/* 表格样式结束 */

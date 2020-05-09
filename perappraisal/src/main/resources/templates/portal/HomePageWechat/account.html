@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head th:include="portal/HomePageWechat/layout::header">
+    <meta charset="UTF-8" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0,uc-fitscreen=yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>高新普惠</title>
+    <meta name="keywords" content="miniMobile的demo" />
+    <meta name="description" content="miniMobile是一个简单易用的移动框架！" />
+    <!-- miniMObile.css、js -->
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/miniMobile.css"/>
+    <link rel="stylesheet" type="text/css" href="css/account.css"/>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script type="text/javascript" src="js/miniMobile.js"></script>
+    <!-- fonticon -->
+    <link rel="stylesheet" type="text/css" href="plugins/fonticon/iconfont.css" />
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.5/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.5/js/swiper.min.js"></script>
+    <!-- animate.css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+</head>
+
+<body class="fadeIn animated" style="background:#f5f5f5;">
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        高新普惠
+    </div>
+</header>
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+
+<!--&lt;!&ndash; aside &ndash;&gt;-->
+<!--<aside class="ui-aside w40 bg-color-success f30">-->
+<!--    <div class="user p3 color8 clearfix">-->
+<!--        <div class="fl w10">-->
+<!--            <img src="img/user.jpg" class="w10 h10 radius-o" />-->
+<!--        </div>-->
+<!--        <div class="fr w22 loginbtn">-->
+<!--            <span>登录</span><br />-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <ul class="f30 mt2">-->
+<!--        <li>-->
+<!--            <a href="index.html" class="pl3 color8">首页</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="list-button.html" class="pl3 color8">关于我们</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="list.html" class="pl3 color8">我的账户</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="" class="pl3 color8">400-0784-000</a>-->
+<!--        </li>-->
+
+<!--    </ul>-->
+<!--</aside>-->
+<script type="text/javascript">
+    var aside = $(".ui-aside").asideUi({
+        hasmask: true,
+        size: "4rem",
+        position: "left",
+        sidertime: 300
+    });
+    $(".ui-header-l").on('touchend', function() {
+        aside.toggle();
+    })
+</script>
+<!--个人资料-->
+<div class="data_me">
+<!--    <p class="cg"><span>银行存管账户</span><b>张三（1****4420）</b><i>已开通</i></p>-->
+    <p class="dm">客户代码<span th:text="${custid}">0000050</span></p>
+</div>
+<div class="data_me login">
+    <p class="dm">投资明细<a href="/home/wechat/trdorder/weblist"><img src="/js/homepage/img/arrow.png" width="10"></a></p>
+</div>
+<div class="data_me login">
+<!--    <p class="dm">银行卡<a href="bank.html"><img src="/js/homepage/img/arrow.png" width="10"></a><span>招商银行 尾号1234</span></p>-->
+    <p class="dm">修改手机号<a href="/home/wechat/trdorder/setphone"><img src="/js/homepage/img/arrow.png" width="10"></a><span  th:text="${username}?${#strings.substring(username,0,3)}+'****'+${#strings.substring(username,7,11)}:''" >187****7212</span></p>
+</div>
+<div class="data_me login">
+    <p class="dm">修改密码<a href="/home/wechat/trdorder/forget"><img src="/js/homepage/img/arrow.png" width="10"></a></p>
+</div>
+
+
+
+
+<!-- 底部导航 -->
+<nav class="demo-bottomNav w75 h12 pt1 t-c f28 bg-color8 o-h clearfix">
+    <div class="w15 fl">
+        <a href="index.html">
+            <i class="f46 icon iconfont icon-home_light"></i>
+            <p>首页</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="list-button.html">
+            <i class="f46 icon iconfont icon-zhediemianban"></i>
+            <p>网贷</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="list.html">
+            <i class="f46 icon iconfont icon-rank"></i>
+            <p>理财</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="comment.html">
+            <i class="f46 icon iconfont icon-list"></i>
+            <p>基金</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="my.html">
+            <i class="f46 icon iconfont icon-ddonghuabai"></i>
+            <p>科技</p>
+        </a>
+    </div>
+</nav>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        }
+    });
+</script>
+    
+</body>
+
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="portal/homepage/layout::header"></head>
+<body>
+<nav th:include="portal/homepage/layout::nav"  class="navbar navbar-default navbar-custom" style="margin-bottom: 0"></nav>
+
+<div class="account">
+    <p class="path">您所在的位置：理财优选>认购意向</p>
+    <div class="accountLeft">
+        <ul>
+            <li class="accountMenu">
+                <span>账户管理</span>
+                <ul>
+                    <li><a onclick="openhref()" >账户设置</a></li>
+                </ul>
+            </li>
+            <li class="accountMenu">
+                <span>认购意向</span>
+                <ul>
+                    <li><a href="#" class="active">认购意向</a></li>
+                </ul>
+            </li>
+        </ul>   
+    </div>
+    <div class="accountRight settingRight" style="height:814px; overflow:hidden;">
+        <div class="setCon invest">   
+            <!--<ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#setLeft" aria-controls="setLeft" role="tab" data-toggle="tab">出借明细</a></li>
+                <li role="presentation"><a href="#setRight" aria-controls="setRight" role="tab" data-toggle="tab">我的订单</a></li>
+            </ul>-->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="setLeft">
+                    <!--<div class="capitaAll">
+                        <div>
+                            <span>累计出借金额</span>
+                            <p>¥<b>0.00</b></p>
+                        </div>
+                        <div>
+                            <span>累计赚取收益</span>
+                            <p>¥<b>0.00</b></p>
+                        </div>
+                    </div>
+                    <div class="investList">
+                        <table class="table-bordered">
+                            <tr>
+                                <th>已收回本金总结</th>
+                                <th>待收回本金总计</th>
+                                <th>已收收益总计</th>
+                                <th>待收收益总计</th>
+                            </tr>
+                            <tr>
+                                <td>0.00</td>
+                                <td>0.00</td>
+                                <td>0.00</td>
+                                <td>0.00</td>
+                            </tr>
+                        </table>
+                    </div>-->
+                    <div class="investAll">
+                        <!--<p>状态：
+                            <span class="current">已持有</span>
+                            <span>买入中</span>
+                            <span>已完成</span>
+                        </p>-->
+                        <div class="investCon">
+                            <div class="investBox">
+                                <table class="table-bordered">
+                                    <tr>
+                                        <th>项目名称</th>
+                                        <th>认购金额</th>
+                                        <th>认购时间</th>
+                                        <!--<th>项目详情</th>-->
+                                    </tr>
+                                    <tr th:each="invest,iterStat:${trdOrderDOList}">
+                                        <td th:text="${invest.borrowtitle}"></td>
+                                        <td th:text="${invest.investamount}"></td>
+                                        <td th:text="${#dates.format(invest.investtime, 'yyyy年MM月dd日 HH:mm:ss')}"></td>
+                                        <!--<td>8%</td>
+                                        <td>200</td>
+                                        <td>0</td>
+                                        <td>1.351</td>
+                                        <td>200</td>
+                                        <td>还款中</td>
+                                        <td><button type="button" data-toggle="modal" data-target="#myModal">查看</button></td>
+                                    --></tr>
+                                </table>
+                                <!--<nav aria-label="Page navigation" class="page">
+                                    <ul class="pagination">
+                                        <li>
+                                        <a href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                        <a href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                        </li>
+                                    </ul>
+                                </nav>-->
+                                <!-- 项目详情查看弹窗 -->
+                                <div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content" style="background:#fff;">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="product_con">
+                                                    <p><span>项目名称：</span><span id="T_name"><a href="" target="_blank">周转贷编号2018110902</a></span></p>
+                                                    <p><span>出借金额：</span><span id="T_invest">200元</span></p>
+                                                    <p><span>支付时间：</span><span id="T_time">20181109101007</span></p>
+                                                    <p><span>增信措施：</span><span id="T_credit" style="display: initial;">股东承担无限连带责任担保</span></p>
+                                                    <p><span>借款人：</span></p>
+                                                    <div class="people">
+                                                        <table class="table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>序号</th>
+                                                                <th>借款人</th>
+                                                                <th>出借金额</th>
+                                                                <th>合同</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="T_tbody">
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>西安北纬广告文化传播有限公司</td>
+                                                                    <td >200</td>
+                                                                    <td><a class="btn-xs btn-grey" href="#" target="_blank">查看</a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="people">
+                                                        <table class="table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>期数</th>
+                                                                <th>发放日期</th>
+                                                                <th>本金（元）</th>
+                                                                <th>利息（元）</th>
+                                                                <th>状态</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="T_repayment_body">
+                                                                <tr>
+                                                                    <td>1/1</td>
+                                                                    <td>20181209</td>
+                                                                    <td>200</td>
+                                                                    <td>1.3151</td>
+                                                                    <td>未还</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" data-dismiss="modal">关闭</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         <!--   <div class="investBox" style="display: none;">
+                                <table class="table-bordered">
+                                    <tr>
+                                        <th>项目名称</th>
+                                        <th>期限</th>
+                                        <th>期望年化利率</th>
+                                        <th>出借金额</th>
+                                        <th>实际出借金额</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    <tr>
+                                        <td>周转贷编号2018110902</td>
+                                        <td>1 个月 </td>
+                                        <td>8%</td>
+                                        <td>200</td>
+                                        <td>200</td>
+                                        <td>还款中</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <nav aria-label="Page navigation" class="page">
+                                    <ul class="pagination">
+                                        <li>
+                                        <a href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                        <a href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="investBox" style="display: none;">
+                                <table class="table-bordered">
+                                    <tr>
+                                        <th>项目名称</th>
+                                        <th>期限</th>
+                                        <th>期望年化利率</th>
+                                        <th>出借金额</th>
+                                        <th>实际出借金额</th>
+                                        <th>状态</th>
+                                    </tr>
+                                    <tr>
+                                        <td>周转贷编号2018110902</td>
+                                        <td>1 个月 </td>
+                                        <td>8%</td>
+                                        <td>200</td>
+                                        <td>200</td>
+                                        <td>还款中</td>
+                                    </tr>
+                                </table>
+                                <nav aria-label="Page navigation" class="page">
+                                    <ul class="pagination">
+                                        <li>
+                                        <a href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                        <a href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="setRight">
+                    <div class="investAll">
+                        <p>状态：
+                            <span class="current">已完成订单</span>
+                            <span>已退款订单</span>
+                            <span>未支付订单</span>
+                        </p>
+                        <div class="investCon">
+                            <div class="investBox investOrder">
+                                <table class="table-bordered">
+                                    <tr>
+                                        <th>订单编号</th>
+                                        <th>产品名称</th>
+                                        <th>金额(元)</th>
+                                        <th>已支付金额(元)</th>
+                                        <th>下单时间</th>
+                                        <th>状态</th>
+                                    </tr>
+                                    <tr>
+                                        <td>110377520181109101003619892077</td>
+                                        <td>周转贷编号2018110902</td>
+                                        <td>200</td>
+                                        <td>200</td>
+                                        <td>20181109</td>
+                                        <td>已支付</td>
+                                    </tr>
+                                </table>
+                                <nav aria-label="Page navigation" class="page">
+                                    <ul class="pagination">
+                                        <li>
+                                        <a href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                        <a href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="investBox investOrder" style="display: none;">
+                                <table class="table-bordered">
+                                    <tr>
+                                        <th>订单编号</th>
+                                        <th>产品名称</th>
+                                        <th>金额(元)</th>
+                                        <th>已支付金额(元)</th>
+                                        <th>下单时间</th>
+                                        <th>状态</th>
+                                    </tr>
+                                    <tr>
+                                        <td>110377520181109101003619892077</td>
+                                        <td>周转贷编号2018110902</td>
+                                        <td>200</td>
+                                        <td>200</td>
+                                        <td>20191024</td>
+                                        <td>已退款</td>
+                                    </tr>
+                                </table>
+                                <nav aria-label="Page navigation" class="page">
+                                    <ul class="pagination">
+                                        <li>
+                                        <a href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                        <a href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="investBox investOrder" style="display: none;">
+                                <table class="table-bordered">
+                                    <tr>
+                                        <th>订单编号</th>
+                                        <th>产品名称</th>
+                                        <th>金额(元)</th>
+                                        <th>下单时间</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    <tr>
+                                        <td>110377520181109101003619892077</td>
+                                        <td>周转贷编号2018110902</td>
+                                        <td>200</td>
+                                        <td>20191024</td>
+                                        <td>未支付</td>
+                                        <td><button type="button">支付</button></td>
+                                    </tr>
+                                </table>
+                                <nav aria-label="Page navigation" class="page">
+                                    <ul class="pagination">
+                                        <li>
+                                        <a href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                        <a href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="portal/homepage/layout::footer"></div>
+</body>
+<script>
+    function openhref() {
+        window.location.href="/home/open/accontset";
+    }
+</script>
+</html>

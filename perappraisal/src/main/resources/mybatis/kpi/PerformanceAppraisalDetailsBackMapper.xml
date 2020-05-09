@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.kpi.dao.PerformanceAppraisalDetailsBackDao">
+
+	<select id="get" resultType="com.bootdo.kpi.domain.PerformanceAppraisalDetailsBackDO">
+		select `id`,`option_id`,`option_name`,`appraisal_user_id`,`examinee_user_id`,`appraisal_user_name`,`appraisal_score`,`appraisal_time`,`appraisal_mobile`,`appraisal_id` from performance_appraisal_details_back where id = #{value}
+	</select>
+
+	<select id="list1" resultType="com.bootdo.kpi.domain.PerformanceAppraisalDetailsBackDO">
+		select `id`,`option_id`,`option_name`,`appraisal_user_id`,`examinee_user_id`,`appraisal_user_name`,`appraisal_score`,`appraisal_time`,`appraisal_mobile`,`appraisal_id` from performance_appraisal_details_back
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="optionId != null and optionId != ''"> and option_id = #{optionId} </if>
+		  		  <if test="optionName != null and optionName != ''"> and option_name = #{optionName} </if>
+		  		  <if test="appraisalUserId != null and appraisalUserId != ''"> and appraisal_user_id = #{appraisalUserId} </if>
+		  		  <if test="examineeUserId != null and examineeUserId != ''"> and examinee_user_id = #{examineeUserId} </if>
+		  		  <if test="appraisalUserName != null and appraisalUserName != ''"> and appraisal_user_name = #{appraisalUserName} </if>
+		  		  <if test="appraisalScore != null and appraisalScore != ''"> and appraisal_score = #{appraisalScore} </if>
+		  		  <if test="appraisalTime != null and appraisalTime != ''"> and appraisal_time = #{appraisalTime} </if>
+		  		  <if test="appraisalMobile != null and appraisalMobile != ''"> and appraisal_mobile = #{appraisalMobile} </if>
+		  		  <if test="appraisalId != null and appraisalId != ''"> and appraisal_id = #{appraisalId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from performance_appraisal_details_back
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="optionId != null and optionId != ''"> and option_id = #{optionId} </if>
+		  		  <if test="optionName != null and optionName != ''"> and option_name = #{optionName} </if>
+		  		  <if test="appraisalUserId != null and appraisalUserId != ''"> and appraisal_user_id = #{appraisalUserId} </if>
+		  		  <if test="examineeUserId != null and examineeUserId != ''"> and examinee_user_id = #{examineeUserId} </if>
+		  		  <if test="appraisalUserName != null and appraisalUserName != ''"> and appraisal_user_name = #{appraisalUserName} </if>
+		  		  <if test="appraisalScore != null and appraisalScore != ''"> and appraisal_score = #{appraisalScore} </if>
+		  		  <if test="appraisalTime != null and appraisalTime != ''"> and appraisal_time = #{appraisalTime} </if>
+		  		  <if test="appraisalMobile != null and appraisalMobile != ''"> and appraisal_mobile = #{appraisalMobile} </if>
+		  		  <if test="appraisalId != null and appraisalId != ''"> and appraisal_id = #{appraisalId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalDetailsBackDO" useGeneratedKeys="true" keyProperty="id">
+		insert into performance_appraisal_details_back
+		(
+			`option_id`, 
+			`option_name`, 
+			`appraisal_user_id`, 
+			`examinee_user_id`, 
+			`appraisal_user_name`, 
+			`appraisal_score`, 
+			`appraisal_time`, 
+			`appraisal_mobile`, 
+			`appraisal_id`
+		)
+		values
+		(
+			#{optionId}, 
+			#{optionName}, 
+			#{appraisalUserId}, 
+			#{examineeUserId}, 
+			#{appraisalUserName}, 
+			#{appraisalScore}, 
+			#{appraisalTime}, 
+			#{appraisalMobile}, 
+			#{appraisalId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalDetailsBackDO">
+		update performance_appraisal_details_back 
+		<set>
+			<if test="optionId != null">`option_id` = #{optionId}, </if>
+			<if test="optionName != null">`option_name` = #{optionName}, </if>
+			<if test="appraisalUserId != null">`appraisal_user_id` = #{appraisalUserId}, </if>
+			<if test="examineeUserId != null">`examinee_user_id` = #{examineeUserId}, </if>
+			<if test="appraisalUserName != null">`appraisal_user_name` = #{appraisalUserName}, </if>
+			<if test="appraisalScore != null">`appraisal_score` = #{appraisalScore}, </if>
+			<if test="appraisalTime != null">`appraisal_time` = #{appraisalTime}, </if>
+			<if test="appraisalMobile != null">`appraisal_mobile` = #{appraisalMobile}, </if>
+			<if test="appraisalId != null">`appraisal_id` = #{appraisalId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from performance_appraisal_details_back where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from performance_appraisal_details_back where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+    <select id="list" resultType="com.bootdo.kpi.domain.PerformanceAppraisalDetailsBackDO">
+        select u.name `examinee_user_name`,r.name `appraisal_user_name`,r.user_post,o.appraisal_type,o.appraisal_grade,o.appraisal_content,b.appraisal_time,a.assessment_title from performance_appraisal_details_back b
+            left join performance_appraisal_option_back o on o.id = b.option_id
+            left join sys_user u on u.user_id = b.examinee_user_id
+            left join sys_user r on r.user_id = b.appraisal_user_id
+            left join performance_appraisal a on a.id = b.appraisal_id
+    </select>
+</mapper>

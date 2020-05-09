@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.kpi.dao.PerformanceAppraisalOptionBackDao">
+
+    <select id="get" resultType="com.bootdo.kpi.domain.PerformanceAppraisalOptionBackDO">
+		select `id`,`appraisal_type`,`appraisal_grade`,`appraisal_content` from performance_appraisal_option_back where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.bootdo.kpi.domain.PerformanceAppraisalOptionBackDO">
+        select `id`,`appraisal_type`,`appraisal_grade`,`appraisal_content` from performance_appraisal_option_back
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="appraisalType != null and appraisalType != ''"> and appraisal_type = #{appraisalType} </if>
+            <if test="appraisalGrade != null and appraisalGrade != ''"> and appraisal_grade = #{appraisalGrade} </if>
+            <if test="appraisalContent != null and appraisalContent != ''"> and appraisal_content = #{appraisalContent} </if>
+        </where>
+        <if test="groupType != null and groupType != ''"> group by #{groupType}</if>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id asc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from performance_appraisal_option_back
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="appraisalType != null and appraisalType != ''"> and appraisal_type = #{appraisalType} </if>
+            <if test="appraisalGrade != null and appraisalGrade != ''"> and appraisal_grade = #{appraisalGrade} </if>
+            <if test="appraisalContent != null and appraisalContent != ''"> and appraisal_content = #{appraisalContent} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalOptionBackDO" useGeneratedKeys="true" keyProperty="id">
+		insert into performance_appraisal_option_back
+		(
+			`appraisal_type`,
+			`appraisal_grade`,
+			`appraisal_content`
+		)
+		values
+		(
+			#{appraisalType},
+			#{appraisalGrade},
+			#{appraisalContent}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalOptionBackDO">
+        update performance_appraisal_option_back
+        <set>
+            <if test="appraisalType != null">`appraisal_type` = #{appraisalType}, </if>
+            <if test="appraisalGrade != null">`appraisal_grade` = #{appraisalGrade}, </if>
+            <if test="appraisalContent != null">`appraisal_content` = #{appraisalContent}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from performance_appraisal_option_back where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from performance_appraisal_option_back where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="groupType" resultType="com.bootdo.kpi.domain.PerformanceAppraisalOptionBackDO">
+        select `appraisal_type`from performance_appraisal_option_back
+        group by appraisal_type
+    </select>
+
+</mapper>

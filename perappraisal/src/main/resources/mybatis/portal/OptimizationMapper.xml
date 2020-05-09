@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.portal.dao.OptimizationDao">
+
+	<select id="get" resultType="com.bootdo.portal.domain.OptimizationDO">
+		select `id`,`borrowtitle`,`borrowamount`,`hasinvestamount`,`receivableamount`,`duein`,`bond`,`url`,`noticeperiodstart`,`noticeperiodend` from financing_optimization where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.portal.domain.OptimizationDO">
+		select `id`,`borrowtitle`,`borrowamount`,`hasinvestamount`,`receivableamount`,`duein`,`bond`,`url`,`noticeperiodstart`,`noticeperiodend` from financing_optimization
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="borrowtitle != null and borrowtitle != ''"> and borrowtitle = #{borrowtitle} </if>
+		  		  <if test="borrowamount != null and borrowamount != ''"> and borrowamount = #{borrowamount} </if>
+		  		  <if test="hasinvestamount != null and hasinvestamount != ''"> and hasinvestamount = #{hasinvestamount} </if>
+		  		  <if test="receivableamount != null and receivableamount != ''"> and receivableamount = #{receivableamount} </if>
+		  		  <if test="duein != null and duein != ''"> and duein = #{duein} </if>
+		  		  <if test="bond != null and bond != ''"> and bond = #{bond} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="noticeperiodstart != null and noticeperiodstart != ''"> and noticeperiodstart = #{noticeperiodstart} </if>
+		  		  <if test="noticeperiodend != null and noticeperiodend != ''"> and noticeperiodend = #{noticeperiodend} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by noticeperiodstart desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from financing_optimization
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="borrowtitle != null and borrowtitle != ''"> and borrowtitle = #{borrowtitle} </if>
+		  		  <if test="borrowamount != null and borrowamount != ''"> and borrowamount = #{borrowamount} </if>
+		  		  <if test="hasinvestamount != null and hasinvestamount != ''"> and hasinvestamount = #{hasinvestamount} </if>
+		  		  <if test="receivableamount != null and receivableamount != ''"> and receivableamount = #{receivableamount} </if>
+		  		  <if test="duein != null and duein != ''"> and duein = #{duein} </if>
+		  		  <if test="bond != null and bond != ''"> and bond = #{bond} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="noticeperiodstart != null and noticeperiodstart != ''"> and noticeperiodstart = #{noticeperiodstart} </if>
+		  		  <if test="noticeperiodend != null and noticeperiodend != ''"> and noticeperiodend = #{noticeperiodend} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.portal.domain.OptimizationDO">
+		insert into financing_optimization
+		(
+			`id`, 
+			`borrowtitle`, 
+			`borrowamount`, 
+			`hasinvestamount`, 
+			`receivableamount`, 
+			`duein`, 
+			`bond`, 
+			`url`, 
+			`noticeperiodstart`, 
+			`noticeperiodend`
+		)
+		values
+		(
+			#{id}, 
+			#{borrowtitle}, 
+			#{borrowamount}, 
+			#{hasinvestamount}, 
+			#{receivableamount}, 
+			#{duein}, 
+			#{bond}, 
+			#{url}, 
+			#{noticeperiodstart}, 
+			#{noticeperiodend}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.portal.domain.OptimizationDO">
+		update financing_optimization 
+		<set>
+			<if test="borrowtitle != null">`borrowtitle` = #{borrowtitle}, </if>
+			<if test="borrowamount != null">`borrowamount` = #{borrowamount}, </if>
+			<if test="hasinvestamount != null">`hasinvestamount` = `hasinvestamount` + #{hasinvestamount}, </if>
+			<if test="receivableamount != null">`receivableamount` = #{receivableamount}, </if>
+			<if test="duein != null">`duein` = #{duein}, </if>
+			<if test="bond != null">`bond` = #{bond}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="noticeperiodstart != null">`noticeperiodstart` = #{noticeperiodstart}, </if>
+			<if test="noticeperiodend != null">`noticeperiodend` = #{noticeperiodend}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from financing_optimization where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from financing_optimization where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="portal/homepage/layout::header"></head>
+<body>
+<nav th:include="portal/homepage/layout::nav"  class="navbar navbar-default navbar-custom" style="margin-bottom: 0"></nav>
+
+<div class="list">
+    <div class="container">
+        <!--<div class="list_all">
+            <h3>项目收益：</h3>
+            <p><span class="all">全部</span><span>6%以下</span><span>6%~9%</span><span>9%~12%</span><span>12%以上</span></p>
+        </div>
+        <div class="list_all">
+            <h3>认购起点：</h3>
+            <p><span class="all">全部</span><span>1万以下</span><span>1万~5万</span><span>5万~10万</span><span>10万~20万</span><span>20万以上</span></p>
+        </div>-->
+        <div class="list_all">
+            <h3>挂牌价格（元）：</h3>
+            <p><span class="all">全部</span><span>1万以下</span><span>1万~5万</span><span>5万~10万</span><span>10万~20万</span><span>20万以上</span></p>
+        </div>
+        <!--<div class="list_all">
+            <h3>融资期限：</h3>
+            <p><span class="all">全部</span><span>6个月以下</span><span>6个月~9个月</span><span>9个月~12个月</span><span>12个月以上</span></p>
+        </div>
+        <div class="list_all">
+            <h3>项目状态：</h3>
+            <p><span class="all">全部</span><span>预热中</span><span>投资中</span><span>已完成</span><span>还款中</span></p>
+        </div>-->
+    </div>
+</div>
+
+<!--推荐专区-->
+<div class="recommende">
+    <div class="container">
+        <div class="product">
+            <th:block th:each="op,iterStat:${optimizationPage.list}">
+                <div class="product_list">
+                    <h4><a href="#" th:text="${op.borrowtitle}"></a></h4>
+                    <div class="col-md-1"><p style="color:#fd5353;" th:text="${op.borrowamount}"><span></span></p><i>挂牌价格（元）</i></div>
+                    <div class="col-md-4 data"><p th:text="${#dates.format(op.noticeperiodstart, 'yyyy年MM月dd日')}+'-'+${#dates.format(op.noticeperiodend, 'yyyy年MM月dd日')}"><span></span></p><i>首个公告期限</i></div>
+                    <div class="col-md-1"><p th:text="${op.borrowamount-op.hasinvestamount}+'元'"><span></span></p><i>剩余可投金额</i></div>
+                    <div class="col-md-3">
+                        <div class="progress">
+                                <div class="progress-bar progress-bar-danger active progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" th:style="'width: '+${op.percentage}+'%'">
+                                <span class="sr-only" th:text="${op.percentage}+'%'"></span>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"><button th:onclick="'buy(\''+${op.id}+'\')'">立即抢购</button></div>
+                </div>
+            </th:block>
+            <div>
+                <div class="clearfix">
+                    <ul class="pagination m-b-5 " style="padding-left: 29%;">
+                        <li th:if="${optimizationPage.hasPreviousPage}"><a
+                                th:href="@{'/home/optimization/weblist?pageIndex='+${optimizationPage.prePage}}"
+                                aria-label="Previous"> <i class="fa fa-angle-left"></i>&nbsp;上一页
+                        </a></li>
+
+                        <th:block th:each="nav : ${optimizationPage.navigatepageNums}">
+                            <li th:class="${nav==optimizationPage.pageNum}?'active':''"><a
+                                    th:href="@{'/home/optimization/weblist?pageIndex='+${nav}}"
+                                    th:text="${nav}"></a></li>
+                        </th:block>
+
+                        <th:block th:if="${optimizationPage.hasNextPage}">
+                            <li><a
+                                    th:href="@{'/home/optimization/weblist?pageIndex='+${optimizationPage.nextPage}}"
+                                    aria-label="Next"> 下一页&nbsp;<i class="fa fa-angle-right"></i>
+                            </a></li>
+                        </th:block>
+
+                        <li><span th:text="'共'+${optimizationPage.pages}+'页'"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:include="portal/homepage/layout::footer"></div>
+<script type="text/javascript">
+    function buy(id){
+        window.location.href="/home/optimization/"+id;
+        //window.open("/home/optimization/"+id);
+    }
+</script>
+</html>

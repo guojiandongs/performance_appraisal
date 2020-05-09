@@ -1,0 +1,91 @@
+<head th:fragment="header">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>山投信息集团</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/kd.tools.validate.js"></script>
+    <script src="/js/1kd.tools.js"></script>
+    <script src="/js/1kd.ui.plugin.js"></script>
+    <script src="/js/1acctcenter.js"></script>
+	<!--轮播图-->
+	<link href="/css/lunbo_style.css" rel="stylesheet">
+	<!--轮播图-->
+	<script src="/js/jquery.SuperSlide.2.1.1.js"></script>
+	<link href="/css/header.css" rel="stylesheet">
+	<link href="/css/index.css" rel="stylesheet">
+	<link href="/css/list.css" rel="stylesheet">
+	<link href="/css/account.css" rel="stylesheet">
+	<link href="/css/setting.css" rel="stylesheet">
+    <link href="/css/1kd.ui.plugin.css" rel="stylesheet">
+    <link href="/css/1kd.ui.css" rel="stylesheet">
+    <link href="/css/kd.tools.validate.css" rel="stylesheet">
+	<script src="/js/index.js"></script>
+	<script src="/js/plugins/layer/layer.js"></script>
+	<script src="/js/homepage/homepage.js"></script>
+	<script type="text/javascript" src="/js/plugins/layer/laydate/laydate.js" ></script>
+</head>
+<nav th:fragment="nav">
+	<div class="nav-bar">
+		<div class="nav-con">
+			<div class="nav-list">
+				<div><img src="/js/homepage/img/kf.png">客服热线：<span>400-0784-800</span> (9:00~18:00)</div>
+				<div class="nav-right">
+					<p th:if="${session.username == null}"><a href="http://47.92.151.206/kasp/login.html?anotherPlaceLogin=jt_jump">注册 / 登录</a></p>
+					<p th:if="${session.username != null}" th:text="${session.username}"></p>
+					<input type="hidden" name="customer" id="customer" th:value="${session.custid}">
+					<p><a href="/home/open/abUs">关于我们</a></p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="nav-menu">
+		<div class="navMenucon">
+			<a href="#" class="logo" style="width: 240px;height:65px;background:url('/js/homepage/img/logo.png') no-repeat;   display: block; float:left;margin-top:-16px;"></a>
+			<div class="header-navs">
+				<ul class="navs">
+					<li class="active"><a href="/home">首页</a></li>
+					<li><a href="http://47.92.151.206">网贷</a></li>
+					<li><a href="/home/optimization/weblist">vip尊享</a></li>
+					<li><a href="#">基金</a></li>
+					<li th:each="r1:${technology}"><a  th:href="@{${r1.url}}" >金融科技</a></li>
+					<li th:each="r2:${lvYlist}"><a  th:href="@{${r2.url}}">普惠旅游</a></li>
+				</ul>
+			</div>
+			<div class="login-btn" >
+				<a href="#" th:onclick="'javascript:account()'"><img src="/js/homepage/img/mine.png">我的账户</a>
+			</div>
+			<div class="picInfo" style="display: none;">
+				<img src="js/homepage/img/head.png">
+				<a href="account.html"></a>
+				<a href="" style="margin-left: 6px; color: #ff4f3f;">[退出]</a>
+			</div>
+		</div>
+	</div>
+</nav>
+<div th:fragment="footer">
+	<div class="footer">
+		<div class="foot">
+			<p>友情链接：
+				<a href="">综改示范区</a>
+				<a href="">网贷之家</a>
+				<a href="">光大证券</a>
+				<a href="">大同证券</a>
+				<a href="">山西证券</a>
+				<a href="">中国光大银行</a>
+				<a href="">中信银行</a>
+				<a href="">晋城银行</a>
+				<a href="">全景网</a>
+			</p>
+			<p>山投信息集团有限公司 </p>
+		</div>
+		<div class="qr">
+			<img src="/js/homepage/img/ma.jpg">
+			<p>关注公众号</p >
+		</div>
+	</div>
+</div>

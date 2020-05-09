@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.kpi.dao.PerformanceAppraisalUserDao">
+
+	<select id="get" resultType="com.bootdo.kpi.domain.PerformanceAppraisalUserDO">
+		select `id`,`user_name`,`user_post`,`user_deparment`,`enrollment_time`,`is_qualification`,`phone`,`opinion` from performance_appraisal_user where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.kpi.domain.PerformanceAppraisalUserDO">
+		select `id`,`user_name`,`user_post`,`user_deparment`,`enrollment_time`,`is_qualification`,`phone`,`opinion` from performance_appraisal_user
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+		  		  <if test="userPost != null and userPost != ''"> and user_post = #{userPost} </if>
+		  		  <if test="userDeparment != null and userDeparment != ''"> and user_deparment = #{userDeparment} </if>
+		  		  <if test="enrollmentTime != null and enrollmentTime != ''"> and enrollment_time = #{enrollmentTime} </if>
+		  		  <if test="isQualification != null and isQualification != ''"> and is_qualification = #{isQualification} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="opinion != null and opinion != ''"> and opinion = #{opinion} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from performance_appraisal_user
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+		  		  <if test="userPost != null and userPost != ''"> and user_post = #{userPost} </if>
+		  		  <if test="userDeparment != null and userDeparment != ''"> and user_deparment = #{userDeparment} </if>
+		  		  <if test="enrollmentTime != null and enrollmentTime != ''"> and enrollment_time = #{enrollmentTime} </if>
+		  		  <if test="isQualification != null and isQualification != ''"> and is_qualification = #{isQualification} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="opinion != null and opinion != ''"> and opinion = #{opinion} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalUserDO">
+		insert into performance_appraisal_user
+		(
+			`id`, 
+			`user_name`, 
+			`user_post`, 
+			`user_deparment`, 
+			`enrollment_time`, 
+			`is_qualification`, 
+			`phone`, 
+			`opinion`
+		)
+		values
+		(
+			#{id}, 
+			#{userName}, 
+			#{userPost}, 
+			#{userDeparment}, 
+			#{enrollmentTime}, 
+			#{isQualification}, 
+			#{phone}, 
+			#{opinion}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalUserDO">
+		update performance_appraisal_user 
+		<set>
+			<if test="userName != null">`user_name` = #{userName}, </if>
+			<if test="userPost != null">`user_post` = #{userPost}, </if>
+			<if test="userDeparment != null">`user_deparment` = #{userDeparment}, </if>
+			<if test="enrollmentTime != null">`enrollment_time` = #{enrollmentTime}, </if>
+			<if test="isQualification != null">`is_qualification` = #{isQualification}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="opinion != null">`opinion` = #{opinion}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from performance_appraisal_user where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from performance_appraisal_user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+    <select id="departmentlist" resultType="com.bootdo.kpi.domain.PerformanceAppraisalUserDO">
+        select `user_deparment` from performance_appraisal_user group by user_deparment
+    </select>
+</mapper>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="portal/homepage/layout::header"></head>
+<body>
+<nav th:include="portal/homepage/layout::nav"  class="navbar navbar-default navbar-custom" style="margin-bottom: 0"></nav>
+
+<div class="order">
+    <table class="table-bordered">
+        <tr>
+            <th>项目名称</th>
+            <th>挂牌价格（元）</th>
+            <th>合同项下应收账款余额（元）</th>
+            <th>本次应收账款待收总额（元）</th>
+            <th>保证金（元）</th>
+            <th>首个公告期限</th>
+            <th>剩余份额（元）</th>
+        </tr>
+        <tr>
+            <td th:text="${optimization.borrowtitle}"></td>
+            <td th:text="${optimization.borrowamount}"></td>
+            <td th:text="${optimization.receivableamount}"></td>
+            <td th:text="${optimization.duein}"></td>
+            <td th:text="${optimization.bond}"></td>
+            <td th:text="${#dates.format(optimization.noticeperiodstart, 'yyyy年MM月dd日')}+'-'+${#dates.format(optimization.noticeperiodend, 'yyyy年MM月dd日')}"></td>
+            <td th:text="${optimization.borrowamount} - ${optimization.hasinvestamount}"></td>
+        </tr>
+    </table>
+    <div class="orderCon">
+
+        <div class="form-group">
+            <label for="">支付金额</label>
+            <input type="text" name="investamount" id="investamount">
+            <span>（元）</span>
+        </div>
+        <button th:onclick="'javascript:pay(\''+${optimization.id}+'\')'">确认支付</button>
+    </div>
+</div>
+
+<div th:include="portal/homepage/layout::footer"></div>
+<script type="text/javascript">
+    function pay(id){
+        var customer = $("#customer").val();
+        if(!customer){
+            layer.confirm("您还没有登录,请先登录!", {
+                btn : [ '确定' ]
+            }, function() {
+                window.location.href="http://47.92.151.206/kasp/login.html?anotherPlaceLogin=jt_jump";
+            });
+            return;
+        }
+        var investamount = $("#investamount").val();
+        window.location.href="/home/trdorderpay/"+id+"/"+investamount;
+    }
+</script>
+</body>
+</html>

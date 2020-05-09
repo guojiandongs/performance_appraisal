@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<body class="fadeIn animated">
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        山投信息
+    </div>
+</header>
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+<!-- swiper -->
+<section class="swiper-container h40">
+    <div class="swiper-wrapper" >
+        <div  th:each="r:${rcharlist}" class="swiper-slide">
+            <a th:href="${r.url}"><img th:src="${r.fileUrl}" class="w75 h40" /></a>
+        </div>
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+</section>
+<!-- 网贷精选 -->
+<div class="p3 ">
+    <div class="wd clearfix">
+        <p class="fl t-l f36"> 网贷精选</p>
+        <p class="fr t-r f28"><a href="http://47.92.151.206">更多</a></p>
+    </div>
+    <div class="w69 h48 mr1 t-c mt3 radius15  wdmain">
+        <th:block th:each="bond,iterStat:${bondsList}">
+            <h2 class="t-l f32 p3" th:text="${bond.name}"></h2>
+            <b class="t-c f60" th:text="${bond.annualrate}+'%'"><span class="f28"></span></b>
+            <p class="t-c f28 mb3 yq">预期年化收益率</p>
+            <div class="box f28 col-4 h10" style="border-right:1px solid #eee;">
+                <span th:text="${bond.deadline}+ ${bond.deadlineunit}"></span>
+                <p>出借期限</p>
+            </div>
+            <div class="box f28 col-4 h10" style="border-right:1px solid #eee;">
+                <span th:text="${bond.borrowamount} + '元'"></span>
+                <p>出借金额</p>
+            </div>
+            <div class="box f28 col-4 h10">
+                <span th:text="${bond.mintenderedsum} + '元'"></span>
+                <p>出借起点</p>
+            </div>
+            <span class="w30 h7 mt2 btn radius5" style="background:#fe766a;" th:onclick="'javascript:lending(\''+${bond.id}+'\',\''+${lending}+'\')'">立即抢购</span>
+        </th:block>
+    </div>
+</div>
+<!-- vip尊享 -->
+<div class="p3">
+    <div class="wd clearfix">
+        <p class="fl t-l f36"> vip尊享</p>
+        <p class="fr t-r f28"><a href="#" th:onclick="'more()'">更多</a></p>
+    </div>
+
+    <div style="margin:10px 0;" th:onclick="'more()'">
+        <img src="/img/wechat/vip.jpg" width="100%;">
+    </div>
+</div>
+<!-- 基金推荐 -->
+<div class="p3">
+    <div class="wd clearfix">
+        <p class="fl t-l f36"> 基金推荐</p>
+         <p class="fr t-r f28"><a href="/fund">更多</a></p>
+    </div>
+    <div class="w69 h36 mr1 t-c mt3 p3 radius15  wdmain" th:each="f:${onefundlist}">
+        <h2 class="t-c f32" th:text="${f.productName}">广发中证500ETF连接C类</h2>
+        <b class="t-c f60 mt3" th:text="${f.annualrate}+'%'"></b>
+        <p class="t-c f28 mb3 yq" style="color:#888;" th:text="${f.content}">温和上涨期间涨幅</p>
+        <span class="w30 h7 btn radius5" style="background:#fe766a;" th:onclick="'window.open(\''+${f.productUrl}+'\')'">立即抢购</span>
+    </div>    
+</div>
+<!-- 金融科技 -->
+<div class="w75 mb1 p3 clearfix">
+    <div class="sm" th:each="r:${placement}"><img th:src="${r.image}" style="width:100%;"><a th:href="@{${r.url}}"><b th:text="${r.subtitle}">私募</b></a></div>
+    <div class="sm mt3"  th:each="r1:${technology}"><img th:src="${r1.image}" style="width:100%;"><a th:href="@{${r1.url}}"><b th:text="${r1.subtitle}">金融科技</b></a></div>
+    <div class="sm mt3 mb9" th:each="r2:${lvYlist}"><img th:src="${r2.image}" style="width:100%;"><a th:href="@{${r2.url}}"><b th:text="${r2.subtitle}">普惠旅游</b></a></div>
+</div>
+<nav th:include="portal/HomePageWechat/layout::nav" class="navbar navbar-default navbar-custom" style="margin-bottom: 0">
+</nav>
+
+
+<script type="text/javascript">
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        //是否自动播方轮播图
+        autoplay:true
+    });
+
+    function lending(id,lending){
+        window.open(lending+id);
+    }
+
+    function more(){
+        window.location.href="/home/wechat/optimization/weblist"
+        //window.open("/home/optimization/"+id);
+    }
+
+    function buy(id){
+        window.location.href="/home/wechat/optimization/"+id;
+    }
+</script>
+    
+</body>
+
+</html>

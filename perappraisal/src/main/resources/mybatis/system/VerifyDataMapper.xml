@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.system.dao.VerifyDataDao">
+
+	<select id="get" resultType="com.bootdo.system.domain.VerifyDataDO">
+		select `appid`,`ACCESS_TOKEN`,`JSAPI_TICKET`,`SIGNATURE`,`IDENTI` from wx_verify_data where appid = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.system.domain.VerifyDataDO">
+		select `appid`,`ACCESS_TOKEN`,`JSAPI_TICKET`,`SIGNATURE`,`IDENTI` from wx_verify_data
+        <where>  
+		  		  <if test="appid != null and appid != ''"> and appid = #{appid} </if>
+		  		  <if test="accessToken != null and accessToken != ''"> and ACCESS_TOKEN = #{accessToken} </if>
+		  		  <if test="jsapiTicket != null and jsapiTicket != ''"> and JSAPI_TICKET = #{jsapiTicket} </if>
+		  		  <if test="signature != null and signature != ''"> and SIGNATURE = #{signature} </if>
+		  		  <if test="identi != null and identi != ''"> and IDENTI = #{identi} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by appid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from wx_verify_data
+		 <where>  
+		  		  <if test="appid != null and appid != ''"> and appid = #{appid} </if>
+		  		  <if test="accessToken != null and accessToken != ''"> and ACCESS_TOKEN = #{accessToken} </if>
+		  		  <if test="jsapiTicket != null and jsapiTicket != ''"> and JSAPI_TICKET = #{jsapiTicket} </if>
+		  		  <if test="signature != null and signature != ''"> and SIGNATURE = #{signature} </if>
+		  		  <if test="identi != null and identi != ''"> and IDENTI = #{identi} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.system.domain.VerifyDataDO">
+		insert into wx_verify_data
+		(
+			`appid`, 
+			`ACCESS_TOKEN`, 
+			`JSAPI_TICKET`, 
+			`SIGNATURE`, 
+			`IDENTI`
+		)
+		values
+		(
+			#{appid}, 
+			#{accessToken}, 
+			#{jsapiTicket}, 
+			#{signature}, 
+			#{identi}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.system.domain.VerifyDataDO">
+		update wx_verify_data 
+		<set>
+			<if test="accessToken != null">`ACCESS_TOKEN` = #{accessToken}, </if>
+			<if test="jsapiTicket != null">`JSAPI_TICKET` = #{jsapiTicket}, </if>
+			<if test="signature != null">`SIGNATURE` = #{signature}, </if>
+			<if test="identi != null">`IDENTI` = #{identi}</if>
+		</set>
+		where appid = #{appid}
+	</update>
+	
+	<delete id="remove">
+		delete from wx_verify_data where appid = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from wx_verify_data where appid in 
+		<foreach item="appid" collection="array" open="(" separator="," close=")">
+			#{appid}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.commitment.dao.PerformanceCommitmentEvaluateDao">
+
+	<select id="get" resultType="com.bootdo.commitment.domain.PerformanceCommitmentEvaluateDO">
+		select `id`,`commitment_id`,`commitment_content`,`commitment_user_id`,`commitment_user_name`,`commitment_department_id`,`commitment_department_name`,`appraisal_user_id`,`commitment_date` from performance_commitment_evaluate where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.commitment.domain.PerformanceCommitmentEvaluateDO">
+		select `id`,`commitment_id`,`commitment_content`,`commitment_user_id`,`commitment_user_name`,`commitment_department_id`,`commitment_department_name`,`appraisal_user_id`,`commitment_date` from performance_commitment_evaluate
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="commitmentId != null and commitmentId != ''"> and commitment_id = #{commitmentId} </if>
+		  		  <if test="commitmentContent != null and commitmentContent != ''"> and commitment_content = #{commitmentContent} </if>
+		  		  <if test="commitmentUserId != null and commitmentUserId != ''"> and commitment_user_id = #{commitmentUserId} </if>
+		  		  <if test="commitmentUserName != null and commitmentUserName != ''"> and commitment_user_name = #{commitmentUserName} </if>
+		  		  <if test="commitmentDepartmentId != null and commitmentDepartmentId != ''"> and commitment_department_id = #{commitmentDepartmentId} </if>
+		  		  <if test="commitmentDepartmentName != null and commitmentDepartmentName != ''"> and commitment_department_name = #{commitmentDepartmentName} </if>
+		  		  <if test="appraisalUserId != null and appraisalUserId != ''"> and appraisal_user_id = #{appraisalUserId} </if>
+		  		  <if test="commitmentDate != null and commitmentDate != ''"> and commitment_date = #{commitmentDate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from performance_commitment_evaluate
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="commitmentId != null and commitmentId != ''"> and commitment_id = #{commitmentId} </if>
+		  		  <if test="commitmentContent != null and commitmentContent != ''"> and commitment_content = #{commitmentContent} </if>
+		  		  <if test="commitmentUserId != null and commitmentUserId != ''"> and commitment_user_id = #{commitmentUserId} </if>
+		  		  <if test="commitmentUserName != null and commitmentUserName != ''"> and commitment_user_name = #{commitmentUserName} </if>
+		  		  <if test="commitmentDepartmentId != null and commitmentDepartmentId != ''"> and commitment_department_id = #{commitmentDepartmentId} </if>
+		  		  <if test="commitmentDepartmentName != null and commitmentDepartmentName != ''"> and commitment_department_name = #{commitmentDepartmentName} </if>
+		  		  <if test="appraisalUserId != null and appraisalUserId != ''"> and appraisal_user_id = #{appraisalUserId} </if>
+		  		  <if test="commitmentDate != null and commitmentDate != ''"> and commitment_date = #{commitmentDate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.commitment.domain.PerformanceCommitmentEvaluateDO" useGeneratedKeys="true" keyProperty="id">
+		insert into performance_commitment_evaluate
+		(
+			`commitment_id`, 
+			`commitment_content`, 
+			`commitment_user_id`, 
+			`commitment_user_name`, 
+			`commitment_department_id`, 
+			`commitment_department_name`, 
+			`appraisal_user_id`, 
+			`commitment_date`
+		)
+		values
+		(
+			#{commitmentId}, 
+			#{commitmentContent}, 
+			#{commitmentUserId}, 
+			#{commitmentUserName}, 
+			#{commitmentDepartmentId}, 
+			#{commitmentDepartmentName}, 
+			#{appraisalUserId}, 
+			#{commitmentDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.commitment.domain.PerformanceCommitmentEvaluateDO">
+		update performance_commitment_evaluate 
+		<set>
+			<if test="commitmentId != null">`commitment_id` = #{commitmentId}, </if>
+			<if test="commitmentContent != null">`commitment_content` = #{commitmentContent}, </if>
+			<if test="commitmentUserId != null">`commitment_user_id` = #{commitmentUserId}, </if>
+			<if test="commitmentUserName != null">`commitment_user_name` = #{commitmentUserName}, </if>
+			<if test="commitmentDepartmentId != null">`commitment_department_id` = #{commitmentDepartmentId}, </if>
+			<if test="commitmentDepartmentName != null">`commitment_department_name` = #{commitmentDepartmentName}, </if>
+			<if test="appraisalUserId != null">`appraisal_user_id` = #{appraisalUserId}, </if>
+			<if test="commitmentDate != null">`commitment_date` = #{commitmentDate}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from performance_commitment_evaluate where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from performance_commitment_evaluate where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

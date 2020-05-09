@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.kpi.dao.PerformanceAppraisalDao">
+
+	<select id="get" resultType="com.bootdo.kpi.domain.PerformanceAppraisalDO">
+		select `id`,`start_time`,`end_time`,`assessment_title`,`assessment_criteria`,`is_open` from performance_appraisal where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.kpi.domain.PerformanceAppraisalDO">
+		select `id`,`start_time`,`end_time`,`assessment_title`,`assessment_criteria`,`is_open` from performance_appraisal
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
+		  		  <if test="assessmentTitle != null and assessmentTitle != ''"> and assessment_title = #{assessmentTitle} </if>
+		  		  <if test="assessmentCriteria != null and assessmentCriteria != ''"> and assessment_criteria = #{assessmentCriteria} </if>
+		  		  <if test="isOpen != null and isOpen != ''"> and is_open = #{isOpen} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from performance_appraisal
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
+		  		  <if test="assessmentTitle != null and assessmentTitle != ''"> and assessment_title = #{assessmentTitle} </if>
+		  		  <if test="assessmentCriteria != null and assessmentCriteria != ''"> and assessment_criteria = #{assessmentCriteria} </if>
+		  		  <if test="isOpen != null and isOpen != ''"> and is_open = #{isOpen} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalDO">
+		insert into performance_appraisal
+		(
+			`id`, 
+			`start_time`, 
+			`end_time`, 
+			`assessment_title`, 
+			`assessment_criteria`, 
+			`is_open`
+		)
+		values
+		(
+			#{id}, 
+			#{startTime}, 
+			#{endTime}, 
+			#{assessmentTitle}, 
+			#{assessmentCriteria}, 
+			#{isOpen}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.kpi.domain.PerformanceAppraisalDO">
+		update performance_appraisal 
+		<set>
+			<if test="startTime != null">`start_time` = #{startTime}, </if>
+			<if test="endTime != null">`end_time` = #{endTime}, </if>
+			<if test="assessmentTitle != null">`assessment_title` = #{assessmentTitle}, </if>
+			<if test="assessmentCriteria != null">`assessment_criteria` = #{assessmentCriteria}, </if>
+			<if test="isOpen != null">`is_open` = #{isOpen}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from performance_appraisal where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from performance_appraisal where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

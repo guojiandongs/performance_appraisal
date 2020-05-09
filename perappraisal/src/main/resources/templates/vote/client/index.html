@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+	<div class="ui-header-c fl f30 w59" style="width: 100%;">
+		微信投票
+	</div>
+</header>
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+	<body>
+		<div class="content" >
+
+				<span class="c-title" th:if="${vaidDetail} != null" th:text="${vaidDetail.voteTitle}">投票名称</span>
+				<p class="c-time"></p>
+				<span class="c-join" th:if="${vaidDetail} != null" th:utext="${vaidDetail.voteIntroduction}">介绍</span>
+			<div class="vote" th:each="v:${vavdlist}">
+				<a id="voteOnly" th:onclick="'javascript:pageToOption(\''+${v.id}+'\')'" style="text-decoration:none;">
+					<!--<a id="voteOnly" th:href="@{'/wechat/vote/client/option?activityId='+${v.id}}" >-->
+					<b th:text="${v.activityName}">活动内容</b>
+                    <!--<b>点击查看投票结果</b>-->
+					<span th:text="'投票时间:'+${#dates.format(v.activityStartDate, 'yyyy-MM-dd HH:mm:ss')}+'至'+${#dates.format(v.activityEndDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+					<p th:utext="${v.activityDescribe}">介绍</p>
+				</a>
+			</div>
+		</div>
+	</body>
+<script type="text/javascript">
+	//跳转投票页面
+	function pageToOption(id){
+		$.ajax({
+			url:"/wechat/vote/client/votingDateCheck",
+			type:"get",
+			async:false,
+			data:{
+                id:id
+			},
+			success:function (r) {
+				//if (r.code==0){
+                    window.location.href = "/wechat/vote/client/option?activityId="+id;
+				/*}else {
+                    if (r.msg =="未绑定手机号" ) {
+                        layer.alert(r.msg+",请点击确定绑定方可投票", function () {
+                            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf922d893180913cc&redirect_uri=https://www.gaoxinzb.com/m/forwardBindPhone.action&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
+                        });
+                    }else{
+                        layer.msg(r.msg);
+                    }
+				}*/
+            }
+
+		})
+	}
+
+</script>
+</html>

@@ -1,0 +1,128 @@
+.account{width:1200px; margin:26px auto; overflow:hidden;}
+.path{font-size:15px; margin-bottom:20px;}
+.accountLeft{width:260px; background:#fff; float:left;}
+.accountLeft .accountMenu span{height:46px; background:#ff4f3f; display: block; line-height:46px; font-size:16px; color:#fff; padding-left:26px;}
+.accountLeft .accountMenu ul li a{line-height:30px; font-size:15px; padding-left:15px; margin:20px 0 20px 42px; display: block;}
+.accountLeft .accountMenu ul li a.active{ border-left:3px solid #ff4f3f; background:#f9f9f9;}
+.accountRight{width:926px; height:814px; float:right; background:#fff; border-top:1px solid #ff4f3f;}
+.personal{height:160px; border-bottom:1px solid #e8e8e8; font-size:15px; overflow:hidden;}
+.personal .headIcon{margin:36px; float:left;}
+.personal .data{float:left; margin-top:56px;}
+.personal .data .phoneNum{color:#ff4f3f;}
+.personal .data .type{margin-top:8px; width:218px; height:30px; border-right:1px solid #e8e8e8; float:left;}
+.personal .data .type select{width:115px; height:30px; background:#ededed; border:0; padding-left:10px;}
+.personal .data .safe{margin:12px 0 0 22px; width:160px; height:30px; float:left; border-right:1px solid #e8e8e8;}
+.personal .data .safe span{color:#ff4f3f;}
+.personal .data .safe button{padding:2px 4px; border:1px solid #ff4f3f; color:#ff4f3f; border-radius: 4px; margin-left:10px; font-size:12px; background:none;}
+.personal .data .member{float:left; height:30px; margin:12px 0 0 20px;}
+.personal .data .member button{padding:2px 4px; border:1px solid #ff4f3f; color:#ff4f3f; border-radius: 4px; margin-left:10px; font-size:12px; background:none;}
+.money{height:160px; padding:50px 0;}
+.money .all{width:210px; text-align: center; border-right:1px dashed #e8e8e8; float:left; position: relative;}
+.money .all .hint{border:1px solid #ff4f3f; border-radius: 4px; padding:5px; font-size:13px; position: absolute; top:-36px; display: none;}
+.money .all p{font-size:16px; cursor: pointer;}
+.money .all p img{margin-left:5px;}
+.money .all b{font-size:30px; color:#ff4f3f;}
+.money .all b span{font-size:20px;}
+.money .cz{border:0;}
+.cz button{width:76px; height:34px; border-radius: 4px; font-size:16px; border:0; margin:20px 0 0 20px;}
+.cz .recharge{background:#ff4f3f; color:#fff;}
+.cz .extract{background:none; border:1px solid #ff4f3f; color:#ff4f3f;}
+.earnings{overflow:hidden; position: relative;}
+.earnings h3{width:166px; height:48px; line-height:48px; text-align: center; float:left; color:#ff4f3f; border-radius: 10px 10px 0 0; border:1px solid #ff4f3f; border-bottom:0; font-size:18px;}
+.earnings hr{float:left; width:760px; border-top:1px solid #ff4f3f; margin-top:67px;}
+.statement button{padding:8px 16px; border:1px solid #ff4f3f; background:none; border-radius: 4px; font-size:15px; color:#ff4f3f; position: absolute; right:90px; top:96px;}
+.expect{text-align: center; float:left; margin:100px 0 0 100px;}
+.expect p{font-size:16px;}
+.expect b{font-size:30px; color:#ff4f3f;}
+.expect b span{font-size:20px;}
+.expect .lend{margin-top:50px;}
+
+
+/* 风险测评页面 */
+
+.risk{
+    padding:0 40px;
+    height: 814px;
+}
+.risk h2{
+    font-size:16px; 
+    font-weight: bold;
+    border-left:3px solid #ff4f3f;
+    padding-left:10px;
+}
+.risk .ristTxt {
+    margin:50px 0 20px 0;
+    color:#333;
+}
+.risk .ristTxt h3{
+    font-size:16px;
+}
+.risk .ristTxt span{
+    display: block;
+    margin-bottom:20px;
+}
+.risk .ristTxt p{
+    text-indent: 28px;
+    line-height:30px;
+}
+.startEvaluation {
+    text-align: center;
+}
+.startEvaluation button{
+    width:230px;
+    height:44px;
+    background:#ff4f3f;
+    color:#fff;
+}
+.risk .agreen{
+    margin-top:30px;
+    border-top:1px solid #ccc;
+    padding-top:15px;
+    font-size:16px;
+}
+.risk .agreen a{
+    color:#ff4f3f;
+    text-decoration: underline;
+}
+.startRisk{
+    padding:40px;
+}
+.startRisk dt{
+    margin-bottom:15px;
+}
+.startRisk dd{
+    display: inline-block;
+    margin-right:50px;
+}
+.startRisk dd label{
+    line-height:40px;
+}
+.startRisk dd label input{
+    margin: 0 5px 0 0;
+}
+.startRisk .tips{
+    margin-top:30px;
+    border-top:1px solid #ccc;
+    padding-top:10px;
+}
+.startRisk .tips span{
+    display: block;
+    line-height:30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

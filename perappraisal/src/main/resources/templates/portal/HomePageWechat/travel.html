@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head th:include="portal/HomePageWechat/layout::header"></head>
+
+<body class="fadeIn animated">
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        山投信息
+    </div>
+</header>
+<!-- aside -->
+<aside class="ui-aside w40 bg-color-success f30">
+    <div class="user p3 color8 clearfix">
+        <div class="fl w10">
+            <img src="img/user.jpg" class="w10 h10 radius-o" />
+        </div>
+        <div class="fr w22 loginbtn">
+            <span>登录</span><br />
+        </div>
+    </div>
+    <ul class="f30 mt2">
+        <li>
+            <a href="index.html" class="pl3 color8">首页</a>
+        </li>
+        <li>
+            <a href="/home/wechat/wechatabUs" class="pl3 color8">关于我们</a>
+        </li>
+        <li>
+            <a href="list.html" class="pl3 color8">我的账户</a>
+        </li>
+        <li>
+            <a href="" class="pl3 color8">400-0784-000</a>
+        </li>
+
+    </ul>
+</aside>
+<script type="text/javascript">
+    var aside = $(".ui-aside").asideUi({
+        hasmask: true,
+        size: "4rem",
+        position: "left",
+        sidertime: 300
+    });
+    $(".ui-header-l").on('touchend', function() {
+        aside.toggle();
+    })
+</script>
+<div><img src="img/travel.jpg" width="100%;"></div>
+
+<!-- 底部导航 -->
+<nav th:include="portal/HomePageWechat/layout::nav" class="navbar navbar-default navbar-custom" style="margin-bottom: 0">
+</nav>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        }
+    });
+</script>
+    
+</body>
+
+</html>

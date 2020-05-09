@@ -1,0 +1,66 @@
+Manifest-Version: 1.0
+Main-Class: com.bootdo.BootdoApplication
+Class-Path: spring-data-redis-2.0.8.RELEASE.jar validation-api-2.0.1.Fin
+ al.jar activiti-engine-5.22.0.jar activiti-json-converter-5.22.0.jar sp
+ ring-boot-starter-web-2.0.3.RELEASE.jar xml-apis-1.4.01.jar spring-bean
+ s-5.0.7.RELEASE.jar shiro-lang-1.4.0.jar batik-xml-1.7.jar jul-to-slf4j
+ -1.7.25.jar spring-orm-5.0.7.RELEASE.jar spring-security-web-5.0.6.RELE
+ ASE.jar xmlgraphics-commons-1.2.jar springfox-schema-2.6.1.jar netty-co
+ mmon-4.1.25.Final.jar activiti-bpmn-converter-5.22.0.jar avalon-framewo
+ rk-impl-4.3.1.jar netty-resolver-4.1.25.Final.jar spring-boot-autoconfi
+ gure-2.0.3.RELEASE.jar spring-boot-starter-aop-2.0.3.RELEASE.jar batik-
+ util-1.7.jar commons-beanutils-1.8.3.jar spring-expression-5.0.7.RELEAS
+ E.jar mybatis-spring-boot-autoconfigure-1.1.1.jar commons-io-2.5.jar sp
+ ring-boot-starter-tomcat-2.0.3.RELEASE.jar activiti-bpmn-model-5.22.0.j
+ ar shiro-spring-1.3.2.jar spring-boot-starter-json-2.0.3.RELEASE.jar ba
+ tik-ext-1.7.jar spring-tx-5.0.7.RELEASE.jar jackson-datatype-jdk8-2.9.6
+ .jar avalon-framework-api-4.3.1.jar batik-js-1.7.jar snakeyaml-1.19.jar
+  reactive-streams-1.0.2.jar shiro-web-1.3.2.jar swagger-models-1.5.10.j
+ ar attoparser-2.0.4.RELEASE.jar commons-dbcp-1.4.jar springfox-spring-w
+ eb-2.6.1.jar commons-pool-1.6.jar unbescape-1.1.5.RELEASE.jar commons-e
+ mail-1.4.jar batik-anim-1.7.jar guava-18.0.jar logback-core-1.2.3.jar d
+ ruid-1.0.28.jar shiro-cache-1.4.0.jar jackson-databind-2.9.6.jar spring
+ -security-core-5.0.6.RELEASE.jar spring-data-commons-2.0.8.RELEASE.jar 
+ commons-pool2-2.5.0.jar springfox-spi-2.6.1.jar spring-boot-2.0.3.RELEA
+ SE.jar jedis-2.9.0.jar tomcat-embed-el-8.5.31.jar spring-boot-starter-d
+ ata-redis-2.0.3.RELEASE.jar velocity-1.7.jar commons-collections-3.2.1.
+ jar tomcat-embed-core-8.5.31.jar jackson-annotations-2.9.0.jar spring-a
+ op-5.0.7.RELEASE.jar batik-transcoder-1.7.jar commons-logging-1.1.1.jar
+  netty-handler-4.1.25.Final.jar jackson-core-2.9.6.jar activiti-process
+ -validation-5.22.0.jar ehcache-2.10.5.jar spring-websocket-5.0.7.RELEAS
+ E.jar spring-context-5.0.7.RELEASE.jar thymeleaf-3.0.9.RELEASE.jar spri
+ ng-boot-starter-cache-2.0.3.RELEASE.jar javax.mail-1.6.1.jar commons-la
+ ng3-3.6.jar batik-gvt-1.7.jar mapstruct-1.0.0.Final.jar batik-script-1.
+ 7.jar activiti-common-rest-5.22.0.jar fop-0.94.jar batik-svggen-1.7.jar
+  spring-security-config-5.0.6.RELEASE.jar spring-messaging-5.0.7.RELEAS
+ E.jar mysql-connector-java-5.1.46.jar spring-plugin-core-1.2.0.RELEASE.
+ jar batik-dom-1.7.jar springfox-swagger-ui-2.6.1.jar activiti-image-gen
+ erator-5.22.0.jar joda-time-2.9.9.jar logback-classic-1.2.3.jar activat
+ ion-1.1.1.jar lettuce-core-5.0.4.RELEASE.jar activiti-spring-5.22.0.jar
+  spring-boot-starter-2.0.3.RELEASE.jar spring-boot-starter-websocket-2.
+ 0.3.RELEASE.jar springfox-core-2.6.1.jar spring-core-5.0.7.RELEASE.jar 
+ commons-lang-2.6.jar jackson-module-parameter-names-2.9.6.jar batik-par
+ ser-1.7.jar batik-css-1.7.jar shiro-core-1.3.2.jar swagger-annotations-
+ 1.5.10.jar aspectjweaver-1.8.13.jar netty-transport-4.1.25.Final.jar qu
+ artz-2.2.1.jar mybatis-spring-1.3.0.jar batik-awt-util-1.7.jar log4j-1.
+ 2.16.jar spring-oxm-5.0.7.RELEASE.jar springfox-swagger-common-2.6.1.ja
+ r spring-webmvc-5.0.7.RELEASE.jar spring-boot-starter-logging-2.0.3.REL
+ EASE.jar log4j-api-2.10.0.jar netty-buffer-4.1.25.Final.jar jackson-dat
+ atype-jsr310-2.9.6.jar kingdom.api.sdk.jar javax.annotation-api-1.3.2.j
+ ar spring-boot-starter-thymeleaf-2.0.3.RELEASE.jar reactor-core-3.1.8.R
+ ELEASE.jar c3p0-0.9.1.1.jar classmate-1.3.4.jar batik-bridge-1.7.jar lo
+ g4j-to-slf4j-2.10.0.jar spring-boot-starter-jdbc-2.0.3.RELEASE.jar spri
+ ng-context-support-5.0.7.RELEASE.jar spring-security-crypto-5.0.6.RELEA
+ SE.jar thymeleaf-extras-shiro-2.0.0.jar spring-jcl-5.0.7.RELEASE.jar sp
+ ring-web-5.0.7.RELEASE.jar shiro-ehcache-1.4.0.jar slf4j-api-1.7.25.jar
+  nekohtml-1.9.22.jar batik-svg-dom-1.7.jar activiti-diagram-rest-5.22.0
+ .jar activiti-modeler-5.22.0.jar springfox-swagger2-2.6.1.jar commons-c
+ onfiguration-1.10.jar spring-plugin-metadata-1.2.0.RELEASE.jar xercesIm
+ pl-2.11.0.jar jcl-over-slf4j-1.7.25.jar spring-jdbc-5.0.7.RELEASE.jar t
+ omcat-embed-websocket-8.5.31.jar hibernate-validator-6.0.10.Final.jar m
+ ybatis-3.4.4.jar batik-codec-1.7.jar fastjson-1.2.31.jar xml-apis-ext-1
+ .3.04.jar jboss-logging-3.3.2.Final.jar jsoup-1.9.2.jar javaGeom-0.11.1
+ .jar mybatis-spring-boot-starter-1.1.1.jar netty-codec-4.1.25.Final.jar
+  thymeleaf-spring5-3.0.9.RELEASE.jar spring-data-keyvalue-2.0.8.RELEASE
+ .jar thymeleaf-extras-java8time-3.0.1.RELEASE.jar HikariCP-2.7.9.jar
+

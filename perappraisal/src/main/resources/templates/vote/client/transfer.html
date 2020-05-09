@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        *{padding:0; margin:0;}
+        a{text-decoration: none; color: #337ab7;}
+        .title{font-size:16px; height:34px; text-align: center; background:#ff4f3f; color:#fff; line-height:34px; margin:0;}
+        .text {padding:0 10px;}
+        .text h3{font-size:16px; text-align: center; color:#555; margin:15px 0 10px 0;}
+        .text p{font-size:14px; text-indent: 2em; line-height:26px;}
+        h4{margin-top: 22px;line-height: 34px;background: #ff4f3f;font-size: 15px;padding-left:10px;color: #fff;}
+        .choose{margin:15px 0;padding-left:10px;}
+        .choose input{margin-right:6px;}
+        .hk01{padding:5px 10px; box-shadow:0 0 5px #ccc; background:#fff; overflow:hidden; margin-top:15px;}
+        .hk01 h2{width:100%; font-size:14px; border-bottom:1px solid #eae9e9; line-height:28px; color:#666; font-weight:bold; margin:0;}
+        .hk01 h2 input{margin-right:6px;}
+        .hk01 span{ float:right; }
+        .hk01 p{font-size:12px; color:#666; margin-top:5px; overflow:hidden;}
+        .hk01 p span a{color:#fd5353; }
+        .transfer-list{}
+        .agree{text-align: center; margin:15px 0 50px 0; }
+        .agree input{margin-right:6px;}
+        .agree span{color:#fd5353; text-decoration: underline; }
+        .btn{width:100%; padding:0; position: fixed;bottom:0;}
+        .btn button{width:100%; background:#fd5353; line-height:34px; border:0; color:#fff;}
+    </style>
+</head>
+<body>
+    <div class="transfer">
+        <h2 class="title">债权转让</h2>
+        <div class="text">
+            <h3>公告</h3>
+            <p style="text-indent: inherit;">尊敬的出借人:</p>
+            <p>文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容</p>
+            <p>客服电话：</p>
+            <p>工作时间：</p>
+        </div>
+        <h4>可转让项目信息</h4>
+        <div class="choose"><input type="checkbox" id="all" onclick="swapCheck()">全选</div>
+        <div class="transfer-list">
+            <div class="hk01" th:each="v:${transList}">
+                <h2><input th:if="${v.auditingStatus== '3'}" type="checkbox" name="transfername" th:value="${v.id}" class="list1"><a href="#" th:text="${v.productname}"></a><span th:text="${v.annualrate}+'%'">14%</span></h2>
+                <p>
+                    <span style="float:left;" th:text="'出借本金：'+${v.investamount}">出借本金：5000元</span>
+                    <span style="float:right;" th:text="'出借期限：'+${v.deadline}+${v.deadlineunit=='M'?'个月':'天'}">出借期限：6个月</span>
+                </p>
+                <p>
+                    <span style="float:left;" th:text="'出借日期：'+${v.investtime}">出借日期：2015-11-20</span>
+                    <span style="float:right;" th:text="'起息日：'+${v.audittime}">起息日：2015-11-20</span>
+                </p>
+                <p>
+                    <!--<span style="float:left;">下次还款时间：2015-11-20</span>-->
+                    <span style="float:left;" th:if="${v.auditingStatus== '0'}">转让状态：审核中</span>
+                    <span style="float:left;" th:if="${v.auditingStatus== '1'}">转让状态：已转让</span>
+                    <span style="float:left;" th:if="${v.auditingStatus== '2'}">转让状态：审核未通过</span>
+                    <span style="float:left;" th:if="${v.auditingStatus== '3'}">转让状态：未转让</span>
+                </p>
+            </div>
+        </div>
+        <input type="hidden" th:value="${openid}" name="openid" id="openid"/>
+        <span th:if="${transList.size()>0}">
+            <p class="agree"><input type="checkbox" id="agreement">请阅读<span data-toggle="modal" data-target="#myModal">《协议》</span></p>
+            <div class="btn"><button th:onclick="'save()'">确认转让</button></div>
+        </span>
+    </div>
+
+<script type="text/javascript">
+        var isCheckAll = false;
+        function swapCheck() {
+            if (isCheckAll) {
+                $("input[name='transfername']").each(function() {
+                    this.checked = false;
+                });
+                isCheckAll = false;
+            } else {
+                $("input[name='transfername']").each(function() {
+                    this.checked = true;
+                });
+                isCheckAll = true;
+            }
+        }
+
+        function save(){
+            var checkUserName = $("#agreement").is(":checked");//是否被选中
+            if(!checkUserName){
+                layer.msg("您还没有确认阅读协议！");
+                return;
+            }
+            var orderids = '';
+            $('input[name="transfername"]:checked').each(function(k){
+                if(k == 0){
+                    orderids = $(this).val();
+                }else{
+                    orderids += ','+$(this).val();
+                }
+            })
+            if(orderids==''){
+                layer.msg("没有选择项目！");
+                return;
+            }
+            $.ajax({
+                url:"/transferReco/save",
+                type:"get",
+                async:false,
+                data:{
+                    orderids:orderids
+                },
+                success:function (r) {
+                    layer.msg(r.msg, function () {
+                        window.location.href = "/transferReco/client?tag="+$("#openid").val();
+                    })
+                }
+            })
+        }
+</script>
+</body>
+</html>

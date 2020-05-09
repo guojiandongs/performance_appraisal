@@ -1,0 +1,333 @@
+@charset "utf-8";
+/* CSS Document */
+ul,li,ol{padding:0; list-style: none;}
+a:hover{text-decoration:none; color:#555;}
+body{background:#f5f5f5; font-family:"微软雅黑"; color:#555;}
+
+
+/*轮播图*/
+.banner{ width:100%; height:380px; position:relative; overflow:hidden;}
+.banner .banner_list{ width:500%; height:380px; position:absolute; left:0; top:0; padding:0; margin:0;}
+.banner .banner_list li{ width:20%; height:380px; float:left; list-style:none;}
+.banner .arrow{overflow:hidden;}
+.banner .arrow span{width:60px; height:60px; background:url(../img/arr.png) 0 0; position:absolute; left:0; top:50%; margin-top:-35px; z-index:11; cursor:pointer;}
+.banner .arrow .right{left:auto; right:0; background-position:right 0;}
+.banner ol{ position:absolute; bottom:15px; left:50%; margin-left:-100px; z-index:2;}
+.banner ol li{ width:12px; height:12px; list-style:none; background:#fff; float:left;  cursor:pointer; border-radius:30px; margin-left:10px;}
+.banner ol .current{ background:#ff4f3f; }
+
+
+/*轮播图 登录框*/
+.jumbotron{padding:0; margin:0; position:relative;}
+.login{width:280px;height:320px;padding: 50px 30px;background: rgba(255 ,255, 255, 0.8);position: absolute;right:14%;top:30px;text-align: center;} 
+.login p{color:#ff4f3f; font-size:26px; font-weight: bold;}
+.login .money{color:#ff4f3f;font-size:16px;margin:24px 0 14px 0;display: block;}
+.login b{font-size:34px; color:#ff4f3f;}
+.login b i{font-size:16px;}
+.login button{width:100%; height:40px; margin-top:24px;border-radius: 4px;background:#ff4f3f;border:none;color:#fff;padding:0 46px;cursor: pointer;}
+.login button span{line-height:40px;}
+
+
+.main{
+    width:1200px; 
+    margin:20px auto;
+    background:#fff;
+    padding:20px;
+}
+.wdmain .title{
+    position: relative;
+}
+.wdmain .title h2{
+    font-size:24px; 
+    font-weight:bold;
+    margin:0;
+}
+.wdmain .title span{
+    font-size:14px;
+    color:#a5a5a5;
+    display: block;
+    margin-top:5px;
+}
+.wdmain .title a{
+    font-size:14px;
+    color:#ff4f3f;
+    position: absolute;
+    top:10px;
+    right:0;
+}
+.wdlist {
+    width:270px;
+    height:300px;
+    box-shadow: 0 0 10px #e2e2e2;
+    padding:16px;
+    text-align: center;
+}
+.wdproduct{
+    display: flex;
+    justify-content: space-between;
+    margin-top:20px;
+}
+.name{
+    font-size:14px;
+    display: flex;
+    justify-content: space-between;
+}
+.name p{
+    color:#2f4252;
+    width:126px;
+    overflow:hidden; 
+    text-overflow:ellipsis; 
+    white-space: nowrap;
+}
+.name span{
+    color:#9ea9b3;
+}
+.name span i{
+    color:#ff4f3f;
+    font-style: normal;
+}
+.num{
+    font-size:28px;
+    color:#ff4f3f;
+    display: block;
+    margin-top:40px;
+    position: relative;
+}
+.num .add{
+    position: absolute;
+    top: -18px;
+    right: 56px;
+}
+.num span{
+    font-size:22px;
+}
+.revenue{
+    font-size:14px;
+    color:#677887;
+    margin-bottom: 40px;
+}
+.money{
+    font-size:16px;
+    color:#677887;
+}
+.money span{
+    color:#2f4252;
+}
+.wdlist button{
+    width:218px;
+    height:44px;
+    background:#ff4f3f;
+    color:#fff;
+    font-size:18px;
+    border-radius: 6px;
+    border:0;
+    box-shadow: 0 6px 0 0 #ffdadb;
+    margin-top: 8px;
+}
+.wdlist button.end{
+    background: #bababa;
+}
+.fund{
+    width:880px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.fund-list{
+    text-align: center;
+    border-right:1px solid #f0f0f0;
+    border-bottom:1px solid #f0f0f0;
+    width:280px;
+    padding: 20px 0;
+}
+.fund-list p{
+    font-size:16px;
+    color:#2f4252;
+}
+.fund-list b,.fund-list i{
+    display: block;
+}
+.fund-list b{
+    color:#ff4f3f;
+    font-size:26px;
+    margin-top: 10px;
+    display: block;
+}
+.fund-list b span{
+    font-size:22px;
+}
+.fund-list i {
+    font-size:14px;
+    font-style: normal;
+    color:#677887;
+}
+.fund-list button{
+    width:96px;
+    height:32px;
+    background:#ff4f3f;
+    border:0;
+    border-radius: 2px;
+    color:#fff;
+    margin-top:20px;
+}
+
+.newproduct{
+    width:300px;
+    height:320px;
+    background: url(../img/fundbg.png) no-repeat scroll center 0px;
+}
+.fundmain{
+    display: flex;
+
+}
+.newproduct{
+   padding:30px 20px;
+   color:#fff; 
+   text-align: center;
+   margin-top: 20px;
+}
+.newproduct h2{
+    margin:0;
+    font-size:28px;
+    font-weight: bold;
+    text-align:left;
+}
+.newproduct p{
+    font-size:18px;
+    margin-top: 40px;
+}
+.newproduct b{
+    font-size:30px;
+    display: block;
+    margin-top: 20px;
+}
+.newproduct b span{
+    font-size:22px;
+    
+}
+.newproduct i{
+    font-style: normal;
+    font-size:14px;
+    display: block;
+}
+.newproduct button{
+    width:220px;
+    height:50px;
+    border:1px solid #fff;
+    background:none;
+    border-radius: 4px;
+    margin-top: 36px;
+}
+
+.finance{
+    width:516px;
+    height:175px;
+    /*background: url(../img/jrkj.png) no-repeat scroll center 0px;*/
+    text-align: center;
+    color:#fff;
+    padding:20px 0;
+}
+.finance p{
+    font-size:44px;
+    font-weight: bold;
+}
+.finance a{
+    width: 170px;
+    height: 48px;
+    background: #000;
+    color: #fff;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    line-height: 44px;
+    font-size: 18px;
+    margin-top: 13px;
+}
+/*.travel{*/
+/*    background: url(../img/jrkj1.png) no-repeat scroll center 0px;*/
+/*}*/
+.financemain{
+    display: flex;
+    justify-content: space-around;
+    margin: 18px 0 26px 0;
+}
+.footer{
+    width: 100%;
+    height: 174px;
+    background: #323232;
+    color: #b3b5ba;
+    margin-top: 30px;
+    padding: 20px 0;
+}
+.foot{
+    width:1200px;
+    margin:0 auto;
+}
+.foot p{
+    margin-top:20px;
+}
+.foot p a {
+    color:#b3b5ba;
+    margin-right:10px;
+}
+
+
+.division_list{border-bottom:1px dashed #d6d6d6; padding:20px 0; overflow:hidden; width:100%; }
+ .division_list h3{font-size:16px; margin:0 0 4px 0; font-weight:600;}
+ .division_list h3 span{font-size:14px;}
+ .division_list .revenue{float:left; margin-right:62px; margin-bottom:0px;}
+ .division_list .revenue b{font-size:30px;font-weight: normal; color:#ff4a48;}
+.division_list .revenue b span{font-size:14px;}
+.division_list .revenue p{font-size:14px; margin:0;}
+.division_list .progress_con{width:330px; float:left; position: relative; margin-top:20px;}
+.division_list .progress_con .progress{width:270px; height:9px; margin:8px 0;}
+.division_list .progress_con .progress .progress-bar{background:#ff4f3f;}
+.division_list .progress_con b{position: absolute;left: 285px;top: -2px;font-size: 16px;color: #ff4f3f;}
+.division_list .progress_con b span{font-size:14px;}
+.division_list .invest{float:right; margin-top:14px;}
+.division_list .invest button{width:130px; height:36px; font-size:16px; background:#ff4f3f; color:#fff; border-radius: 4px; border:0;}
+
+.division_list .notstart button{background:#c9caca;}
+.division_list .finish button{background:#bababa;}
+
+
+/* 订单 */
+.order{
+    width:1200px;
+    margin:30px auto;
+    padding:30px;
+    background:#fff;
+}
+.orderCon .form-group{
+    font-weight: bold;
+}
+.orderCon .form-group label{
+    width: 130px;
+    font-weight: normal;
+    color: #555;
+}
+.orderCon .form-group{
+    margin-bottom:24px;
+}
+.orderCon .form-group input,.orderCon .form-group select{
+    width:200px;
+    height:32px;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    padding-left:10px;
+}
+.orderCon button{
+    width:300px;
+    height:36px;
+    background:#ff4f3f;
+    color:#fff;
+    border:0;
+    border-radius: 4px;
+    margin-top:20px;
+}
+.orderCon a{
+    color:#ff4f3f;
+}
+
+
+
+

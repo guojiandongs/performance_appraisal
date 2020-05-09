@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">名字：</label>
+								<div class="col-sm-8">
+									<input id="userName" name="userName" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">岗位：</label>
+								<div class="col-sm-8">
+									<input id="userPost" name="userPost" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">所在部门：</label>
+								<div class="col-sm-8">
+									<input id="userDeparment" name="userDeparment" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">入职日期：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="laydate-icon layer-date form-control" id="enrollmentTime" name="enrollmentTime" placeholder="入职日期"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" style="background-color: #fff;" readonly="readonly"/>
+                                </div>
+							</div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">手机号：</label>
+                                <div class="col-sm-8">
+                                    <input id="phone" name="phone" class="form-control" type="text">
+                                </div>
+                            </div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核资格：</label>
+                                <div class="col-sm-8">
+                                    <select id="isQualification" name="isQualification" class="form-control">
+                                        <option value="0">否</option>
+                                        <option value="1">是</option>
+                                    </select>
+                                </div>
+							</div>
+														<div class="form-group">
+                            <label class="col-sm-3 control-label">角色：</label>
+                            <div class="col-sm-8">
+                                <select id="opinion" name="opinion" class="form-control">
+                                    <option value="">--请选择--</option>
+                                    <option value="部门同事">部门同事</option>
+                                    <option value="行业应用部">行业应用部</option>
+                                    <option value="基础弱电部">基础弱电部</option>
+                                    <option value="商务部">商务部</option>
+                                    <option value="综合办">综合办</option>
+                                    <option value="分管领导">分管领导</option>
+                                    <option value="总经理">总经理</option>
+                                </select>
+                            </div>
+                        </div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/kpi/performanceAppraisalUser/add.js">
+	</script>
+</body>
+</html>

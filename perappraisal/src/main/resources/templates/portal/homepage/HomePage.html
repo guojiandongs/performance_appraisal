@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="portal/homepage/layout::header"></head>
+<body>
+	<nav th:include="portal/homepage/layout::nav"  class="navbar navbar-default navbar-custom" style="margin-bottom: 0"></nav>
+	<div class="jumbotron">
+		<div class="jq22-banner-box">
+			<div class="jq22-banner-slide">
+				<div class="hd jq22-banner-circle">
+					<ul>
+						<li th:each="r:${rcharlist}"></li>
+					</ul>
+				</div>
+				<div class="bd jq22-banner-body">
+					<ul>
+						<li th:each="r:${rcharlist}" th:style=" 'display: block;
+    							background: url('+${r.fileUrl}+') center center no-repeat;
+    							z-index: 1;width: 100%;height: 355px;'">
+							<a th:href="${r.url}" class="jq22-banner-body-bg01" th:target="_blank"></a>
+						</li>
+
+					</ul>
+				</div>
+
+
+			</div>
+		</div>
+		<!--<div class="login">
+			<p>今日推荐</p>
+			<span class="money">取网贷一个项目名称名称</span>
+			<b>7.5<i>%</i></b>
+			<button><span>立即赚钱</span></button>
+		</div>-->
+	</div>
+	<div class="main">
+		<!-- 网贷精选 -->
+		<div class="wdmain">
+			<div class="title">
+				<h2>网贷精选</h2>
+				<span>简单、方便</span>
+				<a href="http://47.92.151.206">更多精选</a>
+			</div>
+			<div class="wdproduct" >
+				<th:block th:each="bond,iterStat:${bondsList}">
+					<div class="wdlist">
+						<div class="name">
+							<p th:text="${bond.name}"></p>
+							<span>借款期限 <i th:text="${bond.deadline}+ ${bond.deadlineunit}"></i></span>
+						</div>
+						<b class="num" th:text="${bond.annualrate}+'%'"><span></span></b>
+						<p class="revenue">期望年化收益率</p>
+						<p class="homemoney">已投金额<span th:text="${bond.hy}+'元'"></span></p>
+						<th:block th:if="${bond.bondType} eq '预热中'">
+							<button>预热</button>
+						</th:block>
+						<th:block th:if="${bond.bondType} eq '即将开始'">
+							<button>即将开始</button>
+						</th:block>
+						<th:block th:if="${bond.bondType eq '立即出借' || bond.bondType eq '立即投资'}">
+							<button th:onclick="'javascript:lending(\''+${bond.id}+'\',\''+${lending}+'\')'">立即出借</button>
+						</th:block>
+						<th:block th:if="${bond.bondType eq '立即出借' || bond.bondType eq '立即投资'}">
+							<button class="end">已满额</button>
+						</th:block>
+						<button th:onclick="'javascript:lending(\''+${bond.id}+'\',\''+${lending}+'\')'">立即出借</button>
+					</div>
+				</th:block>
+			</div>
+		</div>
+		<!-- vip尊享 -->
+		<div class="wdmain" style="margin-top:46px;">
+			<div class="title">
+				<h2>vip尊享</h2>
+				<span>简单、方便</span>
+				<a href="#" th:onclick="'more()'">更多精选</a>
+			</div>
+			<th:block th:if="${username != null}" th:each="op,iterStat:${optimezatinoList}">
+				<div class="division_list">
+					<h3><a href="#" target="_blank"><span th:text="${op.borrowtitle}"></span></a>
+					</h3>
+					<div class="revenue">
+						<b th:text="${op.borrowamount}"><span>元</span></b>
+						<p>挂牌价格（元）</p>
+					</div>
+					<div class="revenue">
+						<b th:text="${#dates.format(op.noticeperiodstart, 'yyyy年MM月dd日')}+'-'+${#dates.format(op.noticeperiodend, 'yyyy年MM月dd日')}"><span></span></b>
+						<p>首个公告期限</p>
+					</div>
+					<div class="revenue">
+						<b th:text="${op.borrowamount-op.hasinvestamount}"><span>元</span></b>
+						<p>剩余可投份额</p>
+					</div>
+					<div class="progress_con">
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" th:style="'width: '+${op.percentage}+'%'">
+							</div>
+						</div>
+						<b th:text="${op.percentage}+'%'"><span></span></b>
+					</div>
+					<div class="invest"><button th:onclick="'buy(\''+${op.id}+'\')'">立即抢购</button></div>
+				</div>
+			</th:block>
+			<th:block th:if="${username == null}">
+				<div class="" style="margin: 20px 0 0 0; text-align: center; " th:onclick="'more()'"><img src="/js/homepage/img/vip.jpg"></div>
+			</th:block>
+
+
+
+		</div>
+		<!-- 基金推荐 -->
+		<div class="wdmain" style="margin-top:46px;">
+			<div class="title">
+				<h2>基金推荐</h2>
+				<span>富有是个过程，一步一个脚印</span>
+				<a href="fundlist.html">更多推荐</a>
+			</div>
+			<div class="fundmain">
+				<div class="fund">
+					<div  class="fund-list" th:each="f:${fundlist}">
+						<p th:text="${f.productName}">产品名称</p>
+						<b th:text="${f.annualrate}+'%'">年华率</b>
+						<i th:text="${f.content}">标注</i>
+						<button th:onclick="'window.open(\''+${f.productUrl}+'\')'" target="_blank">
+							立即买入
+						</button>
+					</div>
+				</div>
+				<div class="newproduct" th:each="f:${onefundlist}">
+					<h2>今日推荐</h2>
+					<p th:text="${f.productName}">产品名称</p>
+					<b th:text="${f.annualrate}+'%'">年华率<span>%</span></b>
+					<i>预期年化收益率</i>
+					<button th:onclick="'window.open(\''+${f.productUrl}+'\')'" target="_blank">
+						查看详情
+					</button>
+				</div>
+			</div>
+
+		</div>
+		<!-- 特色服务 -->
+<!--		<div class="wdmain" style="margin-top:46px;">-->
+<!--			<div class="title">-->
+<!--				<h2>特色服务</h2>-->
+<!--				<span>体验更优质，丰富的服务</span>-->
+<!--			</div>-->
+<!--			<div class="financemain">-->
+<!--				<div class=" finance"  th:each="r1:${technology}"  th:style=" 'background: url('+${r1.image}+') no-repeat scroll center 0px;'">-->
+
+<!--					<p th:text="${r1.subtitle}">普惠科技</p>-->
+<!--					<a th:href="@{${r1.url}}" >查看详情</a>-->
+
+<!--				</div>-->
+<!--				<div class=" finance travel" th:each="r:${lvYlist}"  th:style=" 'background: url('+${r.image}+') no-repeat scroll center 0px;'">-->
+<!--					<p th:text="${r.subtitle}">普惠旅游</p>-->
+
+<!--					<a th:href="@{${r.url}}"  >查看详情</a>-->
+
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+
+		<div class="wdmain" style="margin-top:46px;">
+			<div class="title">
+				<h2>特色服务</h2>
+				<span>体验更优质，丰富的服务</span>
+			</div>
+			<div class="financemain">
+
+				<div class=" finance" th:each="r:${placement}" th:style=" 'background: url('+${r.image}+') no-repeat scroll center 0px;'">
+					<p th:text="${r.subtitle}">私募</p>
+					<a th:href="@{${r.url}}" >查看详情</a>
+				</div>
+				<div class=" finance trave2" th:each="r1:${technology}" th:style="'background: url('+${r1.image}+') no-repeat scroll center 0px;'">
+					<p th:text="${r1.subtitle}">金融科技</p>
+					<a th:href="@{${r1.url}}" >查看详情</a>
+				</div>
+				<div class=" finance travel" th:each="r2:${lvYlist}" th:style="  'background: url('+${r2.image}+') no-repeat scroll center 0px;'">
+					<p th:text="${r2.subtitle}">普惠旅游</p>
+					<a th:href="@{${r2.url}}" >查看详情</a>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		function lvyou() {
+			//window.open("/home/tourism");
+			//window.location.href="/home/tourism"
+			window.local.href="/home/tourism";
+		}
+        jQuery(".jq22-banner-slide").slide({
+            mainCell: ".bd ul",
+            effect: "fold",
+            autoPlay: true,
+            trigger: "click",
+            delayTime: 1000
+        });
+
+	</script>
+	</body>
+	<div th:include="portal/homepage/layout::footer"></div>
+	<script type="text/javascript">
+		function lending(id,lending){
+			window.open(lending+id+".html");
+		}
+        function buy(id){
+		    window.location.href="/home/optimization/"+id;
+            //window.open("/home/optimization/"+id);
+        }
+        function more(){
+		    window.location.href="/home/optimization/weblist"
+            //window.open("/home/optimization/"+id);
+        }
+	</script>
+</html>

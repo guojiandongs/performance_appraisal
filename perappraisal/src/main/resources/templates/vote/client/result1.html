@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+	<script>
+		$(document).ready(function(){
+			$('.skillbar').each(function(){
+				$(this).find('.skillbar-bar').animate({
+					width:$(this).attr('data-percent')
+				},6000);
+			});
+		});
+	</script>
+
+</head>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+	<div class="ui-header-c fl f30 w59" style="width: 100%;">
+		微信投票
+	</div>
+</header>
+<!--登录菜单-->
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+	<body>
+		<div class="content">
+			<p th:if="${vald}!=null">
+				<span class="c-title" th:text="${vald.activityName}">投票名称</span>
+				<p class="c-time" th:text="${#dates.format(vald.activityStartDate, 'yyyy-MM-dd')}+'至'+${#dates.format(vald.activityEndDate, 'yyyy-MM-dd')}">时间</p>
+				<span class="c-join">自2020年1月16日9时出借人代表委员会候选人投票通道开启以来，截止到2020年1月19日24时，平台投票系统实际参与投票人数共278人，计759票，此次投票中得票数最高的9人当选出借人委员会成员（张鸽、李海燕、化威、申贺明、卓小奇、杨建荣、赵梅芳、杜静、褚振娟），若9名委员中存在因个人或其他特殊原因退出委员会或出现不符合要求的情况，将根据该投票区间排名名单顺位递补。第一次出借人委员会会议将于近期召开，稍后会有工作人员与候选人联系，组建微信群进行下一步沟通。
+ 如有任何疑问，可通过联系客服热线（4000784800）咨询，工作时间为工作日8:30-17:30。 
+详细投票结果如下：
+</span>
+			</p>
+			<div class="c-table">
+				<!--<p>最牛国家（单选）</p>-->
+				<p th:each="v:${vresultlist}">
+					<span th:text="(${v.activity_options})+(${v.selected}==1?'(已选)':'')">选项(已选)</span>
+					<i class="skillbar clearfix " th:data-percent="${v.percentage}+'%'">
+						<span class="skillbar-bar" style="background: #c6010f;"></span>
+					</i>
+					<span class="skill-bar-percent" th:text="${v.votenum}+'票'">票数</span>
+					<span class="skill-bar-percent" th:text="${v.percentage}+'%'">百分比</span>
+                </p>
+				<!--<p style="text-align: center;">你已投票</p>-->
+			</div>
+		</div>
+	</body>
+</html>

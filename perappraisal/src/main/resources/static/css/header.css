@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+ul,li,ol{padding:0; list-style: none;}
+a:hover{text-decoration:none; color:#555;}
+body{background:#f5f5f5; font-family:"微软雅黑"; background:#f3f3f3;}
+.nav-bar{width:100%; height:40px; background:#fff; border-bottom:1px solid #e6e6e6;}
+.nav-con{width:1200px; margin:0 auto;font-size:12px; overflow:hidden;padding:12px 0;}
+.nav-list{color:#5e5e5e;  display: flex; justify-content: space-between;}
+.nav-list img{margin-right:8px;}
+.nav-list span{color:#ff5256;}
+.nav-right p{display: inline-block; margin-left:20px;}
+
+
+
+
+.nav-menu{width:100%; background:#fff;}
+.navMenucon{width:1200px;height:100px;margin:0 auto;padding-top:30px;}
+.logo{width: 240px;height:65px;background:url('/homepage/img/logo.png') no-repeat;   display: block; float:left;margin-top:-16px;}
+.header-navs{float:left;margin-left:300px;}
+.navs li {float:left; padding:10px 20px;font-size:16px; color:#323232;}
+.navs .active{color:#ff5256; font-weight: bold; }
+.navs .active a{color:#ff5256; }
+.navs li a:hover{ color:#ff5256;}
+.on{background:#ff5256;border-radius: 4px;color:#fff;}
+.login-btn{float:left;margin-left:20px;}
+.login-btn a{line-height:40px;text-align:center;float:left; font-size:16px;}
+.login-btn img{margin-right:10px;}
+.current{background:#ff5256;color:#fff;border-radius: 20px;}
+
+.picInfo{
+    float:left;
+    margin:4px 0 0 10px;
+}
+.picInfo img{
+    width:33px;
+    display: inline-block;
+    margin-right:8px;
+}
+.picInfo span{
+    color:#ff4f3f;
+}

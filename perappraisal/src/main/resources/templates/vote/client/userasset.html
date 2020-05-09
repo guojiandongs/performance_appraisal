@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h"
+        style="background-color: #fd5353 !important;">
+    <div class="ui-header-c fl f30 w59" style="width: 100%;">
+        资产确认
+    </div>
+</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        *{padding:0; margin:0;}
+        body{ color:#555;}
+        .customer h2{
+            font-size:16px;
+            height:32px;
+            line-height:32px;
+            background:#F4C39B;
+            color:#fff;
+            margin:10px 0;
+            padding-left:15px;
+        }
+        .customer p{
+            font-size:14px;
+            padding:0 15px;
+            line-height:36px;
+
+        }
+        .customer input{
+            height:30px;
+            border:1px solid #ccc;
+            padding:0 10px;
+            border-radius: 4px;
+            width:50%;
+        }
+        .customer label{
+            width: 40%;
+            display: inline-block;
+            font-weight: 400;
+        }
+        .state{
+            padding:15px;
+            font-size:12px;
+            color:#ff4f3f;
+            border-top:1px solid #E6E5E4;
+            margin-top:20px;
+        }
+        .state b{
+            margin-bottom: 8px;
+            display: block;
+        }
+        .state p{
+            line-height:26px;
+        }
+        .btn{
+            padding:0 15px;
+        }
+        button{
+            height:30px;
+            background:#ff4f3f;
+            color:#fff;
+            text-align: center;
+            width:100%;
+            border:0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="customer">
+    <h2 style=" background: #fd5353">客户信息</h2>
+    <p>
+        <label>客户姓名:</label>
+        <span id="chineseName" th:text="${userasset.chineseName}">张三</span>
+    </p>
+    <p>
+        <label>证件类型:</label>
+        <span id="documentType" >身份证</span>
+    </p>
+    <p>
+        <label>证件号码:</label>
+        <span id="documentId" th:text="${userasset.documentId}">1212121212121</span>
+    </p>
+</div>
+<div class="customer">
+    <h2 style=" background: #fd5353">资产确认</h2>
+    <p>
+        <label>账户总资产（元）:</label>
+        <span id="stillprincipaltotal" th:text="${userasset.stillprincipaltotal}">1,000,000元</span>
+    </p>
+    <p>
+        <label>全部已收收益（元）:</label>
+        <span id="allInterests" th:text="${userasset.allInterests}">1,000,000元</span>
+    </p>
+    <p>
+        <label>可用余额（元）:</label>
+        <span id="withdrawal" th:text="${userasset.withdrawal}">1,000,000元</span>
+    </p>
+</div>
+<div class="customer">
+    <h2 style=" background: #fd5353">账户确认</h2>
+    <p>
+        <label>开户行:</label>
+        <input type="text" id="bankName" th:value="${userasset.bankName}" placeholder="请输入银行卡所在的开户行">
+    </p>
+    <p>
+        <label>银行卡号:</label>
+        <input type="text" id="bankId" th:value="${userasset.bankId}" placeholder="请输入银行卡号">
+    </p>
+    <p>
+        <label>银行卡预留手机号:</label>
+        <input type="text" id="bankMobile" th:value="${userasset.bankMobile}" placeholder="请输入银行卡预留手机号">
+    </p>
+    <input type="hidden" id="custid" th:value="${userasset.custid}" >
+    <input type="hidden" id="openid" th:value="${userasset.openid}" >
+</div>
+<div class="state">
+    <b>说明：</b>
+    <p>1.以上账户为“高新普惠”平台良性清退过程中出借人唯一收款账户。</p>
+    <p>2.全部已收收益包括在银行存管系统和三方支付系统产生的所有出借收益。</p>
+    <p>3.平台将于2020年2月起，对已登记收款账户的出借人每月集中兑付一次。第一期清兑预计于2020年2月25日前后展开。</p>
+</div>
+<div class="btn">
+    <button th:if="${status== '0'}" th:onclick="'save()'">确认提交</button>
+    <button th:if="${status== '1'}" th:onclick="'update()'">确认修改</button>
+</div>
+
+</body>
+<script type="text/javascript">
+    //跳转投票页面
+    function save(){
+
+        var bankName = $("#bankName").val();
+        if (bankName == ""){
+            layer.msg("开户行不能为空");
+            return;
+        }
+        var bankId = $("#bankId").val();
+        if (bankId == ""){
+            layer.msg("银行卡号不能为空");
+            return;
+        }
+        var bankMobile = $("#bankMobile").val();
+        if (bankMobile == ""){
+            layer.msg("银行预留手机号不能为空");
+            return;
+        }
+        $.ajax({
+            url:"/userasset/save",
+            type:"get",
+            async:false,
+            data:{
+                custid:$("#custid").val(),
+                openid:$("#openid").val(),
+                chineseName:$("#chineseName").text(),
+                documentType:'1',
+                documentId:$("#documentId").text(),
+                stillprincipaltotal:$("#stillprincipaltotal").text(),
+                allInterests:$("#allInterests").text(),
+                withdrawal:$("#withdrawal").text(),
+                bankName:bankName,
+                bankId:bankId,
+                bankMobile:bankMobile
+            },
+            success:function (r) {
+                layer.msg(r.msg, function () {
+                    window.location.href = "/userasset?tag="+$("#openid").val();
+                })
+            }
+        })
+    }
+    function update(){
+        var bankName = $("#bankName").val();
+        if (bankName == ""){
+            layer.msg("开户行不能为空");
+            return;
+        }
+        var bankId = $("#bankId").val();
+        if (bankId == ""){
+            layer.msg("银行卡号不能为空");
+            return;
+        }
+        var bankMobile = $("#bankMobile").val();
+        if (bankMobile == ""){
+            layer.msg("银行预留手机号不能为空");
+            return;
+        }
+        $.ajax({
+            url:"/userasset/update",
+            type:"get",
+            async:false,
+            data:{
+                custid:$("#custid").val(),
+                openid:$("#openid").val(),
+                chineseName:$("#chineseName").text(),
+                documentType:'1',
+                documentId:$("#documentId").text(),
+                stillprincipaltotal:$("#stillprincipaltotal").text(),
+                allInterests:$("#allInterests").text(),
+                withdrawal:$("#withdrawal").text(),
+                bankName:bankName,
+                bankId:bankId,
+                bankMobile:bankMobile
+            },
+            success:function (r) {
+                layer.msg(r.msg, function () {
+                    window.location.href = "/userasset?tag="+$("#openid").val();
+                })
+            }
+
+        })
+    }
+</script>
+</html>

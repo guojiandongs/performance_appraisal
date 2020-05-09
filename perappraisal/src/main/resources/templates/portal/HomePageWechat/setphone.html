@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head th:include="portal/HomePageWechat/layout::header">
+</head>
+
+<body class="fadeIn animated" style="background:#f5f5f5;">
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        高新普惠
+    </div>
+</header>
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<!-- aside -->
+<!--<aside class="ui-aside w40 bg-color-success f30">-->
+<!--    <div class="user p3 color8 clearfix">-->
+<!--        <div class="fl w10">-->
+<!--            <img src="img/user.jpg" class="w10 h10 radius-o" />-->
+<!--        </div>-->
+<!--        <div class="fr w22 loginbtn">-->
+<!--            <span>登录</span><br />-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <ul class="f30 mt2">-->
+<!--        <li>-->
+<!--            <a href="index.html" class="pl3 color8">首页</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="list-button.html" class="pl3 color8">关于我们</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="list.html" class="pl3 color8">我的账户</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="" class="pl3 color8">400-0784-000</a>-->
+<!--        </li>-->
+
+<!--    </ul>-->
+<!--</aside>-->
+<script type="text/javascript">
+    var aside = $(".ui-aside").asideUi({
+        hasmask: true,
+        size: "4rem",
+        position: "left",
+        sidertime: 300
+    });
+    $(".ui-header-l").on('touchend', function() {
+        aside.toggle();
+    })
+</script>
+<!--忘记密码-->
+<div class="forget">
+    <form id="updloginpwd">
+    <div class="cipher">
+        <input placeholder="输入登录密码" id="password" name="password" type="password"
+               nullmsg="请输入密码！" errormsg="6-16位数字及字母,不能使用空格！">
+    </div>
+    <div class="cipher">
+        <input placeholder="输入身份证号" id="idcard"  name="idcard"
+               nullmsg="请输入真实的证件号码！" errormsg="证件号码输入有误！">
+    </div>
+        <div class="cipher">
+        <input placeholder="输入新的手机号" id="newphone" name="newphone"
+               nullmsg="请输入手机号码"  errormsg="手机号码不合法" >
+    </div>
+    <div class="cipher">
+        <input placeholder="输入手机验证码" id="phonecode" name="phonecode"
+               errormsg="请输入6位数字验证码！" nullmsg="请输入短信验证码！" >
+        <button type="button"  id="lgnphonecode" class="yzm">获取验证码</button>
+    </div>
+    <div class="cipher">
+        <button type="button" class="confirm" onclick="setphone('updloginpwd','lpwd2sc')">确认</button>
+    </div>
+    </form>
+</div>
+
+<nav class="emo-bottomNav w75 h12 pt1 t-c f28 bg-color8 o-h clearfix" th:include="portal/HomePageWechat/layout::nav"></nav>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        }
+    });
+
+    //修改手机号
+    function setphone(formid, showid) {
+
+        var password = $("#password").val();
+        var idcard = $("#idcard").val();
+        var newphone = $("#newphone").val();
+        var phonecode = $("#phonecode").val();
+
+        var pswcheck = /^(?![^a-zA-Z]+$)(?!\D+$).{6,16}$/;
+        if(password==""){
+            alert("请输入密码");
+            //layer.msg("请输入验证码");
+            return;
+        }
+        if(!pswcheck.test(password)){
+            alert("6-16位字符，至少包含数字、字母(区分大小写)");
+
+           // layer.msg("6-16位字符，至少包含数字、字母(区分大小写)");
+            return ;
+        }
+        if(!idcard){
+            alert("请输入身份证号")
+            //layer.msg("请输入验证码");
+            return;
+        }
+        if(!isIdCardNo(idcard)){
+            alert("身份证号输入错误，请正确身份证号码")
+            return ;
+        }
+        var desPwd="";
+        //解决冲突
+        jQuery(document).ready(function($) {
+            // 使用 jQuery $ 的代码
+            var _pwd = $.trim($("#password").val());
+             desPwd = $.des.getDes(_pwd);
+            $("#password").val(desPwd);
+        });
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/changephone/changphone",
+            data :{
+                loginpwd:desPwd,
+                idcard:idcard
+            },// 你的formid
+            async : false,
+            error : function(request) {
+                layer.alert("系统出错");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    layer.alert(data.msg);
+                } else {
+                    layer.alert(data.msg);
+                }
+            }
+        });
+        if(!newphone){
+            layer.alert("请输入手机号")
+            //layer.msg("请输入验证码");
+            return;
+        }
+        var a =checkmobile(false);
+        if(!checkmobile(false)){
+            console.log("7777");
+            return false;
+        }
+        if(!phonecode){
+            layer.msg("请输入验证码");
+            return;
+        }
+        if(phonecode.length != 6){
+            layer.msg("请填写6位数字验证码");
+            $("#phonecode").val("");
+            return;
+        }
+        $.ajax({
+            type : "post",
+            data : $('#' + formid).serialize(),
+            async: false,
+            url : "/setphone/setphone",
+            success : function(data) {
+                if (data.msg == '1') {
+                             layer.alert(data.msg+'校验成功');
+                            //timeOutRelocate(3, 'myselfinfo.html', 'changephone');
+                        } else {
+                            layer.alert(data.msg);
+                        }
+            },
+            error : function(data) {
+                alert('出错了!');
+                return false;
+            }
+        });
+        // var url = "mall/setCustPhone4zjv2!setphone.do";
+        // $.post(url, $("#" + formid).serializeArray(), function(data) {
+        //     var data = eval("(" + data + ")");
+        //     if (data.result == '1') {
+        //         nextstep(formid, showid);
+        //         timeOutRelocate(3, 'myselfinfo.html', 'changephone');
+        //     } else {
+        //         zhejiang_alert('提示', data.message, refreshpage);
+        //     }
+        // });
+
+    }
+    function isIdCardNo(num){
+        num = num.toUpperCase();
+        //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。
+        if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))){
+            return false;
+        }
+        //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
+        //下面分别分析出生日期和校验位
+        var len, re;
+        len = num.length;
+        if (len == 15){
+            re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);
+            var arrSplit = num.match(re);
+            //检查生日日期是否正确
+            var dtmBirth = new Date('19' + arrSplit[2] + '/' + arrSplit[3]+ '/' + arrSplit[4]);
+            var bGoodDay;
+            bGoodDay = (dtmBirth.getYear() == Number(arrSplit[2]))
+                && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3]))
+                && (dtmBirth.getDate() == Number(arrSplit[4]));
+            if (!bGoodDay){
+                return false;
+            }else{
+                //将15位身份证转成18位
+                //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
+                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10,
+                    5, 8, 4, 2);
+                var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5',
+                    '4', '3', '2');
+                var nTemp = 0, i;
+                num = num.substr(0, 6) + '19' + num.substr(6, num.length - 6);
+                for (i = 0; i < 17; i++){
+                    nTemp += num.substr(i, 1) * arrInt[i];
+                }
+                num += arrCh[nTemp % 11];
+                return num;
+            }
+        }
+        if (len == 18){
+            re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);
+            var arrSplit = num.match(re);
+            //检查生日日期是否正确
+            var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/"+ arrSplit[4]);
+            var bGoodDay;
+            bGoodDay = (dtmBirth.getFullYear() == Number(arrSplit[2]))
+                && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3]))
+                && (dtmBirth.getDate() == Number(arrSplit[4]));
+            if (!bGoodDay){
+                //alert(dtmBirth.getYear());
+                //alert(arrSplit[2]);
+                return false;
+            }else{
+                //检验18位身份证的校验码是否正确。
+                //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
+                var valnum;
+                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10,
+                    5, 8, 4, 2);
+                var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5',
+                    '4', '3', '2');
+                var nTemp = 0, i;
+                for (i = 0; i < 17; i++){
+                    nTemp += num.substr(i, 1) * arrInt[i];
+                }
+                valnum = arrCh[nTemp % 11];
+                if (valnum != num.substr(17, 1)){
+                    return false;
+                }
+                return num;
+            }
+        }
+        return false;
+    }
+    function checkmobile(isASync) {
+        var mobile = $("#newphone").val();
+        var mobiletest = /^13[0-9]{9}$|14[0-9]{9}$|19[0-9]{9}$|15[0-9]{9}$|18[0-9]{9}$|17[0-9]{9}$/;
+        var isno = true;
+        if (mobiletest.test(mobile)) {
+            var data = {
+                mobile : mobile
+            };
+            $.ajax({
+                type : "post",
+                data : data,
+                async: false,
+                url : "/home/wechat/chenkphone",
+                success : function(data) {
+                    if (data) {
+                        layer.alert("该手机号已被注册");
+                        $("#mobile").val("");
+                         isno = false;
+                    }else {
+                        isno = true;
+                    }
+                },
+                error : function(data) {
+                    alert('出错了!');
+                    isno = false;
+                }
+            });
+        } else {
+            alert("请填写正确格式的手机号");
+            $("#mobile").val("");
+            isno = false;
+        }
+        return isno;
+    }
+    //获取验证码，修改登录密码
+    $("#lgnphonecode").click(function () {
+        var wa = $("#lgnphonecode").val();
+        var array = wa.match(/\d+/);
+        if (array != null) {
+            wa = array[0];
+        }
+        if (wa && wa > 0 && wa < 150) {
+            return;
+        }
+        checkcode(150, $("#lgnphonecode"), "", "lgpwd");
+    });
+    //刷新验证码图片
+    function refreshImg(obj) {
+        $(obj).attr('src', '/home/yzm/doget?vtype=admin&rmd=' + new Date().getTime());
+    }
+    function _dialog(wait, $btn,type) {
+        var _div = '<div class="modal fade" id="codediv" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">' + '<div class="modal-dialog">' + '<div class="modal-content">' + '<div class="modal-header">' + ' <button type="button" class="close" data-dismiss="modal">' + '    <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>' + '  </button>' + ' <h4 class="modal-title" id="myModalLabel">验证码</h4>' + '</div>' + ' <div class="modal-body" style="text-align:center;">' + '<span >验证码&nbsp;<em style="color:red">*</em>&nbsp;</span>' + '<input name="validcode" style="width:100px;height:30px;border:1px solid #eee" type="text" value="" id="validcode" datatype="*" class="input" errormsg="请输入右侧的验证码！"/>' + ' <img id="codeimg" style="width: 100px;height: 30px;cursor: pointer;border: 1px solid #eee;" title="看不清楚？" />' + '<span class="" id="checktip" title="请输入验证码！">请输入验证码！</span>  ' + '</div>' + ' <div class="modal-footer" >' + '<a href="javascript:void(0);" class="kdmall-btn" id="submitok">确定</a>&nbsp;&nbsp;' + '   <a class="kdmall-btn" href="javascript:void(0);" id="canceldiv">取消</a>' + '</div>' + ' <div></div>' + '</div>' + '</div>' + '</div>';
+
+        var $div = $(_div);
+        $('#codediv').remove();
+        $div.appendTo('body');
+        $("#codeimg").attr('src', '/home/yzm/doget?vtype=admin&rmd=' + new Date().getTime());
+        //验证码绑定刷新事件
+        $('#codeimg').bind('click', function() {
+            refreshImg(this);
+            $("#checktip").text($("#checktip").attr('title')).css('color', '#333');
+        });
+        jQuery(document).ready(function($) {
+            // 使用 jQuery $ 的代码
+            $('#codediv').modal('show');
+
+        });
+        // $('#codediv').modal('show');
+        $('#submitok').click(function(event) {
+            var validcode = $.trim($('#validcode').val());
+            if (validcode == null || '' == validcode) {
+                $("#checktip").text("验证码不能为空!").css('color', '#ec403e');
+                return;
+            };
+            sendcode(wait, $btn,type);
+        });
+        $('#canceldiv').click(function() {
+            jQuery(document).ready(function($) {
+                // 使用 jQuery $ 的代码
+                $('#codediv').modal('hide');
+            });
+
+        });
+    }
+    //打开验证码模态框，获取手机验证码
+    function checkcode(wait, $btn, type) {
+        $("#checktip").text($("#checktip").attr('title')).css('color', '#333');
+        $('#input', '#codediv').not(':button, :submit, :reset,:hidden').val('').removeAttr('checked').removeAttr('selected');
+        _dialog(wait, $btn, type);
+    }
+    //发送手机验证码
+    function sendcode(wait, $btn,type) {
+        var validcode = $.trim($("#validcode").val());
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/home/wechat/checkValidCode",
+            data :{validcode:validcode},
+            async : false,
+            error : function(request) {
+                layer.alert("修改失败");
+            },
+            success : function(data) {
+
+                if (data.result == '0') {
+                    $('#codediv').modal('hide');
+                    if("验证码错误！" == data.msg){
+                        layer.msg(data.msg);
+                    }else{
+                        timeCounter(wait, $btn);
+                    }
+                } else {
+                    jQuery(document).ready(function($) {
+                        // 使用 jQuery $ 的代码
+                        $('#codediv').modal('hide');
+                    });
+                    layer.msg(data.msg);
+                    //alert(data.msg)
+                    setcode(wait, $btn,type);
+                };
+            }
+        });
+    }
+    //发送验证码
+    function setcode(wait, $btn, mobiletel) {
+
+        var mobile = $("#newphone").val();
+        var code = $("#validcode").val();
+        $.ajax({
+            type : "post",
+            data : {
+                mobile : mobile,
+                validcode : code
+            },
+            url : "/home/wechat/setcode",
+            success : function(data) {
+                if ("y"== data.msg) {
+                    $("#codeimgdiv").hide();
+                    timeCounter(wait, $btn);
+                } else if("validcodeN"==data  ){
+                    jQuery(document).ready(function($) {
+                        // 使用 jQuery $ 的代码
+                        layer.msg('验证码输入错误!');
+
+                    });
+
+                    return false;
+                } else {
+                    layer.msg('发送短信验证码失败!');
+                    return false;
+                }
+            },
+            error : function(data) {
+                alert('出错了!');
+                return false;
+            }
+        });
+    }
+
+    function timeCounter(wait, $btn) {
+        if (wait == 0) {
+            $btn.attr("disabled", false).text("获取验证码");
+            wait = 300;
+        } else {
+            $btn.attr("disabled", "disabled").text("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function() {
+                timeCounter(wait, $btn)
+            }, 1000)
+        }
+    }
+</script>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${performanceCommitmentEvaluate.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">评价内容id：</label>
+								<div class="col-sm-8">
+									<input id="commitmentId" name="commitmentId" th:value="${performanceCommitmentEvaluate.commitmentId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">评价内容：</label>
+								<div class="col-sm-8">
+									<input id="commitmentContent" name="commitmentContent" th:value="${performanceCommitmentEvaluate.commitmentContent}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">被考评人员id：</label>
+								<div class="col-sm-8">
+									<input id="commitmentUserId" name="commitmentUserId" th:value="${performanceCommitmentEvaluate.commitmentUserId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">人员名称：</label>
+								<div class="col-sm-8">
+									<input id="commitmentUserName" name="commitmentUserName" th:value="${performanceCommitmentEvaluate.commitmentUserName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">所在部门id：</label>
+								<div class="col-sm-8">
+									<input id="commitmentDepartmentId" name="commitmentDepartmentId" th:value="${performanceCommitmentEvaluate.commitmentDepartmentId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">所在部门：</label>
+								<div class="col-sm-8">
+									<input id="commitmentDepartmentName" name="commitmentDepartmentName" th:value="${performanceCommitmentEvaluate.commitmentDepartmentName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考评人员：</label>
+								<div class="col-sm-8">
+									<input id="appraisalUserId" name="appraisalUserId" th:value="${performanceCommitmentEvaluate.appraisalUserId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考评时间：</label>
+								<div class="col-sm-8">
+									<input id="commitmentDate" name="commitmentDate" th:value="${performanceCommitmentEvaluate.commitmentDate}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/commitment/performanceCommitmentEvaluate/edit.js">
+	</script>
+</body>
+</html>

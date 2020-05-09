@@ -1,0 +1,61 @@
+/*个人资料*/
+
+.data_me{width:100%; background:#fff}
+.data_me p{padding:10px 15px; border:1px solid #e8e8e8; margin:0;}
+.data_me .cg span{font-size:16px; display:block;}
+.data_me .cg b{font-weight:normal; font-size:14px; margin-top:5px; display:inline-block;}
+.data_me .cg i{font-size:14px; font-style:normal; color:#fd5353; float:right; margin-top:-8px;}
+.data_me .dm span{float:right;}
+
+.login{margin-top:13px;}
+.login .dm a{float:right; margin-left:8px;}
+
+/*忘记密码*/
+.forget{padding:10px;}
+.forget input{width:100%; height:40px; background:#fff; border:1px solid #e3e3e3; padding:0 10px;}
+.forget .cipher{position:relative; margin-bottom:10px;}
+.forget .cipher .yzm{position:absolute; right:7px; top:7px; padding:3px 8px; background:#fd5353; border:0; border-radius:4px; color:#fff;}
+.forget .cipher .confirm{width:100%; height:40px; background:#fd5353; border-radius:4px; color:#fff; font-size:16px;border:0;}
+
+
+.bank{width:90%; margin:10px auto; padding:15px 15px 25px 15px; border-radius:6px; position:relative;
+background:-webkit-linear-gradient(top, #68a9d9, #066eb7);
+background:-moz-linear-gradient(top, #68a9d9, #066eb7);
+background:-o-linear-gradient(top, #68a9d9, #066eb7);}
+
+.bank .js{width:140px; height:40px; border-radius:30px; background:#fff; display:block; padding:6px 0 0 6px;}
+.bank i{position:absolute; right:15px; top:26px; color:#fff; font-style:normal;}
+.bank p{color:#fff; margin:10px 0 0 0;}
+.bank p span{color:#fff;}
+.bank b{font-size:12px; color:#fff; font-weight:normal; position:absolute; bottom:7px; right:15px;}
+.bank_me{width:90%; margin:10px auto;   position:relative; background:#d9d9d9;}
+.bank_me span{position:absolute; right:15px; bottom:10px;}
+.amend{widtH:90%; margin-left: 5%; height:40px; background:#fd5353; border:0; bottom:0; color:#fff; font-size:16px;}
+
+/* 投资明细 */
+.hk01{width:100%; padding:5px; box-shadow:0 0 8px #ccc; margin:10px 0 15px 0; background:#fff; overflow:hidden;}
+.hk01 h2{width:100%; font-size:14px; border-bottom:1px solid #eae9e9; line-height:28px; color:#666; font-weight:bold; margin:0;}
+.hk01 span{ float:right; }
+.hk01 p{font-size:12px; color:#666; margin-top:5px; overflow:hidden;}
+.hk01 p span a{color:#fd5353;}
+
+
+/*地址显示*/
+.site{padding:15px; background:#fff; margin-bottom:15px;} 
+.site .name{font-size:14px;}
+.site .name span{float:right;}
+.site .dz{border-bottom:1px solid #ccc; padding-bottom:5px;}
+.site .editor{color:#fd5353;}
+.site .del{float:right; color:#888;}
+.add{widtH:100%; height:40px; background:#fd5353; color:#fff; position:fixed; bottom:0;}
+
+/*添加地址*/
+section{ width:100%; max-width:640px; margin:0 auto; height:100%; }
+.regist {width:100%; height:40px; border-bottom:1px solid #ccc;  font-size:14px; color:#666;  
+line-height:40px;  position:relative;}
+.regist table tr td:first-child {width:94px; padding-left: 10px; }
+.regist table { width: 100%; overflow: hidden; }
+.regist input { width:100%; background:none; margin-top:-4px;}
+.btn{width:100%; padding:0 10px; margin-top:10px;}
+.btn button{width:100%; height:40px; border-radius:5px; background:#fd5353; border:0; line-height:40px; text-align:center; color:#fff;
+ font-size:16px;}

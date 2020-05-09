@@ -1,0 +1,1137 @@
+<!doctype html>
+<html>
+<head th:include="portal/homepage/layout::header">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><!--移动设备优先-->
+    <title>高新普惠-您身边的金融管家</title>
+
+</head>
+<script src="/js/kjax.des.js"></script>
+<body>
+<nav th:include="portal/homepage/layout::nav"  class="navbar navbar-default navbar-custom" style="margin-bottom: 0"></nav>
+
+<!--账户中心-->
+<div class="account">
+    <p class="path">您所在的位置：账户管理>账户设置</p>
+    <div class="accountLeft">
+        <ul>
+            <ul>
+                <li class="accountMenu">
+                    <span>账户管理</span>
+                    <ul>
+                        <li><a onclick="openhref()" class="active">账户设置</a></li>
+                    </ul>
+                </li>
+                <li class="accountMenu">
+                    <span>认购意向</span>
+                    <ul>
+                        <li><a href="#" >认购意向</a></li>
+                    </ul>
+                </li>
+            </ul>
+            </li>
+<!--            <li class="accountMenu">-->
+<!--                <span>资金管理</span>-->
+<!--                <ul>-->
+<!--                    <li><a href="account_asset.html?type=zjmx">资金明细</a></li>-->
+<!--                    <li><a href="javascript:void(0);" onclick="charged('T');">充值</a></li>-->
+<!--                    <li><a href="withdraw.html?custRole=T">提现</a></li>-->
+<!--                </ul>-->
+<!--            </li>-->
+<!--            <li class="accountMenu">-->
+<!--                <span>我的出借</span>-->
+<!--                <ul>-->
+<!--                    <li><a href="financing.html">出借明细</a></li>-->
+<!--                </ul>-->
+<!--            </li>-->
+<!--            <li class="accountMenu">-->
+<!--                <span>我的奖励</span>-->
+<!--                <ul>-->
+<!--                    <li><a href="myphcurrency.html">普惠积分</a></li>-->
+<!--                    <li><a href="membercoupon.html">优惠券</a></li>-->
+<!--                    <li><a href="myaward.html">我的奖品</a></li>-->
+<!--                    <li><a href="recommend_users.html">邀请好友</a></li>-->
+<!--                </ul>-->
+<!--            </li>-->
+        </ul>
+    </div>
+    <div class="accountRight settingRight">
+        <div class="setCon">
+<!--            <ul class="nav nav-tabs" role="tablist">-->
+<!--                <li role="presentation" class="active"><a href="#setLeft" aria-controls="setLeft" role="tab" data-toggle="tab">账户设置</a></li>-->
+<!--                <li role="presentation"><a href="#setRight" aria-controls="setRight" role="tab" data-toggle="tab">银行存管账户</a></li>-->
+<!--            </ul>-->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="setLeft">
+<!--                    <div class="alter">-->
+<!--                        <p class="head"><img src="${staticserver}/shx/imgv2/head.png"></p>-->
+<!--                        <p class="data">-->
+<!--                            <b>${username!''}</b>-->
+<!--                            <i>安全等级：<span>-->
+<!--                            <#if safeStatus?exists>-->
+<!--				<#if safeStatus.safequestion == "1">-->
+<!--				高-->
+<!--				<#else>-->
+
+<!--						低-->
+
+<!--				</#if>-->
+
+<!--			</#if>-->
+<!--                            </span></i>-->
+<!--                        </p>-->
+<!--                    </div>-->
+
+<!--                    <div class="setList">-->
+<!--                        <p class="infoList">-->
+<!--                            <b>存管账户</b>-->
+<!--                            <span>晋商银行资金存管</span>-->
+<!--                        </p>-->
+<!--                         <#if custbindingpmap?exists>-->
+<!--                         	<#if custbindingpmap.openaccountstatus == "3">-->
+<!--								<p class="state">${custbindingpmap.capitalaccount!''}</p>-->
+<!--		                        <a target="_blank">已开通</a>-->
+<!--							<#else>-->
+<!--								<p class="state">未设置</p>-->
+<!--								<a-->
+<!--			                       <#if safeStatus.individualorinstitution=='0'>href="register.html?type=open_person&custRole=T&success=yes"-->
+<!--							       <#elseif safeStatus.individualorinstitution=='1'>href="register.html?type=open_org&custRole=T&success=yes"-->
+<!--							       <#else> href="register.html?type=zhlx&orgname=&success=yes"</#if>-->
+<!--				                 target="_blank">立即开通-->
+<!--				                </a>-->
+<!--							</#if>-->
+<!--                         <#else>-->
+<!--	                         <p class="state">未设置</p>-->
+<!--	                         <a-->
+<!--                        		<#if safeStatus.individualorinstitution=='0'>href="register.html?type=open_person&custRole=T&success=yes"-->
+<!--				                <#elseif safeStatus.individualorinstitution=='1'>href="register.html?type=open_org&custRole=T&success=yes"-->
+<!--				                <#else> href="register.html?type=zhlx&orgname=&success=yes"</#if>-->
+<!--				                 target="_blank">立即开通-->
+<!--					         </a>-->
+<!--                         </#if>-->
+
+<!--                    </div>-->
+<!--                    <div class="setList">-->
+<!--                        <p class="infoList">-->
+<!--                            <b>电子合同</b>-->
+<!--                            <span>确保用户出借的法律效力</span>-->
+<!--                        </p>-->
+
+
+<!--                        <#if isca == '0'>-->
+<!--                         <p class="state">未授权</p>-->
+<!--                        <a onclick="applyca()" >立即授权</a>-->
+<!--                        <#elseif isca == '1'>-->
+<!--                        <p class="state">已授权</p>-->
+<!--                         <a>授权成功</a>-->
+<!--                         <#elseif isca == '3'>-->
+<!--                         <p class="state">授权失败</p>-->
+<!--                         <a onclick="applyca()" >重新申请授权</a>-->
+<!--                         <#else>-->
+<!--                         <p class="state">未授权</p>-->
+<!--                         <a onclick="applyca()" >立即授权</a>-->
+<!--                         </#if>-->
+<!--                    </div>-->
+                    <div class="setList">
+                        <p class="infoList">
+                            <b>登录密码</b>
+                            <span>登录账户时需要输入密码</span>
+                        </p>
+                        <p class="state">******</p>
+                        <a class="changePwdBtn">修改</a>
+                    </div>
+                    <!-- 修改登录密码 -->
+                    <div class="changePwd revisePwd" style="display: none;">
+                    <form id="updloginpwd">
+                        <h2>修改登录密码<span class="cancel">取消</span></h2>
+                        <div class="form-group">
+                            <label for="">新密码</label>
+                            <input type="hidden" th:value="${username}" id="oldphonenumber">
+                            <input type="password" name="newPassword" id="password" datatype="checkPassword"
+                                   nullmsg="请设置密码！" errormsg="6-16位数字及字母,不能使用空格！" placeholder="请输入新密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="">确认新密码</label>
+                            <input type="password" name="newPassword2" id="password2"
+                                   datatype="checkPassword" recheck="newPassword" nullmsg="请再输入一次密码！"
+                                   errormsg="您两次输入的账号密码不一致！" placeholder="请确认密码">
+                        </div>
+                        <div class="form-group forgetYzm">
+                            <label>手机验证码</label>
+                            <input type="text" name="phonecode" id="phonecode" placeholder="请输入手机验证码" datatype="/^\d{6}$/" nullmsg="验证码为6位数字！">
+                            <button  id="lgnphonecode" type="button">获取验证码</button>
+                        </div>
+                        <div class="form-group">
+                            <label></label>
+                            <input type="button" onclick="updLoginPwd('updloginpwd','lpwd2sc')" value="确认修改" class="sure">
+                        </div>
+                        <div class="tips">
+                            <p>温馨提示：</p>
+                            <span>1. 为了您的账户安全，请定期更换登录密码，并确保登录密码设置与提现密码不同</span>
+                            <span>2. 如果您在操作过程中遇到问题，请及时联系客服，客服电话：0351-7739570</span>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="setList">
+                        <p class="infoList">
+                            <b>登录手机号</b>
+                            <span>登录账户时用于接收短信验证码</span>
+                        </p>
+                        <p class="state"  th:text="${username}?${#strings.substring(username,0,3)}+'****'+${#strings.substring(username,7,11)}:''" ></p>
+                        <a class="changePhone">修改</a>
+                    </div>
+                    <!-- 修改登录手机号 -->
+                    <form id="validphone">
+                    <div class="changePwd loginPhone" style="display: none;">
+                        <h2>修改登录手机号<span class="cancel">取消</span></h2>
+                        <div id='valid1st'>
+                        <div class="form-group">
+                            <label for="">登录密码</label>
+                            <input type="password" name="loginpwd" id='loginpwd' datatype="checkPassword"
+                                   nullmsg="请输入登录密码！" errormsg="登录密码输入有误！" placeholder="请输入您的登录密码">
+                        </div>
+                        <div class="form-group" th:switch="${safeStatus.individualorinstitution}">
+                                <div th:case="1">
+	                                <label for="" >证件号码</label>
+	                                <input input id="phidcard" name="idcard" class="input" type="text" datatype="*"
+	                                       nullmsg="请输入真实的证件号码！" errormsg="证件号码输入有误！" placeholder="请输入您的证件号码">
+	                                <!-- b添加class不能通过的提示样式-->
+	                                <b></b>
+                                </div>
+                                <div th:case="0">
+
+	                                    <label for="">身份证号</label>
+	                                    <input input id="phidcard" name="idcard" class="input" type="text" datatype="idcard"
+	                                           nullmsg="请输入真实的身份证号！" errormsg="身份证号输入有误！" placeholder="请输入您的身份证号码">
+	                                    <!-- b添加class不能通过的提示样式-->
+	                                    <b></b>
+                                </div>
+                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="">请选择问题</label>-->
+<!--                            <select id="question"-->
+<!--                                    name="question">-->
+<!--                              <div>-->
+<!--                                        <option th:if="${usrQA} != null" th:each="q:${usrQA}" th:value="${usrQA.key}" th:text="${usrQA.text}"></option>-->
+<!--                                        <option th:if="${usrQA} == null" th:each="q:${questions}"  th:value="${qStat.count}"-->
+<!--                                               th:text="${q.dict_value}"></option>-->
+<!--                                </div>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="">请输入答案</label>-->
+<!--                            <input type="text" id="phanswer" name="answer" class="input"-->
+<!--                                                                           datatype="*" nullmsg="请输入答案!"-->
+<!--                                                                            errormsg="答案不能为空">-->
+<!--                        </div>-->
+                        <div class="form-group">
+                            <label></label>
+                            <input type="button" onclick="validQuestion('validphone','valid2sc')" value="下一步" class="sure">
+                        </div>
+                        </div>
+                        <!-- 第二步 -->
+                        <div id='valid2sc' style="display:none;">
+                        	 <div class="form-group">
+                            <label for="">输入新手机号</label>
+                            <input id="newphone" name="newphone" type="text" value="" datatype="m" nullmsg="请输入手机号码"
+                                   errormsg="手机号码不合法" placeholder="请输入新手机号">
+                        </div>
+                        <div class="form-group forgetYzm">
+                            <label>手机验证码</label>
+                            <input id="phcodetype" name='codetype' type="hidden" value="phpwd"/>
+                            <input name="newphonecode" id='newphonecode' type="text" class="input" value=""
+                                   datatype="/^\d{6}$/"
+                                   errormsg="请输入6位数字验证码！" nullmsg="请输入短信验证码！" placeholder="请输入手机验证码">
+                            <button type="button" id="chgphonecode">获取验证码</button>
+                        </div>
+                        <div class="form-group">
+                            <label></label>
+                            <input type="button" onclick="setphone('validphone','valid3td')" value="确认修改" class="sure">
+                        </div>
+<!--                        </div>-->
+                        <div id='valid3td' style="display:none">
+                        <div class="psdchinp cscon4402">
+
+                        恭喜您，手机验证成功！
+
+                    </div>
+
+                    <div>
+
+                        <span id="changephone" style="color: red">3</span>&nbsp;秒后页面将自动跳转到“登录”，如果浏览器不能自动跳转，请
+
+                        <a style="text-decoration: underline"
+
+                           href="javascript: window.location.href = 'login.html';">点击此处</a>
+
+                    </div>
+                        </div>
+
+                        <div class="tips">
+                            <p>温馨提示：</p>
+                            <span>1、请填写真实有效的手机号，手机号将作为验证用户身份的重要手段。</span>
+                            <span>2、本平台会对用户的所有资料进行严格保密。</span>
+                            <span>3、使用过程遇到问题，请联系客服。</span>
+                        </div>
+                    </div>
+                        </div>
+                    </form>
+<!--                    <div class="setList">-->
+<!--                        <p class="infoList">-->
+<!--                            <b>密保设置</b>-->
+<!--                            <span>用于加强账户的安全性</span>-->
+<!--                        </p>-->
+<!--                        <#if safeStatus?exists>-->
+
+<!--              <#if safeStatus.safequestion?string == "1">-->
+
+<!--                <p class="state">已设置</p>-->
+<!--                        <a class="setSecurity">立即修改</a>-->
+<!--				<#else>-->
+<!--				<p class="state">未设置</p>-->
+<!--                 <a class="setSecurity">立即设置</a>-->
+<!--              </#if>-->
+
+<!--			<#else>-->
+<!--			<p class="state">未设置</p>-->
+<!--             <a class="setSecurity">立即设置</a>-->
+<!--            </#if>-->
+
+<!--                    </div>-->
+                    <!-- 密保设置 -->
+<!--                    <form id="updsafety">-->
+<!--                    <div class="changePwd security" style="display: none;">-->
+<!--                        <h2>密保设置<span class="cancel">取消</span></h2>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="">密保问题一</label>-->
+<!--                            <select id='q1' name='q1' onchange="selectedChange('updsafety','q1')">-->
+<!--                               <option value='-1'>请选择</option>-->
+
+<!--                                <#if questions?exists>-->
+
+<!--                                    <#list questions as que>-->
+
+<!--                                        <option value="${que.dict_key}">${que.dict_value!''}</option>-->
+
+<!--                                    </#list>-->
+
+<!--                                </#if>-->
+<!--                            </select>-->
+<!--                            <b></b>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label>密保答案</label>-->
+<!--                            <input type="text" id='ans1' name='ans1'>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="">密保问题二</label>-->
+<!--                            <select id='q2' name='q2' onchange="selectedChange('updsafety','q2')">-->
+<!--                                <option value='-1'>请选择</option>-->
+
+<!--                                <#if questions?exists>-->
+
+<!--                                    <#list questions as que>-->
+
+<!--                                        <option value="${que.dict_key}">${que.dict_value!''}</option>-->
+
+<!--                                    </#list>-->
+
+<!--                                </#if>-->
+<!--                            </select>-->
+<!--                            <b></b>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label>密保答案</label>-->
+<!--                            <input type="text" id='ans2' name='ans2'>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="">密保问题三</label>-->
+<!--                            <select id='q3' name='q3' onchange="selectedChange('updsafety','q3')">-->
+<!--                               <option value='-1'>请选择</option>-->
+
+<!--                                <#if questions?exists>-->
+
+<!--                                    <#list questions as que>-->
+
+<!--                                        <option value="${que.dict_key}">${que.dict_value!''}</option>-->
+
+<!--                                    </#list>-->
+
+<!--                                </#if>-->
+<!--                            </select>-->
+<!--                            <b></b>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label>密保答案</label>-->
+<!--                            <input type="text" type="text" id='ans3' name='ans3'>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label></label>-->
+<!--                            <input type="button" onclick="updSafetyQuestion('updsafety','safetyQus2st')" value="确认提交" class="sure">-->
+<!--                        </div>-->
+<!--                        <div class="tips">-->
+<!--                            <p>温馨提示：</p>-->
+<!--                            <span>1.请牢记您设置的密码保护问题，密码问题将用于找回密码等重要操作。</span>-->
+<!--                            <span>2.使用过程遇到问题，请联系客服。</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    </form>-->
+<!--                    <div style="display:none;">-->
+
+<!--    <select id='cachselect' name='cachselect' onchange="">-->
+
+<!--        <option value='-1'>请选择</option>-->
+
+<!--        <#if questions?exists>-->
+
+<!--            <#list questions as que>-->
+
+<!--                <option value="${que.dict_key}">${que.dict_value!''}</option>-->
+
+<!--            </#list>-->
+
+<!--        </#if>-->
+
+<!--    </select>-->
+
+<!--</div>-->
+<!--                    <div class="setList">-->
+<!--                        <p class="infoList">-->
+<!--                            <b>风险测评</b>-->
+<!--                            <span>了解风险承受能力，减少出借损失</span>-->
+<!--                        </p>-->
+<!--                        <#if riskflag == '1'>-->
+<!--                        <p class="state">-->
+<!--                        ${riskEstimate!''} <#if riskEstimate =='保守型'>-->
+<!--						(建议出借额度上限为50万)-->
+<!--						<#elseif riskEstimate =='稳健型'>-->
+<!--						(建议出借额度上限为200万)-->
+<!--						<#elseif riskEstimate=='平衡型'>-->
+<!--						(建议出借额度上限为500万)-->
+<!--						<#elseif riskEstimate =='成长型'>-->
+<!--						(建议出借额度上限为1000万)-->
+<!--						<#elseif riskEstimate =='进取型'>(建议出借额度上限为无上限)-->
+<!--						 <#else>-->
+<!--						</#if>-->
+<!--                        </p>-->
+<!--                        <a href="myselfinfo.html?s=risk" target="_blank">重新测评</a>-->
+<!--                        <#else>-->
+<!--                        <p class="state">未测评</p>-->
+<!--                        <a href="myselfinfo.html?s=risk" target="_blank">立即测评</a>-->
+<!--                        </#if>-->
+<!--                    </div>-->
+<!--                    <div class="setList">-->
+<!--                        <p class="infoList">-->
+<!--                            <b>紧急联系人</b>-->
+<!--                            <span>紧急情况下能被联系到的与当事人相关的人</span>-->
+<!--                        </p>-->
+<!--                         <#if contacMap?exists>-->
+<!--                         	<#if contacMap.chinesename!=''>-->
+<!--	                            <p class="state">已设置</p>-->
+<!--	                        	<a class="addTo">立即修改</a>-->
+<!--                        	<#else>-->
+<!--	                        	<p class="state">未设置</p>-->
+<!--	                        	<a class="addTo">立即设置</a>-->
+<!--                        	</#if>-->
+<!--                         <#else>-->
+<!--		                        <p class="state">未设置</p>-->
+<!--		                        <a class="addTo">立即设置</a>-->
+<!--                         </#if>-->
+
+<!--                    </div>-->
+                    <!-- 添加紧急联系人 -->
+<!--                    <div class="changePwd append" style="display: none;">-->
+<!--                        <h2>紧急联系人<span class="cancel">取消</span></h2>-->
+<!--                        <input type="hidden"  id="J_name" value="${contacMap.chinesename!''}">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="">姓名</label>-->
+<!--                            <input type="text" id="J_chinesename" name="chinesename" value="${contacMap.chinesename!''}" placeholder="请输入姓名">-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="">手机号码</label>-->
+<!--                            <input type="text" id="J_mobiletelno" name="mobiletelno" value="${contacMap.mobiletelno!''}" placeholder="请输入联系人手机号码">-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="">与联系人关系</label>-->
+<!--                            <select name="relation" id="J_relation" data-value="${contacMap.relation!''}">-->
+<!--                                <option value="">请选择</option>-->
+<!--                                <option value="父母">父母</option>-->
+<!--                                <option value="夫妻">夫妻</option>-->
+<!--                                <option value="朋友">朋友</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label></label>-->
+<!--                            <input type="button" onclick="contact();" value="确认提交" class="sure">-->
+<!--                        </div>-->
+<!--                        <div class="tips">-->
+<!--                            <p>温馨提示：</p>-->
+<!--                            <span>如果您在操作过程中遇到问题，请及时联系客服，客服电话：0351-7739570</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="setList">-->
+<!--                        <p class="infoList">-->
+<!--                            <b>资料完善</b>-->
+<!--                            <span>完善个人资料，方便后续联络</span>-->
+<!--                        </p>-->
+<!--                        <#if custbindingpmapThree??>-->
+<!--	                        <#if custbindingpmapThree.openaccountstatus=="3" || custbindingpmapThree.borrowaccountstatus=="3"-->
+<!--	                        || custbindingpmapThree.guaranteeaccountstatus=="3">-->
+<!--		                        	<#if (m.name?? && m.name!="") || (comestablishedtime?? && comestablishedtime!="")>-->
+<!--		                        		<p class="state">已填写</p>-->
+<!--		                        		<a class="adressBtn">立即修改</a>-->
+<!--			                        <#else>-->
+<!--			                        	<p class="state">未填写</p>-->
+<!--			                        	<a class="adressBtn">立即填写</a>-->
+<!--		                        	</#if>-->
+
+<!--	                        <#else>-->
+<!--	                        	<a class="" style="background:#847978">未开户</a>-->
+<!--	                        </#if>-->
+<!--                        </#if>-->
+<!--                    </div>-->
+<!--                    <#if custbindingpmapThree??>-->
+<!--                    <#if custbindingpmapThree.openaccountstatus=="3" || custbindingpmapThree.borrowaccountstatus=="3"-->
+<!--	                        || custbindingpmapThree.guaranteeaccountstatus=="3">-->
+                    <!-- 完善个人信息 -->
+<!--                    <div class="changePwd adress" style="display: none;">-->
+<!--                        <h2>完善信息<span class="cancel">取消</span></h2>-->
+<!--                        <form id="otherinfo">-->
+<!--                        <input type="hidden" id="individualorinstitution" name="individualorinstitution" value="${individualorinstitution!''}" />-->
+<!--				  		<input type="hidden"   style="width: 379px" value="${m.receiverid!''}"  name="receiverid">-->
+<!--                        <#if individualorinstitution=='0'>-->
+<!--	                        <div class="form-group">-->
+<!--	                            <label for="">个人姓名</label>-->
+<!--	                            <input type="text" errormsg="个人姓名不能为空！" nullmsg="请输入个人姓名" datatype="*"-->
+<!--		                         value="${m.name!''}" maxlength="100" name="name">-->
+<!--	                        </div>-->
+<!--	                        <div class="form-group">-->
+<!--	                            <label for="">现所在地</label>-->
+<!--	                             <select name="province" id="provinceSelect" data-value="${m.province!'-1'}" style="width:150px;">-->
+<!--				                      <option value="-1">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--				                      <#if provinceDict?exists>-->
+<!--				                          <#list provinceDict as i>-->
+<!--				                              <option value="${i.dict_key!''}">${i.dict_value!''}</option>-->
+<!--				                          </#list>-->
+<!--				                      </#if>-->
+<!--				                  </select>-->
+<!--				                  <select name="city" id="citySelect" class="short" data-value="${m.city!'-1'}" style="width:150px;">-->
+<!--				                      <option value="-1">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--				                  </select>-->
+<!--	                        </div>-->
+<!--	                        <div class="form-group">-->
+<!--	                             <label for="">身份证所属区域</label>-->
+<!--	                             <select style="width:100px" name="comregisteredprovince" id="hjprovinceSelect" data-value="${comregisteredprovince!'-1'}">-->
+<!--				                      <option value="-1">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--				                      <#if hjprovinceDict?exists>-->
+<!--				                          <#list hjprovinceDict as i>-->
+<!--				                              <option value="${i.dict_key!''}">${i.dict_value!''}</option>-->
+<!--				                          </#list>-->
+<!--				                      </#if>-->
+<!--				                  </select>-->
+<!--				                  <select style="width:100px" name="comregisteredcity" id="hjcitySelect" class="short" data-value="${comregisteredcity!'-1'}">-->
+<!--				                      <option value="-1">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--				                  </select>-->
+<!--				                    <input type="text" id="comregisteredaddress" name="comregisteredaddress"   maxlength="100"-->
+<!--				                         value="${comregisteredaddress!''}" datatype="*" nullmsg="请输入联系地址" errormsg="联系地址不能为空！" style="width:100px">-->
+<!--	                        </div>-->
+
+<!--	                        <div class="form-group">-->
+<!--	                            <label for="">联系地址</label>-->
+<!--	                            <input name="address" type="text" id="address" maxlength="100"-->
+<!--		                         value="${m.address!''}" datatype="*" nullmsg="请输入联系地址" errormsg="联系地址不能为空！">-->
+<!--	                        </div>-->
+<!--	                        <div class="form-group">-->
+<!--	                            <label for="">工作性质</label>-->
+<!--	                            <input name="personcategory" type="text" id="personcategory" maxlength="100"-->
+<!--		                         value="${personcategory!''}" datatype="*" nullmsg="请输入工作性质" errormsg="工作性质不能为空！">-->
+<!--	                        </div>-->
+
+<!--                        <#else>-->
+<!--	                        <div class="form-group" style="text-align:left">-->
+<!--	                            <label for="">成立时间</label>-->
+<!--	                            <input style="width:300px;" name="comestablishedtime" id="comestablishedtime" readonly="readonly" type="text"-->
+<!--	                                       onfocus="WdatePicker({dateFmt:'yyyyMMdd'})" value="${comestablishedtime!''}">-->
+<!--	                        </div>-->
+<!--	                        <div class="form-group" style="text-align:left">-->
+<!--	                             <label for="">注册地址</label>-->
+<!--	                             <select style="width:100px" name="comregisteredprovince" id="hjprovinceSelect" data-value="${comregisteredprovince!'-1'}">-->
+<!--				                      <option value="-1">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--				                      <#if hjprovinceDict?exists>-->
+<!--				                          <#list hjprovinceDict as i>-->
+<!--				                              <option value="${i.dict_key!''}">${i.dict_value!''}</option>-->
+<!--				                          </#list>-->
+<!--				                      </#if>-->
+<!--				                  </select>-->
+<!--				                  <select style="width:130px" name="comregisteredcity" id="hjcitySelect" class="short" data-value="${comregisteredcity!'-1'}">-->
+<!--				                      <option value="-1">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--				                  </select>-->
+<!--				                    <input type="text" id="comregisteredaddress" name="comregisteredaddress"   maxlength="100"-->
+<!--				                         value="${comregisteredaddress!''}" datatype="*" nullmsg="请输入联系地址" errormsg="联系地址不能为空！">-->
+<!--	                        </div>-->
+<!--	                        <div class="form-group" style="text-align:left">-->
+<!--	                            <label for="">注册资本</label>-->
+<!--	                            <input type="text" id="comregisteredcapital" name="comregisteredcapital"   maxlength="100" style="width:300px;"-->
+<!--		                         value="${comregisteredcapital!''}" datatype="*" nullmsg="请输入注册资本" errormsg="注册资本不能为空！">-->
+<!--	                        </div>-->
+
+<!--	                        <div class="form-group" style="text-align:left">-->
+<!--	                            <label for="">经营范围</label>-->
+<!--	                            <input type="text" id="commanagearea" name="commanagearea"   maxlength="1000" style="width:300px;"-->
+<!--		                         value="${commanagearea!''}" datatype="*" nullmsg="请输入经营范围" errormsg="经营范围不能为空！">-->
+<!--	                        </div>-->
+
+<!--	                        <div class="form-group">-->
+<!--	                            <label for="" style="width: 152px;text-align: center;">股东信息-->
+<!--		                            <a href="javascript:void(0);" onclick="addShareholderInformation()"-->
+<!--		                            style="color: #f96265;font-size: 12px;text-decoration: underline; display: block;">-->
+<!--		                            	添加股东信息-->
+<!--	                            	</a>-->
+<!--	                            </label>-->
+<!--	                           <table class="records-table">-->
+<!--	                     	<thead>-->
+<!--	                            <tr>-->
+<!--	                              <th>股东名称</th>-->
+<!--	                              <th>股东类型</th>-->
+<!--	                              <th>股东证件类型</th>-->
+<!--	                              <th>操作</th>-->
+<!--	                            </tr>-->
+<!--	                         </thead>-->
+<!--	                         <tbody id="J_add_Shareholder_Information">-->
+<!--			                         	<#if shareholderlist?exists>-->
+<!--			                         		<#list shareholderlist as list>-->
+<!--			                         			<tr>-->
+<!--			                         			<input type="hidden" name="paramCust.shareholderlist_id" value="${list.id!''}"/>-->
+<!--						                             <td>-->
+<!--						                  				 <input type="text" id="shareholder_name" name="paramCust.shareholder_name"   maxlength="100"-->
+<!--						                					value="${list.shareholder_name!''}" datatype="*" nullmsg="请输入股东名称" errormsg="股东名称不能为空！">-->
+<!--											         </td>-->
+<!--						                             <td>-->
+<!--						                             	 <select name="paramCust.shareholder_type" id="shareholder_type" class="select"-->
+<!--						                             	 data-value="${list.shareholder_type!''}" datatype="*" nullmsg="请选择股东类别！"-->
+<!--						                             	  style="width:100px;"-->
+<!--						                             	 >-->
+<!--											  	          <option <#if list.shareholder_type=='-1'>selected=true</#if> value="-1">请选择</option>-->
+<!--											  	          <option <#if list.shareholder_type=='0'>selected=true</#if> value="0">个人</option>-->
+<!--											  	          <option <#if list.shareholder_type=='1'>selected=true</#if> value="1">机构</option>-->
+<!--											            </select>-->
+<!--						                             </td>-->
+<!--						                             <td>-->
+<!--						                             	<select name="paramCust.shareholder_certificates_type" id="shareholder_certificates_type" class="select"-->
+<!--						                             	data-value="${list.shareholder_certificates_type!''}" datatype="*" nullmsg="请选择股东证件类别！"-->
+<!--						                             	style="width:200px;">-->
+<!--											  	          <option <#if list.shareholder_certificates_type=='-1'>selected=true</#if> value="-1">请选择</option>-->
+<!--											  	          <option <#if list.shareholder_certificates_type=='身份证'>selected=true</#if> value="身份证">身份证</option>-->
+<!--											  	          <option <#if list.shareholder_certificates_type=='统一社会信用代码'>selected=true</#if> value="统一社会信用代码">统一社会信用代码</option>-->
+<!--											            </select>-->
+<!--						                             </td>-->
+<!--						                             <td><a href="javascript:void(0);" onclick="removeColunm(this)"-->
+<!--		                            style="color: #f96265;font-size: 12px;text-decoration: underline; display: block;">-->
+<!--		                            	删除股东信息-->
+<!--	                            	</a></td>-->
+<!--					                            </tr>-->
+<!--			                         		</#list>-->
+<!--			                         	</#if>-->
+<!--			                             &lt;!&ndash;   &ndash;&gt;-->
+<!--			                         </tbody>-->
+
+<!--			                  	</table>-->
+<!--	                        </div>-->
+<!--                         </#if>-->
+<!--                         <div class="form-group">-->
+<!--                            <input type="button" onclick="addCustOtherInfoNew()" value="确认提交" class="sure">-->
+<!--                        </div>-->
+<!--                         </form>-->
+<!--                    </div>-->
+<!--                	</#if>-->
+<!--                	</#if>-->
+<!--                </div>-->
+<!--                <div role="tabpanel" class="tab-pane" id="setRight">-->
+
+<!--                	<#if custbindingpmap??>-->
+<!--                    <#if custbindingpmap.openaccountstatus=="0">-->
+<!--                            <li class="new-card">-->
+<!--                                <a-->
+<!--                                <#if safeStatus.individualorinstitution=='0'>href="register.html?type=open_person&custRole=T&success=yes"-->
+<!--							       <#elseif safeStatus.individualorinstitution=='1'>href="register.html?type=open_org&custRole=T&success=yes"-->
+<!--							       <#else> href="register.html?type=zhlx&orgname=&success=yes"</#if>-->
+<!--								>-->
+<!--                                    <span class="add">点击开户</span>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                    <#elseif custbindingpmap.openaccountstatus=="1">-->
+<!--						<li class="new-card">-->
+
+<!--                            <span class="add">审核中</span>-->
+
+<!--                        </li>-->
+<!--                    <#elseif custbindingpmap.openaccountstatus=="2">-->
+
+<!--                            <li class="new-card">-->
+<!--                                <a-->
+<!--                                <#if safeStatus.individualorinstitution=='0'>href="register.html?type=open_person&custRole=T&success=yes"-->
+<!--							       <#elseif safeStatus.individualorinstitution=='1'>href="register.html?type=open_org&custRole=T&success=yes"-->
+<!--							       <#else> href="register.html?type=zhlx&orgname=&success=yes"</#if>-->
+<!--								>-->
+<!--                                    <span class="add">审核失败,点击重新审核</span>-->
+<!--                                </a>-->
+<!--                            </li>-->
+
+<!--                    <#elseif custbindingpmap.openaccountstatus=="10">-->
+<!--						&lt;!&ndash; 存量客户激活 -individualorinstitution 0个人  1企业 &ndash;&gt;-->
+<!--                        <#if custbindingpmap.individualorinstitution=="0">-->
+<!--							<li class="new-card">-->
+<!--                                <a class="add" href="javascript:void(0);" onclick="batchAccountActive()"-->
+<!--                                   style="float:right;">激活个人银行存管账户</a>-->
+<!--                            </li>-->
+<!--                        <#else>-->
+<!--							<li class="new-card">-->
+<!--                                <a class="add" href="bankmanage.html?s=bind&p=cg&t=org"-->
+<!--                                   style="float:right;">激活企业银行存管账户</a>-->
+
+<!--                            </li>-->
+<!--                        </#if>-->
+<!--                    <#elseif custbindingpmap.openaccountstatus=="12">-->
+<!--						&lt;!&ndash; 存量客户激活审核失败处理 -individualorinstitution 0个人  1企业 &ndash;&gt;-->
+<!--                        <#if custbindingpmap.individualorinstitution=="0">-->
+<!--							<li class="new-card">-->
+<!--                                <a class="add" href="javascript:void(0);" onclick="batchAccountActive()"-->
+<!--                                   style="float:right;">激活个人银行存管账户审核失败,点击重新审核</a>-->
+<!--                            </li>-->
+<!--                        <#else>-->
+<!--								<li class="new-card">-->
+<!--                                    <a class="add" href="bankmanage.html?s=bind&p=cg&t=org" style="float:right;">激活企业银行存管账户审核失败,点击重新审核</a>-->
+
+<!--                                </li>-->
+<!--                        </#if>-->
+<!--                    <#elseif custbindingpmap.openaccountstatus=="3">-->
+
+
+
+<!--                    <div class="jsCard">-->
+<!--                        <h3>-->
+<!--                            <span class="js_bank"><img src="${staticserver}/shx/imgv2/jsbanklogo.gif"></span>-->
+<!--                        </h3>-->
+<!--                        <span class="num">${js_accountInfoMap.accountId!''}</span>-->
+<!--                        <p>账户名称:${js_accountInfoMap.acctName?substring(0,1)}***</p>-->
+<!--                        <p>-->
+<!--                            手机号:${js_accountInfoMap.mobileNo?substring(0,3)}*****${js_accountInfoMap.mobileNo?substring(js_accountInfoMap.mobileNo?length-3)}</p>-->
+<!--                        <p>开户时间:${js_accountInfoMap.createDate}</p>-->
+<!--                        <p class="back_zt">-->
+<!--                        <#if js_accountInfoMap.acctStatus == 'Y' >-->
+<!--                                        <p class="back_zt">已认证</p>-->
+<!--                                    <#else>-->
+<!--                                        <p class="back_zt">未认证</p>-->
+<!--                                    </#if>-->
+<!--                        </p>-->
+<!--                    </div>-->
+
+
+<!--                    <h2>绑定银行卡信息</h2>-->
+<!--                    <div class="jsCard userCard">-->
+<!--                        <p><#if sfzfbanklist.openbankname?length gte 0>-->
+<!--                                            ${sfzfbanklist.openbankname}-->
+<!--                                        </#if></p>-->
+<!--                        <b>-->
+<!--                        <#assign leng = sfzfbanklist.bankaccount?length>-->
+<!--                                            <#if  sfzfbanklist.bankaccount== "企业变更银行卡人工审核中">-->
+<!--                                                ${sfzfbanklist.bankaccount}-->
+<!--                                            <#elseif sfzfbanklist.bankaccount?index_of("请重新修改银行卡")!=-1>-->
+<!--                                                ${sfzfbanklist.bankaccount}-->
+<!--                                            <#else>-->
+<!--                                                <#if sfzfbanklist.bankaccount?length gte 13>-->
+<!--                                                    ${sfzfbanklist.bankaccount?substring(0,3)}-->
+<!--                                                    **********${sfzfbanklist.bankaccount?substring(leng-4)}-->
+<!--                                                <#else>-->
+<!--                                                    ${sfzfbanklist.bankaccount}-->
+<!--                                                </#if>-->
+<!--                                            </#if>-->
+
+<!--                        </b>-->
+
+<!--                        <#if sfzfbanklist.bankaccount == "企业变更银行卡人工审核中">-->
+<!--                                    <#else>-->
+<!--                                    <a href="javascript:void(0);" id="reset_jsbank_mobile" type="button" onclick="reset_jsbank_card()" target="_blank">修改银行卡号</a>-->
+
+<!--                                    </#if>-->
+
+
+<!--                    </div>-->
+<!--                    <div class="revise">-->
+<!--                        <table class="table-bordered">-->
+
+<!--                            <tr>-->
+<!--                                <th>交易密码</th>-->
+<!--                                <th>交易手机号</th>-->
+<!--                                <#if custbindingpmap.individualorinstitution=="1">-->
+<!--                                <th>变更企业信息</th>-->
+<!--                                <th>变更企业法人信息</th>-->
+<!--                                </#if>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td><a onclick="changeTransPassWord()" href="javascript:void(0);">修改</a> | <a href="javascript:void(0);" onclick="resetTransPassWord()">重置</a></td>-->
+<!--                                <td><a href="javascript:void(0);" onclick="changeTransPhone()">修改</a></td>-->
+<!--                                 <#if custbindingpmap.individualorinstitution=="1">-->
+<!--                                 	<#if custbindingpmap.certificateno=="审核中">-->
+<!--                                 	<td>审核中</td>-->
+<!--                                 	<td>审核中</td>-->
+<!--                                 	<#else>-->
+<!--                                 	<td><a href="javascript:void(0);" onclick="resetEnterpriseInfo()">修改</a></td>-->
+<!--                                 	<td><a href="javascript:void(0);" onclick="resetBusinessInfo()">修改</a></td>-->
+<!--                                 	</#if>-->
+<!--                                 </#if>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                      </#if>-->
+<!--                                </#if>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $updLogForm = $("#updloginpwd").kdValidform(); //修改登录密码表单
+
+$(".changePwdBtn").click(function(){
+
+   $(".revisePwd").toggle(500);
+});
+$(".revisePwd .cancel").click(function(){
+  $(".revisePwd").hide(500);
+});
+$(".addTo").click(function(){
+  $(".append").toggle(500);
+});
+$(".append .cancel").click(function(){
+  $(".append").hide(500);
+});
+$(".setSecurity").click(function(){
+  $(".security").toggle(500);
+});
+$(".security .cancel").click(function(){
+  $(".security").hide(500);
+});
+$(".changePhone").click(function(){
+  $(".loginPhone").toggle(500);
+});
+$(".loginPhone .cancel").click(function(){
+  $(".loginPhone").hide(500);
+});
+$(".adressBtn").click(function(){
+  $(".adress").toggle(500);
+});
+$(".adress .cancel").click(function(){
+  $(".adress").hide(500);
+});
+/*new PCAS("province", "city", "--请选择省份--", "--请选择城市--");*/
+</script>
+
+<script type="text/javascript">
+    function applyca() {
+        var param = {};
+       /*  $.kutil.pageReload("mall/applyca!applyca.do", param); */
+       var customerName = "${realchinesename!''}";
+       var idCard = "${realcertificateno!''}";
+       var mobile = "${mobiletel!''}";
+       var identType = "${certificatetype!''}";
+        var individualorinstitution = "${individualorinstitution!''}";
+
+		param.customerName = customerName;
+		param.idCard = idCard;
+		param.mobile = mobile;
+		param.identType = identType;
+		param.individualorinstitution = individualorinstitution;
+		console.log(param);
+
+        var url = 'mall/applyca!applyca.do?ajax=yes';
+        $.post(url, param, function (data) {
+            console.log(data);
+            var data = eval('(' + data + ')');
+            if ( data.result == '1' ) {
+             console.log(111);
+             fddurl = data.message;
+             window.location.href=fddurl;
+            }else{
+             console.log(222);
+             layer.alert('尊敬的客户，您好！您申请的电子合同授权失败，请确保您已开通银行存款账户后再进行授权，若仍无法授权请及时联系客服人员，客户电话：400-0784-800。\n','', function() {
+                 layer.closeAll();
+                });
+            }
+
+        });
+    }
+</script>
+
+
+
+<script>
+
+function contact() {
+        var param = {};
+       /*  $.kutil.pageReload("mall/applyca!applyca.do", param); */
+       var chinesename =  $("#J_chinesename").val();
+       if(chinesename==''){
+       layer.alert("紧急联系人姓名不能为空！");
+       return;
+       }
+       var mobiletelno = $("#J_mobiletelno").val();
+       if(mobiletelno==''){
+       	layer.alert("紧急联系人手机号不能为空！");
+       return;
+       }
+       var relation = $("#J_relation option:selected").val();
+       if(relation==''){
+       	layer.alert("与紧急联系人关系不能为空！");
+       return;
+       }
+		param.chinesename = chinesename;
+		param.mobiletelno = mobiletelno;
+		param.relation = relation;
+		console.log(param);
+
+        var url = 'mall/addCust4zjv2!addContact.do';
+        var name = $("#J_name").val();
+        if(name!=''){
+        var url = 'mall/addCust4zjv2!updateContact.do';
+        }
+        $.post(url, param, function (data) {
+           layer.alert(data,'', function() {
+                 window.location.href="myselfinfo.html";
+                });
+
+        });
+    }
+
+
+
+    $("select").each(function () {
+    	var $select = $(this);
+        var data = $select.attr("data-value");
+        if ($.trim(data) != "") {
+        $select.val(data);
+        }
+    });
+</script>
+
+
+<script>
+//动态增加担保方
+function addShareholderInformation() {
+	var html = [], date = new Date(), id = date.getTime();
+	var i = 0;
+	//------------------------------------------------------------------
+	html.push('<tr>');
+	html.push(' <input type="hidden" name="paramCust.shareholderlist_id" value=""/>');
+	html.push('	<td>');
+	html.push('		<input type="text" id="shareholder_name" name="paramCust.shareholder_name"   maxlength="100" value="" datatype="*" nullmsg="请输入股东名称" errormsg="股东名称不能为空！">');
+	html.push('	</td>');
+	html.push('	<td>');
+	html.push('		<select name="paramCust.shareholder_type" id="shareholder_type" style="width:100px;" class="select" data-value="" datatype="*" nullmsg="请选择股东类别！">');
+	html.push('			<option value="-1">请选择</option>');
+	html.push('			<option value="0">个人</option>');
+	html.push('			<option value="1">机构</option>');
+	html.push('		</select>');
+	html.push('	</td>');
+	html.push('	<td>');
+	html.push('		<select name="paramCust.shareholder_certificates_type" id="shareholder_certificates_type" style="width:200px;" class="select" data-value="" datatype="*" nullmsg="请选择股东证件类别！">');
+	html.push('			<option value="-1">请选择</option>');
+	html.push('			<option value="身份证">身份证</option>');
+	html.push('			<option value="统一社会信用代码">统一社会信用代码</option>');
+	html.push('		</select>');
+	html.push('	</td>');
+	html.push('<td><a href="javascript:void(0);" onclick="removeColunm(this)"style="color: #f96265;font-size: 12px;text-decoration: underline; display: block;">删除股东信息</a></td>');
+	html.push('</tr>');
+	$("#J_add_Shareholder_Information").append(html.join(""));
+}
+
+  function removeColunm(thisbutton){
+$(thisbutton).parent().parent().remove();
+}
+
+//保存修改
+function addCustOtherInfoNew() {
+    var url = "mall/addCust4zjv2!addCust.do";
+    $.post(url, $('#otherinfo').serializeArray(), function (data) {
+        if (Eop.Util.isNotEmpty(data)) {
+            var data = eval('(' + data + ')');
+            if (data.flag === '1') {
+                layer.alert(data.msg, function () {
+                    window.location.href = "myselfinfo.html";
+                });
+            } else {
+                layer.alert(data.msg);
+            }
+        }
+        //console.log(data);
+    });
+}
+
+</script>
+
+<script>
+
+    /**
+
+     更换银行卡
+
+     **/
+    function reset_jsbank_card(bankid, bkacct, channelno) {
+        removeForm();
+        let capitalaccount = "${sfzfbanklist.capitalaccount!''}";
+        let customerno = "${sfzfbanklist.customerno!''}";
+        let role = "T";
+        //let returnUrl = "${kasp_url}" + "jsbankmanage.html?custRole="+role;//处理完请求后，跳转至平台的路径
+        let returnUrl = "${kasp_url}" + "myselfinfo.html";//处理完请求后，跳转至平台的路径
+        let param = {};
+        if (capitalaccount != null) {
+            param.capitalaccount = capitalaccount;
+            param.returnUrl = returnUrl;
+            param.customerno = customerno;
+            param.custRole = role;
+        }
+        $.kutil.newTabPage("mall/reset_jsbank_card!resetCard.do", param);
+    }
+
+    function batchAccountActive() {
+        console.log(111);
+        let param = {};
+        $.kutil.pageReload("mall/newlogin!batchAccountActive.do", param);
+
+    }
+
+    /**
+     * 修改交易密码
+     */
+    function changeTransPassWord() {
+        removeForm();
+        let capitalaccount = "${sfzfbanklist.capitalaccount!''}";//客户资金账号
+        let customerno = "${sfzfbanklist.customerno!''}";
+        let role = "T";
+        //let returnUrl = "${kasp_url}" + "jsbankmanage.html?custRole="+role;//处理完请求后，跳转至平台的路径
+        let returnUrl = "${kasp_url}" + "myselfinfo.html";//处理完请求后，跳转至平台的路径
+        let param = {};
+        if (capitalaccount != null) {
+            param.capitalaccount = capitalaccount;
+            param.returnUrl = returnUrl;
+            param.customerno = customerno;
+            param.custRole = role;
+        }
+        $.kutil.newTabPage("mall/reset_jsbank_transpassword!changeTransPwd.do", param);
+    }
+
+    /**
+     * 重置交易密码
+     */
+    function resetTransPassWord() {
+        removeForm();
+        let capitalaccount = "${sfzfbanklist.capitalaccount!''}";//客户资金账号
+        let customerno = "${sfzfbanklist.customerno!''}";
+        let role = "T";
+        //let returnUrl = "${kasp_url}" + "jsbankmanage.html?custRole="+role;//处理完请求后，跳转至平台的路径
+        let returnUrl = "${kasp_url}" + "myselfinfo.html";//处理完请求后，跳转至平台的路径
+        let param = {};
+        if (capitalaccount != null) {
+            param.capitalaccount = capitalaccount;
+            param.returnUrl = returnUrl;
+            param.customerno = customerno;
+            param.custRole = role;
+        }
+        $.kutil.newTabPage("mall/reset_jsbank_transpassword!resetTransPwd.do", param);
+    }
+
+    /**
+     * 修改交易手机号
+     */
+    function changeTransPhone() {
+        removeForm();
+        let capitalaccount = "${sfzfbanklist.capitalaccount!''}";//客户资金账号
+        let customerno = "${sfzfbanklist.customerno!''}";
+        let role = "T";
+        //let returnUrl = "${kasp_url}" + "jsbankmanage.html?custRole="+role;//处理完请求后，跳转至平台的路径
+        let returnUrl = "${kasp_url}" + "myselfinfo.html";//处理完请求后，跳转至平台的路径
+        let param = {};
+        if (capitalaccount != null) {
+            param.capitalaccount = capitalaccount;
+            param.returnUrl = returnUrl;
+            param.customerno = customerno;
+            param.custRole = role;
+        }
+        $.kutil.newTabPage("mall/reset_jsbank_mobile!resetMobile.do", param);
+    }
+
+    /**
+     * 修改企业法人信息
+     */
+    function resetBusinessInfo() {
+        removeForm();
+        let capitalaccount = "${sfzfbanklist.capitalaccount!''}";//客户资金账号
+        let customerno = "${sfzfbanklist.customerno!''}";
+        let role = "T";
+        let returnUrl = "${kasp_url}" + "jsbankmanage.html?custRole="+role;//处理完请求后，跳转至平台的路径
+        let param = {};
+        if (capitalaccount != null) {
+            param.capitalaccount = capitalaccount;
+            param.returnUrl = returnUrl;
+            param.customerno = customerno;
+            param.custRole = role;
+        }
+        $.kutil.newTabPage("mall/reset_jsbank_mobile!resetBusinessInfo.do", param);
+    }
+    /**
+     * 修改企业信息
+     */
+    function resetEnterpriseInfo() {
+        removeForm();
+        let capitalaccount = "${sfzfbanklist.capitalaccount!''}";//客户资金账号
+        let customerno = "${sfzfbanklist.customerno!''}";
+        let role = "T";
+        //let returnUrl = "${kasp_url}" + "jsbankmanage.html?custRole="+role;//处理完请求后，跳转至平台的路径
+        let returnUrl = "${kasp_url}" + "myselfinfo.html";//处理完请求后，跳转至平台的路径
+        let param = {};
+        if (capitalaccount != null) {
+            param.capitalaccount = capitalaccount;
+            param.returnUrl = returnUrl;
+            param.customerno = customerno;
+            param.custRole = role;
+        }
+        $.kutil.newTabPage("mall/reset_jsbank_mobile!resetEnterpriseInfo.do", param);
+    }
+
+    /**
+     * 移除kutil.newTabPage拼接的表单,防止页面出现重复的form
+     */
+    function removeForm() {
+        let form = $("#form_go_html");
+        if (form) {
+            form.remove()
+        }
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

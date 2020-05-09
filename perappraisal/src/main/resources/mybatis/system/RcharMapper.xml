@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.system.dao.RcharDao">
+
+	<select id="get" resultType="com.bootdo.system.domain.RcharDO">
+		select `id`,`cname`,`plant_type`,`file_name`,`file_url`,`url`,`create_time`,`sort` from group_rchar where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.system.domain.RcharDO">
+		select `id`,`cname`,`plant_type`,`file_name`,`file_url`,`url`,`create_time`,`sort` from group_rchar
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cname != null and cname != ''"> and cname = #{cname} </if>
+		  		  <if test="plantType != null and plantType != ''"> and plant_type = #{plantType} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileUrl != null and fileUrl != ''"> and file_url = #{fileUrl} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		</where>
+			order by sort
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from group_rchar
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cname != null and cname != ''"> and cname = #{cname} </if>
+		  		  <if test="plantType != null and plantType != ''"> and plant_type = #{plantType} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileUrl != null and fileUrl != ''"> and file_url = #{fileUrl} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.system.domain.RcharDO">
+		insert into group_rchar
+		(
+			`id`, 
+			`cname`, 
+			`plant_type`, 
+			`file_name`, 
+			`file_url`, 
+			`url`, 
+			`create_time`,
+			`sort`
+		)
+		values
+		(
+			#{id}, 
+			#{cname}, 
+			#{plantType}, 
+			#{fileName}, 
+			#{fileUrl}, 
+			#{url}, 
+			#{createTime},
+			#{sort}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.system.domain.RcharDO">
+		update group_rchar 
+		<set>
+			<if test="cname != null">`cname` = #{cname}, </if>
+			<if test="plantType != null">`plant_type` = #{plantType}, </if>
+			<if test="fileName != null">`file_name` = #{fileName}, </if>
+			<if test="fileUrl != null">`file_url` = #{fileUrl}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="sort != null">`sort` = #{sort}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from group_rchar where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from group_rchar where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

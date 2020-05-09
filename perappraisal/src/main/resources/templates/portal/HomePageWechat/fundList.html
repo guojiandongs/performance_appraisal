@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head th:include="portal/HomePageWechat/layout::header"></head>
+
+<link rel="stylesheet" type="text/css" href="/css/wechat/common.css" />
+<link rel="stylesheet" type="text/css" href="/css/wechat/minirefresh.css" />
+
+<script type="text/javascript" src="/js/wechat/common.js"></script>
+<script type="text/javascript" src="/js/wechat/minirefresh.js"></script>
+
+<body class="fadeIn animated">
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        山投信息
+    </div>
+</header>
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+
+<div id="minirefresh" class="minirefresh-wrap">
+    <div class="minirefresh-scroll">
+        <ul class="data-list" id="listdata">
+            <div id="parent_find" class="p3">
+                <div class="w69 h36 mr1 t-c mt3 p3 radius15  wdmain" th:each="f:${fundlist}">
+                    <h2 class="t-c f32" th:text="${f.productName}">基金名称</h2>
+                    <b class="t-c f60 mt3" th:text="${f.annualrate}+'%'">比例</b>
+                    <p class="t-c f28 mb3 yq" style="color:#888;" th:text="${f.content}">提示</p>
+                    <span class="w30 h7 btn radius5" style="background:#fe766a;"
+                          th:onclick="'window.open(\''+${f.productUrl}+'\')'">立即抢购
+                    </span>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<!-- 底部导航 -->
+<nav th:include="portal/HomePageWechat/layout::nav" class="navbar navbar-default navbar-custom" style="margin-bottom: 0">
+</nav>
+<!--开始查询条数-->
+<input type="hidden" id="offset" value="0">
+<!--开始查询条数-->
+<input type="hidden" id="total" value="">
+<script>
+
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        }
+    });
+    //翻页
+    var prefix = "/fund"
+    var parent_find = document.querySelector('#parent_find');
+    var miniRefresh = new MiniRefresh({
+        container: '#minirefresh',
+        //下拉加载
+        down: {
+            callback: function() {
+                console.log("下拉")
+                location.reload();
+                miniRefresh.endDownLoading();
+            }
+        },
+        //上拉
+        up: {
+            //是否初始化加载上拉逻辑
+            isAuto: false,
+            isShowUpLoading:true,
+            offset:100,
+            callback: function() {
+                console.log("上拉");
+                var limit = $("#limit").val();
+                var offset = $("#offset").val();
+                $.ajax({
+                    url : prefix+"/pagelist",
+                    type : "get",
+                    data : {
+                        'offset' : offset
+                    },
+                    success : function(r) {
+                        $("#total").val(r.total);
+                        $("#offset").val(r.offset);
+                        var list = r.rows;
+                        for (var i = 0;i<list.length;i++){
+                            var item = ""
+                                +"<div class=\"w69 h36 mr1 t-c mt3 p3 radius15  wdmain\" >"
+                                +"      <h2 class=\"t-c f32\" >"+list[i].productName+"</h2>"
+                                +"      <b class=\"t-c f60 mt3\" >"+list[i].annualrate+"%</b>"
+                                +"      <p class=\"t-c f28 mb3 yq\" style=\"color:#888;\" >"+list[i].content+"</p>"
+                                +"      <span class=\"w30 h7 btn radius5\" style=\"background:#fe766a;\""
+                                +"          onclick=\"window.open(\'"+list[i].productUrl+'\')\">'
+                                +"      立即抢购</span>"
+                                +"</div>"
+                            $("#parent_find").append(item);
+                        }
+
+                        miniRefresh.endUpLoading(parent_find.children.length >= parseInt(r.total) ? true : false);
+                    }
+                });
+
+            }
+        }
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+	<script>
+		$(document).ready(function(){
+			$('.skillbar').each(function(){
+				$(this).find('.skillbar-bar').animate({
+					width:$(this).attr('data-percent')
+				},6000);
+			});
+		});
+	</script>
+
+</head>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+	<div class="ui-header-c fl f30 w59" style="width: 100%;">
+		微信投票
+	</div>
+</header>
+<!--登录菜单-->
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+	<body>
+		<div class="content">
+			<p th:if="${vald}!=null">
+				<span class="c-title">平台良性退出清兑方案（讨论稿）投票</span>
+				<p class="c-time" th:text="${#dates.format(vald.activityStartDate, 'yyyy-MM-dd HH:mm:ss')}+'至'+${#dates.format(vald.activityEndDate, 'yyyy-MM-dd  HH:mm:ss')}">时间</p>
+				<span class="c-join">出借人可选择其中一项为“高新普惠”网贷平台清兑方式。公司将根据“少数服从多数”的投票结果，在报备区网贷机构风险整治办和报主要股东后，在各方监督下展开清兑工作。
+</span>
+			</p>
+			<div class="c-table">
+				<!--<p>最牛国家（单选）</p>-->
+				<p th:each="v:${vresultlist}">
+					<span th:text="(${v.activity_options})+(${v.selected}==1?'(已选)':'')">选项(已选)</span>
+					<i class="skillbar clearfix " th:data-percent="${v.percentage}+'%'">
+						<span class="skillbar-bar" style="background: #c6010f;"></span>
+					</i>
+					<span class="skill-bar-percent" th:text="${v.votenum}+'票'">票数</span>
+					<span class="skill-bar-percent" th:text="${v.percentage}+'%'">百分比</span>
+                </p>
+				<!--<p style="text-align: center;">你已投票</p>-->
+			</div>
+            <span>其他意见和建议：</span>
+            <p th:text="${other}"></p>
+		</div>
+	</body>
+</html>

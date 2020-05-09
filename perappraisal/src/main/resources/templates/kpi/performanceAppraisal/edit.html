@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${performanceAppraisal.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">考核开始时间：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="laydate-icon layer-date form-control" id="startTime" name="startTime" th:value="${performanceAppraisal.startTime}==null?null:${#dates.format(performanceAppraisal.startTime,'yyyy-MM-dd')}" placeholder="请选择开始时间"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" style="background-color: #fff;" readonly="readonly"/>
+                                </div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核结束时间：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="laydate-icon layer-date form-control" id="endTime" name="endTime" th:value="${performanceAppraisal.endTime}==null?null:${#dates.format(performanceAppraisal.endTime,'yyyy-MM-dd')}" placeholder="请选择结束时间"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" style="background-color: #fff;" readonly="readonly"/>
+                                </div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核标题：</label>
+								<div class="col-sm-8">
+									<input id="assessmentTitle" name="assessmentTitle" th:value="${performanceAppraisal.assessmentTitle}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核标准：</label>
+								<div class="col-sm-8">
+									<input id="assessmentCriteria" name="assessmentCriteria" th:value="${performanceAppraisal.assessmentCriteria}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否启用：</label>
+								<div class="col-sm-8">
+                                    <select id="isOpen" name="isOpen" class="form-control" th:value="${performanceAppraisal.isOpen}">
+                                        <option th:selected="${performanceAppraisal.isOpen eq 1}" th:value="1">是</option>
+                                        <option th:selected="${performanceAppraisal.isOpen eq 0}" th:value="0">否</option>
+                                    </select>
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/kpi/performanceAppraisal/edit.js">
+	</script>
+</body>
+</html>

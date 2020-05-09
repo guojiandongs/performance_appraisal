@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<script src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.10.3/dingtalk.open.js"></script>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-c fl f30 w59" style="width: 100%;">
+        考核评议内容
+        <span id="names" style="float: right"></span>
+    </div>
+</header>
+<style>
+    .spinner-box {
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+    }
+    .pulse-container {
+        width: 120px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pulse-bubble {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #fd5353;
+    }
+
+    .pulse-bubble-1 {
+        animation: pulse .4s ease 0s infinite alternate;
+    }
+    .pulse-bubble-2 {
+        animation: pulse .4s ease .2s infinite alternate;
+    }
+    .pulse-bubble-3 {
+        animation: pulse .4s ease .4s infinite alternate;
+    }
+    .div-not-click {
+        display: none;
+    }
+</style>
+<!--登录菜单-->
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+<body>
+<form id="saveCommitmentForm">
+    <th:block th:each="content,conSate:${contentList}">
+        <a href="#" class="list-group-item active" th:text="${content.commitmentContent}">
+        </a>
+        <div th:id="department+${conSate.index}">
+
+        </div>
+        <input type="hidden" id="iscommitment" value="false"/>
+    </th:block>
+</form>
+<div class="btn">
+    <button id="button_id" type="button" th:onclick="'saveCommitment()'">确认提交</button>
+</div>
+<div id="loginbut" class="div-not-click"  style="height: 100%;background: rgba(255,255,255,0.8);position: relative;width: 100%;top: 0; position: fixed;">
+    <div class="spinner-box">
+        <div class="pulse-container">
+            <div class="pulse-bubble pulse-bubble-1"></div>
+            <div class="pulse-bubble pulse-bubble-2"></div>
+            <div class="pulse-bubble pulse-bubble-3"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    $(function(){
+        var corpid = [[${corpid}]];
+        dd.runtime.permission.requestAuthCode({
+            corpId: corpid,
+            onSuccess: function(result) {
+                console.log("result===="+result)
+                console.log("result.code================="+result.code)
+                $.ajax({
+                    url : "/commitment/login",
+                    type : "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    data : {
+                        authCode :result.code
+                    },
+                    success : function(r) {
+                        if(r.code=='500'){
+                            alert(r.msg);
+                            return;
+                        }
+                        var evaluateList = r.evaluateList;
+                        var contentList = [[${contentList}]];
+                        //$("#names").html(r.userDto.name);
+                        var departmentList = r.departmentList;
+                        if(evaluateList.length>0){
+                            $("#iscommitment").val("true");
+                                $.each(contentList, function(d,v) {
+                                        var html="";
+                                        $.each(departmentList, function(k,v) {
+                                                html+='<a href="#" class="list-group-item">'+
+                                                    departmentList[k].name
+                                                '</a>'
+                                                html+='<br/>'
+                                                var userList = departmentList[k].userDTOList;
+                                                $.each(userList, function(j,v) {
+                                                    $.each(evaluateList, function(e,v) {
+                                                        if (evaluateList[e].commitmentId == contentList[d].id && evaluateList[e].commitmentDepartmentId == departmentList[k].id && evaluateList[e].commitmentUserId == userList[j].userid) {
+                                                            if(j!=0&&j%4==0){
+                                                                html+='<br/>'
+                                                            }
+                                                            html += '<input style="width: 25px;" type="checkbox" checked value="' + contentList[d].id + "_" + contentList[d].commitmentContent + "_" + departmentList[k].id + "_" + departmentList[k].name + "_" + userList[j].name + "_" + userList[j].userid + '" name="checkbox">' +
+                                                                userList[j].name
+                                                            '</>'
+                                                        }
+                                                    });
+                                                });
+                                        });
+                                        $("#department"+d).append(html);
+                            });
+                        }else{
+                            $.each(contentList, function(d,v) {
+                                var html="";
+                                $.each(departmentList, function(k,v) {
+                                    html+='<a href="#" class="list-group-item">'+
+                                        departmentList[k].name
+                                    '</a>'
+                                    html+='<br/>'
+                                    var userList = departmentList[k].userDTOList;
+                                    $.each(userList, function(j,v) {
+                                        if(j!=0&&j%4==0){
+                                            html+='<br/>'
+                                        }
+                                            html+='<input style="margin-left: 10px" type="checkbox" value="'+contentList[d].id+"_"+contentList[d].commitmentContent+"_"+departmentList[k].id+"_"+departmentList[k].name+"_"+userList[j].name+"_"+userList[j].userid+'" name="checkbox">'+
+                                                userList[j].name
+                                            '</>'
+                                    });
+                                });
+                                $("#department"+d).append(html);
+                            });
+                        }
+                    }
+                });
+            },
+            onFail : function(err) {
+                layer.msg("err========="+err);
+            }
+        })
+    });
+
+    function saveCommitment(){
+        var flag = $("#iscommitment").val();
+        if(flag=='true'){
+            layer.msg("您已经评价过了，不要重复提交！");
+            return;
+        }
+        var options = "";
+        $("input[name='checkbox']:checked").each(function (index, item) {
+            if ($("input[name='checkbox']:checked").length-1==index) {
+                options += $(this).val();
+            } else {
+                options += $(this).val() + ",";
+            }
+        });
+        if(options.length==0){
+            layer.msg("请至少勾选一个选项！");
+            return;
+        }
+        $("#loginbut").removeClass("div-not-click");
+        $("#saveCommitmentForm input").addClass("readonly").attr("readonly", "readonly");
+        $.ajax({
+            url:"/commitment/saveCommitment",
+            type:"post",
+            dataType: "json",//预期服务器返回的数据类型
+            data : {
+                 options :options
+             },
+            success:function (r) {
+                if(r.code==500){
+                    layer.msg(r.msg);
+                    $("#loginbut").addClass("div-not-click");
+                    $("#saveCommitmentForm input").removeClass("readonly").attr("readonly", false);
+                }else{
+                    layer.msg(r.msg, function () {
+                        window.location.href = "/commitment/gotoCommitmentList";
+                    })
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+.product-list{
+    width:1100px;
+    margin:30px auto;
+    background:#fff;
+    padding: 30px;
+}
+.product-list .filters th {
+    padding: 10px 15px;
+    text-align: center;
+    width: 100px;
+    border: 1px #edf0f5 solid;
+    color: #000;
+    font-weight: normal;
+}
+.product-list .filters td {
+    padding: 10px 15px;
+    border: 1px #edf0f5 solid;
+    height: auto;
+    text-align: left;
+}
+.product-list .filters td .links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    min-width: 730px;
+}
+.product-list .filters td .links > li {
+    display: inline-block;
+    margin-right: 10px;
+}
+.product-list .filters td .links > li.active > a {
+    background-color: #f52020;
+    color: #fff;
+}
+.product-list .filters td .links > li > a {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    border-radius: 3px;
+}
+.table-container{
+    width:1100px; 
+    margin:30px auto;
+    background:#fff;
+}
+.table-container .table thead tr th {
+    height: 46px;
+    background-color: #f8e5e5;
+    color: #f19f9f;
+    text-align: center;
+}
+.table-container .table tbody tr td {
+    height: 60px;
+    border-bottom: 1px #edf0f5 solid;
+    text-align: center;
+    vertical-align:inherit;
+}
+.table-container .table tbody tr td h3{
+    font-size:14px;
+}
+.table-container .table tbody tr td .btn-sm {
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    padding: 0 15px;
+    margin-top: 10px;
+    background:#f52020;
+    color:#fff;
+    border:0;
+}
+
+
+
+
+
+.list .container{width:1100px; padding:0 20px; margin:20px auto; background:#fff; }
+.list_all{margin:34px 0;}
+.list_all h3{font-size:16px; color:#555; display:inline;}
+.list_all p{font-size:14px; color:#666; display:inline;}
+.list_all p .all{padding:5px 10px; background:#fd5353; border-radius:4px; color:#fff;}
+.list_all p span{margin-right:40px;}
+
+.order .pagination>li>a,.order  .pagination>li>span{color:#fd5353;}
+.order{text-align:center; }
+.order ul{margin:20px 0 0 0;}
+
+
+
+
+/*推荐产品*/
+.recommende{width:1100px; margin:0 auto;}
+.recommende .container{width:100%; padding:0;}
+.recommende h3{padding:0; margin:0; font-size:18px; color:#555;}
+.recommende h3 img{margin-right:10px;}
+.recommende h3 a{float:right; font-size:12px; color:#fd5353;}
+.recommende .product{width:100%; background:#fff; padding:0 20px 20px; box-shadow:0 0 4px 4px #e2e2e2; margin-top:20px;}
+.recommende .product .product_list{padding:20px 0; overflow:hidden; border-bottom:1px solid #d6d6d6;}
+.recommende .product .product_list h4{font-size:18px; color:#666; margin-bottom:15px;}
+.recommende .product .product_list h4 a:hover{color:#555; text-decoration:none;}
+.recommende .product .product_list .col-md-1{text-align:center; width:13%; border}
+.recommende .product .product_list .col-md-1 p,.recommende .product .product_list .data p{
+    font-size:16px; color:#fd5353; font-weight:bold; margin:0;
+}
+.recommende .product .product_list .col-md-1 p span,.recommende .product .product_list .data p span{font-size:14px;}
+.recommende .product .product_list .col-md-1 i,.recommende .product .product_list .data i{font-style:normal; font-size:12px; color:#ababab;}
+.recommende .product .product_list .col-md-3 .progress{height:12px; margin-top:20px; position:relative; overflow: initial; background:#efefef; border-radius:50px;}
+.recommende .product .product_list .col-md-3 .progress-bar{border-radius:50px;}
+.recommende .product .product_list .col-md-3 .progress-bar span{position:absolute; right:-10px; color:#555; overflow: initial;clip: inherit;}
+.recommende .product .product_list .col-md-1 button{width:120px; height:36px; border-radius:4px; background:#fd5353; border:0; outline:none; color:#fff; margin:10px 0 0 30px;}
+.recommende .product .product_list .col-md-4{text-align: center;}
+
+
+

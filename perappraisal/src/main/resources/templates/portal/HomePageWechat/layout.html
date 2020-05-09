@@ -1,0 +1,129 @@
+<!--首页-->
+<head th:fragment="header">
+
+	<meta charset="UTF-8" />
+	<meta name="renderer" content="webkit" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0,uc-fitscreen=yes" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>山投信息</title>
+	<meta name="keywords" content="山投信息员工绩效考核表" />
+	<meta name="description" content="山投信息员工绩效考核表" />
+
+	<link rel="stylesheet" type="text/css" href="/css/wechat/index_wechat.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/wechat/miniMobile.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/wechat/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="/css/wechat/account.css" />
+	<link rel="stylesheet" type="text/css" href="/css/kd.tools.validate.css" />
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<!--微信投票css-->
+	<!--<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />-->
+	<link rel="stylesheet" type="text/css" href="/css/wechat/bs4.pop.css" />
+	<link rel="stylesheet" type="text/css" href="/css/wechat/style.css" />
+	<!--微信投票css-->
+
+	<link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/4.3.0/css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+
+	<script src="/js/jquery.min.js?v=2.1.4"></script>
+	<script type="text/javascript" src="/js/kjax.des.js"></script>
+	<!--解决jquery.min.js和zepto.min.js（登录菜单）的冲突问题-->
+	<script>jQuery.noConflict()</script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-html5Validate.js"></script>
+	<script type="text/javascript" src="/js/wechat/zepto.min.js"></script>
+	<script type="text/javascript" src="/js/wechat/miniMobile.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.0/js/swiper.min.js"></script>
+	<script type="text/javascript" src="/js/kd.tools.validate.js"></script>
+	<script type="text/javascript" src="/js/plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="/js/wechat/homepage.js"></script>
+	<!--微信投票js-->
+	<!--<script type="text/javascript" src="/js/wechat/bootstrap.js"></script>-->
+	<script type="text/javascript" src="/js/wechat/wechat/bs4.pop.js"></script>
+	<!--微信投票js-->
+
+
+
+
+
+
+
+</head>
+
+<!-- aside -->
+<aside class="ui-aside w40 bg-color-success f30" th:fragment="aside">
+	<div class="user p3 color8 clearfix">
+		<div class="fl w10">
+			<img src="/img/wechat/user.jpg" class="w10 h10 radius-o" />
+		</div>
+		<div class="fr w22 loginbtn">
+			<span th:if="${session.wxusername == null}"><a href="http://47.92.151.206/m/index.action?anotherPlaceLogin=wx_jt_jump">登录</a></span><br />
+			<span th:if="${session.wxusername != null}" th:text="${session.wxusername}"></span><br />
+			<input type="hidden" name="customer" id="customer" th:value="${session.wxcustid}">
+		</div>
+	</div>
+	<ul class="f30 mt2">
+		<li>
+			<a href="/home/wechat" class="pl3 color8">首页</a>
+		</li>
+		<li>
+			<a href="#" class="pl3 color8">关于我们</a>
+		</li>
+		<li>
+<!--			<a href="#" class="pl3 color8" th:onclick="'javascript:account()'">我的账户</a>-->
+			<a href="/home/wechat/trdorder/account" class="pl3 color8">我的账户</a>
+
+		</li>
+		<li>
+			<a href="" class="pl3 color8">400-0784-000</a>
+		</li>
+
+	</ul>
+</aside>
+<script type="text/javascript" th:fragment="asideJS">
+    var aside = $(".ui-aside").asideUi({
+        hasmask: true,
+        size: "4rem",
+        position: "left",
+        sidertime: 300
+    });
+    $(".ui-header-l").on('touchend', function() {
+        aside.toggle();
+    })
+</script>
+<nav th:fragment="nav">
+	<!-- 底部导航 -->
+	<nav class="demo-bottomNav w75 h12 pt1 t-c f28 bg-color8 o-h clearfix">
+		<div class="w15 fl">
+			<a href="/home/wechat">
+				<i class="f46 icon iconfont icon-home_light"></i>
+				<p>首页</p>
+			</a>
+		</div>
+		<div class="w15 fl">
+			<a href="http://47.92.151.206/m/index.action">
+				<i class="f46 icon iconfont icon-zhediemianban"></i>
+				<p>网贷</p>
+			</a>
+		</div>
+		<div class="w15 fl">
+			<a href="/home/wechat/optimization/weblist">
+				<i class="f46 icon iconfont icon-rank"></i>
+				<p>vip尊享</p>
+			</a>
+		</div>
+		<div class="w15 fl">
+			<a href="/fund">
+				<i class="f46 icon iconfont icon-list"></i>
+				<p>基金</p>
+			</a>
+		</div>
+		<div class="w15 fl" th:each="r1:${technology}">
+			<a th:href="@{${r1.url}}">
+				<i class="f46 icon iconfont icon-ddonghuabai"></i>
+				<p>科技</p>
+			</a>
+		</div>
+	</nav>
+</nav>

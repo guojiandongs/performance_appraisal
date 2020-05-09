@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head th:include="portal/HomePageWechat/layout::header"></head>
+
+<body class="fadeIn animated">
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        高新普惠
+    </div>
+</header>
+<!-- aside -->
+<aside class="ui-aside w40 bg-color-success f30">
+    <div class="user p3 color8 clearfix">
+        <div class="fl w10">
+            <img src="img/user.jpg" class="w10 h10 radius-o" />
+        </div>
+        <div class="fr w22 loginbtn">
+            <span>登录</span><br />
+        </div>
+    </div>
+    <ul class="f30 mt2">
+        <li>
+            <a href="index.html" class="pl3 color8">首页</a>
+        </li>
+        <li>
+            <a href="/home/wechat/wechatabUs" class="pl3 color8">关于我们</a>
+        </li>
+        <li>
+            <a href="list.html" class="pl3 color8">我的账户</a>
+        </li>
+        <li>
+            <a href="" class="pl3 color8">400-0784-000</a>
+        </li>
+
+    </ul>
+</aside>
+<script type="text/javascript">
+    var aside = $(".ui-aside").asideUi({
+        hasmask: true,
+        size: "4rem",
+        position: "left",
+        sidertime: 300
+    });
+    $(".ui-header-l").on('touchend', function() {
+        aside.toggle();
+    })
+</script>
+<div class="p3" style="width:90%; margin:20px auto; box-shadow: 0 0 10px #eee;">
+    <div class="clearfix mb5">
+        <p class="fl t-l">项目名称</p>
+        <p class="fr t-r" th:text="${optimization.borrowtitle}"></p>
+    </div>
+    <div class="clearfix mb5">
+        <p class="fl t-l">挂牌价格（元）</p>
+        <p class="fr t-r" th:text="${optimization.borrowamount}"></p>
+    </div>
+    <div class="clearfix mb5">
+        <p class="fl t-l">剩余份额（元）</p>
+        <p class="fr t-r" th:text="${optimization.borrowamount} - ${optimization.hasinvestamount}"></p>
+    </div>
+    <div class="clearfix mb5">
+        <p class="fl t-l">实际支付</p>
+        <input style="float:right; height:30px; border:1px solid #ccc; padding:0 10px; border-radius: 4px;" name="investamount" id="investamount">
+        <input type="hidden" name="customer" id="customer">
+    </div>
+    <span class="w60 h9 mt2 btn radius5" style="background:#fe766a;" th:onclick="'javascript:pay(\''+${optimization.id}+'\')'">立即抢购</span>
+</div>
+
+<!-- 底部导航 -->
+<nav th:include="portal/HomePageWechat/layout::nav" class="navbar navbar-default navbar-custom" style="margin-bottom: 0">
+</nav>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        }
+    });
+
+    function pay(id){
+        var customer = $("#customer").val();
+        if(!customer){
+            layer.confirm("您还没有登录,请先登录!", {
+                btn : [ '确定' ]
+            }, function() {
+                window.location.href="http://47.92.151.206/kasp/login.html?anotherPlaceLogin=jt_jump";
+            });
+            return flase;
+        }
+        var investamount = $("#investamount").val();
+        window.location.href="/home/wechat/trdorderpay/"+id+"/"+investamount;
+    }
+</script>
+    
+</body>
+
+</html>

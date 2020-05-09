@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/html">
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<script src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.10.3/dingtalk.open.js"></script>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+	<div class="ui-header-c fl f30 w59" style="width: 100%;">
+        绩效考核
+        <span id="names" style="float: right"></span>
+	</div>
+</header>
+<!--登录菜单-->
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+<body>
+
+<a href="#" class="list-group-item active">
+    用户列表
+</a>
+<div id="department">
+    <th:block th:each="user,userStat : ${perAssessedList}">
+        <a th:href="@{'/satisfaction/gotoSatisfaction?userId='+${user.assessedPersonnelId}}" class="list-group-item" th:text="${user.username}"></a>
+    </th:block>
+</div>
+</body>
+</html>

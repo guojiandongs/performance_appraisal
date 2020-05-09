@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head th:include="portal/HomePageWechat/layout::header">
+</head>
+
+<body class="fadeIn animated" style="background:#f5f5f5;">
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        高新普惠
+    </div>
+</header>
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+
+<!-- aside -->
+<!--<aside class="ui-aside w40 bg-color-success f30">
+    <div class="user p3 color8 clearfix">
+        <div class="fl w10">
+            <img src="img/user.jpg" class="w10 h10 radius-o" />
+        </div>
+        <div class="fr w22 loginbtn">
+            <span>登录</span><br />
+        </div>
+    </div>
+    <ul class="f30 mt2">
+        <li>
+            <a href="index.html" class="pl3 color8">首页</a>
+        </li>
+        <li>
+            <a href="list-button.html" class="pl3 color8">关于我们</a>
+        </li>
+        <li>
+            <a href="list.html" class="pl3 color8">我的账户</a>
+        </li>
+        <li>
+            <a href="" class="pl3 color8">400-0784-000</a>
+        </li>
+
+    </ul>
+</aside>-->
+<script type="text/javascript">
+    var aside = $(".ui-aside").asideUi({
+        hasmask: true,
+        size: "4rem",
+        position: "left",
+        sidertime: 300
+    });
+    $(".ui-header-l").on('touchend', function() {
+        aside.toggle();
+    })
+</script>
+<!--忘记密码-->
+<div class="forget">
+    <form id="updloginpwd">
+    <div class="cipher">
+        <input disabled="disabled" th:value="${username}"  id="phonenumber" name="phonenumber">
+    </div>
+    <div class="cipher">
+<!--        <input placeholder="输入手机验证码" name="phonecode" id="phonecode"-->
+<!--               datatype="/^\d{6}$/" nullmsg="验证码为6位数字！"><button type="button" class="yzm">获取验证码</button>-->
+
+        <input type="text" name="phonecode" id="phonecode" placeholder="请输入手机验证码"  nullmsg="验证码为6位数字！">
+        <button  id="lgnphonecode" type="button" class="yzm">获取验证码</button>
+    </div>
+        <div class="cipher">
+<!--        <input placeholder="设置登录密码" datatype="checkPassword"-->
+<!--               nullmsg="请设置密码！" errormsg="6-16位数字及字母,不能使用空格！" name="newPassword" id="newPassword" type="password">-->
+            <input type="password" name="newPassword" id="newPassword"
+                   nullmsg="请设置密码！" errormsg="6-16位数字及字母,不能使用空格！" placeholder="请输入新密码">
+    </div>
+    <div class="cipher">
+<!--        <input placeholder="确认登录密码" datatype="checkPassword" recheck="newPassword" nullmsg="请再输入一次密码！"-->
+<!--               errormsg="您两次输入的账号密码不一致！"  name="newPassword2"  id="newPassword2" type="password">-->
+        <input type="password" name="newPassword2" id="newPassword2"
+               datatype="checkPassword" recheck="newPassword" nullmsg="请再输入一次密码！"
+               errormsg="您两次输入的账号密码不一致！" placeholder="请确认密码">
+    </div>
+    <div class="cipher">
+
+        <input type="button" class="confirm" onclick="checkpwd('updloginpwd','lpwd2sc')"  value="确认"/>
+    </div>
+    </form>
+</div> 
+
+
+
+<!-- 底部导航 -->
+<nav class="demo-bottomNav w75 h12 pt1 t-c f28 bg-color8 o-h clearfix">
+    <div class="w15 fl">
+        <a href="index.html">
+            <i class="f46 icon iconfont icon-home_light"></i>
+            <p>首页</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="list-button.html">
+            <i class="f46 icon iconfont icon-zhediemianban"></i>
+            <p>网贷</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="list.html">
+            <i class="f46 icon iconfont icon-rank"></i>
+            <p>理财</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="comment.html">
+            <i class="f46 icon iconfont icon-list"></i>
+            <p>基金</p>
+        </a>
+    </div>
+    <div class="w15 fl">
+        <a href="my.html">
+            <i class="f46 icon iconfont icon-ddonghuabai"></i>
+            <p>科技</p>
+        </a>
+    </div>
+</nav>
+<!--<script type="text/javascript">-->
+<!--    $updLogForm = $("#updloginpwd").kdValidform(); //修改登录密码表单-->
+
+<!--</script>-->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        }
+    });
+   function checkpwd(formid, showid) {
+       //取得验证码，验证长度
+       var mobile = $("#phonenumber").val();
+       var validateCode1 = $("#phonecode").val();
+       if(!validateCode1){
+           layer.msg("请输入验证码");
+           return;
+       }
+       if(validateCode1.length != 6){
+               layer.msg("请填写6位数字验证码");
+               $("#phonecode").val("");
+               return;
+       }
+
+       //检测密码格式
+       var pswcheck = /^(?![^a-zA-Z]+$)(?!\D+$).{6,16}$/;
+       var password1 = $("#newPassword").val();
+       var password2 = $("#newPassword2").val();
+       if(password1==""){
+            layer.msg("请输入登录密码");
+           return false;
+       }
+       if(password2==""){
+           //$("#password2").testRemind("请输入确认密码");
+           layer.msg("请输入确认密码");
+           return false;
+       }
+       if(!pswcheck.test(password1)){
+          // $("#password1").testRemind("6-16位字符，至少包含数字、字母(区分大小写)");
+           layer.msg("6-16位字符，至少包含数字、字母(区分大小写)");
+
+           return false;
+       }
+       if(password1!=password2){
+          //$("#password2").testRemind("您两次输入的密码不一致");
+           layer.msg("您两次输入的密码不一致");
+
+           return false;
+       }
+       $('.nextstep a', $("#" + formid)).attr("disabled", true);
+       //解决冲突
+       jQuery(document).ready(function($) {
+           // 使用 jQuery $ 的代码
+           var _pwd = $.trim($("#newPassword").val());
+           var desPwd = $.des.getDes(_pwd);
+           $("#newPassword").val(desPwd);
+           $("#password2").val(desPwd);
+       });
+       $.ajax({
+           cache : true,
+           type : "POST",
+           url : "/home/wechat/resetloginpwd",
+           data :$('#' + formid).serialize(),// 你的formid
+           async : false,
+           error : function(request) {
+               layer.alert("修改失败");
+           },
+           success : function(data) {
+               if (data.code == 0) {
+                   layer.confirm(data.msg, {
+                       btn : [ '确定' ]
+                   }, function() {
+                       window.location.href="/home/wechat";
+                   });
+               } else {
+                   layer.alert(data.msg)
+               }
+
+           }
+       });
+
+
+   }
+    //刷新验证码图片
+    function refreshImg(obj) {
+        $(obj).attr('src', '/home/yzm/doget?vtype=admin&rmd=' + new Date().getTime());
+    }
+    function _dialog(wait, $btn,type) {
+        var _div = '<div class="modal fade" id="codediv" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">' + '<div class="modal-dialog">' + '<div class="modal-content">' + '<div class="modal-header">' + ' <button type="button" class="close" data-dismiss="modal">' + '    <span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>' + '  </button>' + ' <h4 class="modal-title" id="myModalLabel">验证码</h4>' + '</div>' + ' <div class="modal-body" style="text-align:center;">' + '<span >验证码&nbsp;<em style="color:red">*</em>&nbsp;</span>' + '<input name="validcode" style="width:100px;height:30px;border:1px solid #eee" type="text" value="" id="validcode" datatype="*" class="input" errormsg="请输入右侧的验证码！"/>' + ' <img id="codeimg" style="width: 100px;height: 30px;cursor: pointer;border: 1px solid #eee;" title="看不清楚？" />' + '<span class="" id="checktip" title="请输入验证码！">请输入验证码！</span>  ' + '</div>' + ' <div class="modal-footer" >' + '<a href="javascript:void(0);" class="kdmall-btn" id="submitok">确定</a>&nbsp;&nbsp;' + '   <a class="kdmall-btn" href="javascript:void(0);" id="canceldiv">取消</a>' + '</div>' + ' <div></div>' + '</div>' + '</div>' + '</div>';
+
+        var $div = $(_div);
+        $('#codediv').remove();
+        $div.appendTo('body');
+        $("#codeimg").attr('src', '/home/yzm/doget?vtype=admin&rmd=' + new Date().getTime());
+        //验证码绑定刷新事件
+        $('#codeimg').bind('click', function() {
+            refreshImg(this);
+            $("#checktip").text($("#checktip").attr('title')).css('color', '#333');
+        });
+        jQuery(document).ready(function($) {
+            // 使用 jQuery $ 的代码
+            $('#codediv').modal('show');
+
+        });
+        // $('#codediv').modal('show');
+        $('#submitok').click(function(event) {
+            var validcode = $.trim($('#validcode').val());
+            if (validcode == null || '' == validcode) {
+                $("#checktip").text("验证码不能为空!").css('color', '#ec403e');
+                return;
+            };
+            sendcode(wait, $btn,type);
+        });
+        $('#canceldiv').click(function() {
+            jQuery(document).ready(function($) {
+                // 使用 jQuery $ 的代码
+                $('#codediv').modal('hide');
+            });
+
+        });
+    }
+    //打开验证码模态框，获取手机验证码
+    function checkcode(wait, $btn, type) {
+        $("#checktip").text($("#checktip").attr('title')).css('color', '#333');
+        $('#input', '#codediv').not(':button, :submit, :reset,:hidden').val('').removeAttr('checked').removeAttr('selected');
+        _dialog(wait, $btn, type);
+    }
+
+    //获取验证码，修改登录密码
+    $("#lgnphonecode").click(function () {
+        alert("666");
+        var wa = $("#lgnphonecode").val();
+        var array = wa.match(/\d+/);
+        if (array != null) {
+            wa = array[0];
+        }
+        if (wa && wa > 0 && wa < 150) {
+            return;
+        }
+        checkcode(150, $("#lgnphonecode"), "", "lgpwd");
+    });
+    //发送手机验证码
+    function sendcode(wait, $btn,type) {
+        var validcode = $.trim($("#validcode").val());
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/home/wechat/checkValidCode",
+            data :{validcode:validcode},
+            async : false,
+            error : function(request) {
+                layer.alert("修改失败");
+            },
+            success : function(data) {
+
+                if (data.result == '0') {
+                        $('#codediv').modal('hide');
+                        if("验证码错误！" == data.msg){
+                            layer.msg(data.msg);
+                        }else{
+                            timeCounter(wait, $btn);
+                        }
+                    } else {
+                    jQuery(document).ready(function($) {
+                        // 使用 jQuery $ 的代码
+                        $('#codediv').modal('hide');
+                    });
+                             layer.msg(data.msg);
+                             setcode(wait, $btn,type);
+                    };
+            }
+        });
+    }
+    //发送验证码
+    function setcode(wait, $btn, mobiletel) {
+
+        var mobile = $("#phonenumber").val();
+        var code = $("#validcode").val();
+        $.ajax({
+            type : "post",
+            data : {
+                mobile : mobile,
+                validcode : code
+            },
+            url : "/home/wechat/setcode",
+            success : function(data) {
+                alert(data.msg);
+                if ("y"== data.msg) {
+                    alert("663");
+                    $("#codeimgdiv").hide();
+                    timeCounter(wait, $btn);
+                } else if("validcodeN"==data  ){
+                    layer.msg('验证码输入错误!');
+                    return false;
+                } else {
+                    layer.msg('发送短信验证码失败!');
+                    return false;
+                }
+            },
+            error : function(data) {
+                alert('出错了!');
+                return false;
+            }
+        });
+    }
+
+    function timeCounter(wait, $btn) {
+        if (wait == 0) {
+            $btn.attr("disabled", false).text("获取验证码");
+            wait = 300;
+        } else {
+            $btn.attr("disabled", "disabled").text("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function() {
+                timeCounter(wait, $btn)
+            }, 1000)
+        }
+    }
+
+
+</script>
+    
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head th:include="portal/HomePageWechat/layout::header"></head>
+
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+	<div class="ui-header-c fl f30 w59" style="width: 100%;">
+		微信投票
+	</div>
+</header>
+<!--登录菜单-->
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+<body>
+	<div class="content">
+		<p th:if="${vald}!=null">
+			<!--<span class="c-title" th:text="${vald.activityName}">投票名称</span>-->
+            <span class="c-title">平台良性退出清兑方案（讨论稿）投票</span>
+			<p class="c-time" th:text="${#dates.format(vald.activityStartDate, 'yyyy-MM-dd HH:mm:ss')}+'至'+${#dates.format(vald.activityEndDate, 'yyyy-MM-dd HH:mm:ss')}">时间</p>
+			<!--<span class="c-join" th:text="${xianzhi}">投票限制</span>-->
+
+			<p class="c-join" th:text="${vald.activityDescribe}">介绍</p>
+			<input id="activityid" type="hidden" th:value="${vald.id}">
+		</p>
+			<div class="c-table">
+				<p th:each="l:${vaodlist}" >
+					<!--<input type="checkbox" class="clear-account-cb "  name="activityOptions"
+						   th:activityId="${l.activityId}" th:optionId="${l.id}"
+						   value="qweasd"  th:text="${l.activityOptions}"/>-->
+                    <input type="radio" class="clear-account-cb "  name="activityOptions"
+                           th:activityId="${l.activityId}" th:optionId="${l.id}"
+                           value="qweasd"  th:text="${l.activityOptions}"/>
+				</p>
+			</div>
+        <span>其他意见和建议(250字以内)：</span>
+        <input type="textarea" rows="2" cols="2" name="other" id="other"/>
+			<a id="toupiao" class="c-button" >投票</a>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+
+			$("#toupiao").on("click",function () {
+                if (checkFund()){
+                    layer.msg("请至少选择一项");
+                    return;
+                }
+
+                var param_list = getAllParamList();
+                var param = {};
+				var params = JSON.stringify(param_list);
+				var activityid = $("#activityid").val();
+                var other = $("#other").val();
+                $.ajax({
+                    url : "/wechat/vote/client/saveOption",
+                    type : "POST",
+                    async : false,
+                    data : {
+                        params :params,
+                        activityid:activityid,
+                        other:other
+                    },
+                    success : function(r) {
+                        if (r.code=="0"){
+                            layer.alert("投票成功", function () {
+                                window.location.href = "/wechat/vote/client/toVoteResult?activityid="+r.activityid;
+                            });
+						}else{
+                            if (r.msg =="未绑定手机号" ) {
+                                layer.alert(r.msg+",请点击确定绑定方可投票", function () {
+                                    window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf922d893180913cc&redirect_uri=https://www.gaoxinzb.com/m/forwardBindPhone.action&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
+                                });
+                            }else{
+                                layer.msg(r.msg);
+                            }
+						}
+                    }
+                });
+            })
+		});
+        function checkFund() {
+            var checkOne = false;                    //判断是否被选择条件
+            var chboxVal = [];                       //存入被选中项的值
+            var checkBox = $('input[name = activityOptions]'); //获得得到所的复选框
+
+            for (var i = 0; i < checkBox.length; i++) {
+
+                //如果有1个被选中时（jquery1.6以上还可以用if(checkBox[i].prop('checked')) 去判断checkbox是否被选中）
+                if (checkBox[i].checked) {
+                    checkOne = true;
+                    chboxVal.push(checkBox[i].value)//将被选择的值追加到
+                };
+            };
+
+            if (checkOne) {
+                return false;
+            } else {
+                return true;
+            };
+
+        };
+
+        //组装保存源数据
+        function getAllParamList(){
+            var param_list = [];
+            $(".clear-account-cb").each(function () {
+                var $checkbox = $(this);
+                var obj = {};
+                if ( $checkbox.prop("checked")) {
+                    //obj.id = "123123";
+                    obj.activityId = $checkbox.attr("activityId");
+                    obj.openid = "openiddddd";
+                    obj.optionId = $checkbox.attr("optionId");
+                    param_list.push(obj);
+                }
+            });
+            return param_list;
+        }
+	</script>
+</body>
+</html>

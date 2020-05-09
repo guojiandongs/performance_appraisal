@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head th:include="portal/HomePageWechat/layout::header"></head>
+<header class="ui-header clearfix w75 h8 f46 pl3 pr3 color8 bg-color-success t-c o-h">
+    <div class="ui-header-l fl w5">
+        <b class="icon iconfont icon-sortlight"></b>
+    </div>
+    <div class="ui-header-c fl f30 w59">
+        山投信息
+    </div>
+</header>
+<link rel="stylesheet" type="text/css" href="/css/wechat/common.css" />
+<link rel="stylesheet" type="text/css" href="/css/wechat/minirefresh.css" />
+
+<script type="text/javascript" src="/js/wechat/common.js"></script>
+<script type="text/javascript" src="/js/wechat/minirefresh.js"></script>
+<aside class="ui-aside w40 bg-color-success f30" th:include="portal/HomePageWechat/layout::aside"></aside>
+<script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
+<div id="minirefresh" class="minirefresh-wrap">
+    <div class="minirefresh-scroll">
+        <ul class="data-list" id="listdata">
+            <div id="parent_find" class="p3" style="padding: 0">
+                <!-- vip尊享 -->
+                <div class="pt2 pr3 pb2 pl3 " th:each="op,iterStat:${optimizationList}" th:onclick="'buy(\''+${op.id}+'\')'">
+                    <div class="w69 h29 p2 mr1 t-c mt1 radius15  wdmain wdlist">
+                        <h2 class="t-l f32 p1 mb2" th:text="${op.borrowtitle}"></h2>
+                        <div class="box t-l mb2" style="font-size:12px;">
+                            <span>挂牌价格：</span>
+                            <span th:text="${op.borrowamount} + '元'"></span>
+
+                        </div>
+                        <div class="box t-l" style="font-size:12px;">
+                            <span>首个公告期限</span>
+                            <span th:text="${#dates.format(op.noticeperiodstart, 'yyyy年MM月dd日')}+'-'+${#dates.format(op.noticeperiodend, 'yyyy年MM月dd日')}"></span>
+
+                        </div>
+                          <div class="ui-progressBox mt2">
+                            <div class="progress-content " th:style="'width: '+${op.percentage}+'%'"></div>
+                        </div>
+                        <div class="clearfix mt1">
+                            <p class="t-l fl f28" th:text="'剩余金额：'+${op.borrowamount-op.hasinvestamount}+'元'"></p>
+                            <p class="t-l fr f28" th:text="${op.percentage}+'%'">%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+<!-- 底部导航 -->
+<nav th:include="portal/HomePageWechat/layout::nav" class="navbar navbar-default navbar-custom" style="margin-bottom: 0">
+</nav>
+<!--开始查询条数-->
+<input type="hidden" id="offset" value="0">
+<!--开始查询条数-->
+<input type="hidden" id="total" value="">
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        }
+    });
+
+    function buy(id){
+        window.location.href="/home/wechat/optimization/"+id;
+        //window.open("/home/optimization/"+id);
+    }
+    //翻页
+    var prefix = "/home/wechat"
+    var parent_find = document.querySelector('#parent_find');
+    var miniRefresh = new MiniRefresh({
+        container: '#minirefresh',
+        //下拉加载
+        down: {
+            callback: function() {
+                console.log("下拉")
+                location.reload();
+                miniRefresh.endDownLoading();
+            }
+        },
+        //上拉
+        up: {
+            //是否初始化加载上拉逻辑
+            isAuto: false,
+            isShowUpLoading:true,
+            offset:10,
+            callback: function() {
+                console.log("上拉");
+                var limit = $("#limit").val();
+                var offset = $("#offset").val();
+                $.ajax({
+                    url : prefix+"/optimization/weblistpagelist",
+                    type : "get",
+                    data : {
+                        'offset' : offset
+                    },
+                    success : function(r) {
+                        $("#total").val(r.total);
+                        $("#offset").val(r.offset);
+                        var list = r.rows;
+                        for (var i = 0;i<list.length;i++){
+                            var syje = list[i].borrowamount-list[i].hasinvestamount;
+                            var item = ""
+                            +	"<div class=\"pt2 pr3 pb2 pl3 \"  onclick=\"buy('"+list[i].id+"')\"> "
+                            +	"	<div class=\"w69 h29 p2 mr1 t-c mt1 radius15  wdmain wdlist\">"
+                            +	"		<h2 class=\"t-l f32 p1 mb2\" >"+list[i].borrowtitle+"</h2>"
+                            +	"		<div class=\"box t-l mb2\" style=\"font-size:12px;\">"
+                            +	"			<span>挂牌价格：</span>"
+                            +	"			<span >"+list[i].borrowamount+"元</span>"
+                            +	"		</div>"
+                            +	"		<div class=\"box t-l\" style=\"font-size:12px;\">"
+                            +	"			<span>首个公告期限</span>"
+                            +	"			<span >"+dateFormat("YYYY年mm月dd日", new Date(list[i].noticeperiodstart))+"-"+dateFormat("YYYY年mm月dd日", new Date(list[i].noticeperiodend))+"</span> "
+                            +	"		</div>"
+                            +	"		<div class=\"ui-progressBox mt2\">"
+                            +	"           <div class=\"progress-content \" style=\"width: "+list[i].percentage+"%\"></div>"
+                            +	"		</div>"
+                            +	"		<div class=\"clearfix mt1\">"
+                            +	"			<p class=\"t-l fl f28\" >剩余金额"+syje+"元</p>"
+                            +	"			<p class=\"t-l fr f28\">"+list[i].percentage+"%</p>"
+                            +	"		</div>"
+                            +	"	</div>"
+                            +	"</div>"
+                            $("#parent_find").append(item);
+                        }
+
+                        miniRefresh.endUpLoading(parent_find.children.length >= parseInt(r.total) ? true : false);
+                    }
+                });
+
+            }
+        }
+    });
+    function dateFormat(fmt, date) {
+        let ret;
+        let opt = {
+            "Y+": date.getFullYear().toString(),        // 年
+            "m+": (date.getMonth() + 1).toString(),     // 月
+            "d+": date.getDate().toString(),            // 日
+            "H+": date.getHours().toString(),           // 时
+            "M+": date.getMinutes().toString(),         // 分
+            "S+": date.getSeconds().toString()          // 秒
+            // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        };
+        for (let k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            };
+        };
+        return fmt;
+    }
+</script>
+    
+</body>
+
+</html>

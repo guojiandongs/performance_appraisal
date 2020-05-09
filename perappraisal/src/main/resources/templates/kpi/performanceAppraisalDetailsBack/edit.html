@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${performanceAppraisalDetailsBack.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">考核内容id：</label>
+								<div class="col-sm-8">
+									<input id="optionId" name="optionId" th:value="${performanceAppraisalDetailsBack.optionId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核内容：</label>
+								<div class="col-sm-8">
+									<input id="optionName" name="optionName" th:value="${performanceAppraisalDetailsBack.optionName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核人id：</label>
+								<div class="col-sm-8">
+									<input id="appraisalUserId" name="appraisalUserId" th:value="${performanceAppraisalDetailsBack.appraisalUserId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">被考核人id：</label>
+								<div class="col-sm-8">
+									<input id="examineeUserId" name="examineeUserId" th:value="${performanceAppraisalDetailsBack.examineeUserId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核人名称：</label>
+								<div class="col-sm-8">
+									<input id="appraisalUserName" name="appraisalUserName" th:value="${performanceAppraisalDetailsBack.appraisalUserName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核分数：</label>
+								<div class="col-sm-8">
+									<input id="appraisalScore" name="appraisalScore" th:value="${performanceAppraisalDetailsBack.appraisalScore}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核时间：</label>
+								<div class="col-sm-8">
+									<input id="appraisalTime" name="appraisalTime" th:value="${performanceAppraisalDetailsBack.appraisalTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核人手机号：</label>
+								<div class="col-sm-8">
+									<input id="appraisalMobile" name="appraisalMobile" th:value="${performanceAppraisalDetailsBack.appraisalMobile}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">考核信息id：</label>
+								<div class="col-sm-8">
+									<input id="appraisalId" name="appraisalId" th:value="${performanceAppraisalDetailsBack.appraisalId}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/kpi/performanceAppraisalDetailsBack/edit.js">
+	</script>
+</body>
+</html>
