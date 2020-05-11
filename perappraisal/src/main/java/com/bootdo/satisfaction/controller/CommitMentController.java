@@ -11,6 +11,10 @@ import com.bootdo.satisfaction.domain.DepartmentDTO;
 import com.bootdo.satisfaction.domain.ServiceResult;
 import com.bootdo.satisfaction.domain.UserDTO;
 import com.bootdo.satisfaction.serivce.TokenService;
+import com.bootdo.system.domain.DeptDO;
+import com.bootdo.system.domain.UserDO;
+import com.bootdo.system.service.DeptService;
+import com.bootdo.system.service.UserService;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiDepartmentListRequest;
@@ -55,6 +59,10 @@ public class CommitMentController {
     private PerformanceCommitmentContentService performanceCommitmentContentService;
     @Autowired
     private PerformanceCommitmentEvaluateService performanceCommitmentEvaluateService;
+    @Autowired
+    private DeptService deptService;
+    @Autowired
+    private UserService userService;
 
     private TokenService tokenService;
     private AppConfig appConfig;
@@ -86,7 +94,7 @@ public class CommitMentController {
     @ResponseBody
     public R login(@RequestParam(required=false) String authCode, HttpServletRequest request) {
 
-        String accessToken;
+        /*String accessToken;
 
         // 获取accessToken
         ServiceResult<String> accessTokenSr = tokenService.getAccessToken("commitment");
@@ -104,8 +112,13 @@ public class CommitMentController {
         }
 
         // 获取用户详情
-        UserDTO userDto = getUser(accessToken, userIdSr.getResult());
-        List<DepartmentDTO> departmentList = listDepartment();
+        UserDTO userDto = getUser(accessToken, userIdSr.getResult());*/
+        UserDTO userDto = new UserDTO();
+        userDto.setName("郭建东");
+        userDto.setUserid("21312312312");
+        userDto.setMobile("18335184320");
+        List<DeptDO> departmentList = deptService.list(new HashMap<>());
+        //List<DepartmentDTO> departmentList = listDepartment();
         Map<String,Object> map = new HashMap<>();
         /*List<DepartmentDTO> departmentList = new ArrayList<>();
         DepartmentDTO departmentDTO = new DepartmentDTO();
@@ -131,10 +144,13 @@ public class CommitMentController {
         map.put("departmentList",departmentList);
 
         for (int i = 0; i < departmentList.size(); i++) {
-            DepartmentDTO depart = departmentList.get(i);
-            Long departId = depart.getId();
-            List<UserDTO> userDTOList = listDepartmentUsers(departId);
-            depart.setUserDTOList(userDTOList);
+            DeptDO deptDO = departmentList.get(i);
+            Long departId = deptDO.getDeptId();
+            Map<String, Object> userMap = new HashMap<>();
+            userMap.put("deptId",departId);
+            List<UserDO> userDTOList = userService.list(userMap);
+            //List<UserDTO> userDTOList = listDepartmentUsers(departId);
+            deptDO.setUserDTOList(userDTOList);
         }
         HttpSession session = request.getSession(true);
         session.setAttribute("userDto", userDto);

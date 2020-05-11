@@ -71,12 +71,12 @@
 </div>
 <script type="text/javascript" th:inline="javascript">
     $(function(){
-        var corpid = [[${corpid}]];
+       /* var corpid = [[${corpid}]];
         dd.runtime.permission.requestAuthCode({
             corpId: corpid,
             onSuccess: function(result) {
                 console.log("result===="+result)
-                console.log("result.code================="+result.code)
+                console.log("result.code================="+result.code)*/
                 $.ajax({
                     url : "/commitment/login",
                     type : "POST",
@@ -84,9 +84,9 @@
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                         'Access-Control-Allow-Origin': '*'
                     },
-                    data : {
+                    /*data : {
                         authCode :result.code
-                    },
+                    },*/
                     success : function(r) {
                         if(r.code=='500'){
                             alert(r.msg);
@@ -108,11 +108,11 @@
                                                 var userList = departmentList[k].userDTOList;
                                                 $.each(userList, function(j,v) {
                                                     $.each(evaluateList, function(e,v) {
-                                                        if (evaluateList[e].commitmentId == contentList[d].id && evaluateList[e].commitmentDepartmentId == departmentList[k].id && evaluateList[e].commitmentUserId == userList[j].userid) {
+                                                        if (evaluateList[e].commitmentId == contentList[d].id && evaluateList[e].commitmentDepartmentId == departmentList[k].deptId && evaluateList[e].commitmentUserId == userList[j].userId) {
                                                             if(j!=0&&j%4==0){
                                                                 html+='<br/>'
                                                             }
-                                                            html += '<input style="width: 25px;" type="checkbox" checked value="' + contentList[d].id + "_" + contentList[d].commitmentContent + "_" + departmentList[k].id + "_" + departmentList[k].name + "_" + userList[j].name + "_" + userList[j].userid + '" name="checkbox">' +
+                                                            html += '<input style="width: 25px;" type="checkbox" checked value="' + contentList[d].id + "_" + contentList[d].commitmentContent + "_" + departmentList[k].deptId + "_" + departmentList[k].name + "_" + userList[j].name + "_" + userList[j].userId + '" name="checkbox">' +
                                                                 userList[j].name
                                                             '</>'
                                                         }
@@ -134,7 +134,7 @@
                                         if(j!=0&&j%4==0){
                                             html+='<br/>'
                                         }
-                                            html+='<input style="margin-left: 10px" type="checkbox" value="'+contentList[d].id+"_"+contentList[d].commitmentContent+"_"+departmentList[k].id+"_"+departmentList[k].name+"_"+userList[j].name+"_"+userList[j].userid+'" name="checkbox">'+
+                                            html+='<input style="margin-left: 10px" type="checkbox" value="'+contentList[d].id+"_"+contentList[d].commitmentContent+"_"+departmentList[k].deptId+"_"+departmentList[k].name+"_"+userList[j].name+"_"+userList[j].userId+'" name="checkbox">'+
                                                 userList[j].name
                                             '</>'
                                     });
@@ -143,11 +143,11 @@
                             });
                         }
                     }
-                });
+                /*});
             },
             onFail : function(err) {
                 layer.msg("err========="+err);
-            }
+            }*/
         })
     });
 

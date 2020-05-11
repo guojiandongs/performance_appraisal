@@ -108,7 +108,7 @@ public class SatisfactionController {
     @ResponseBody
     public R login(@RequestParam(required=false) String authCode, HttpServletRequest request) {
 
-        /*String accessToken;
+        String accessToken;
 
         // 获取accessToken
         ServiceResult<String> accessTokenSr = tokenService.getAccessToken("kpi");
@@ -126,16 +126,16 @@ public class SatisfactionController {
         }
 
         // 获取用户详情
-        UserDTO userDto = getUser(accessToken, userIdSr.getResult());*/
+        UserDTO userDto = getUser(accessToken, userIdSr.getResult());
         //List<DepartmentDTO> departmentList = listDepartment();
         Map<String,Object> map = new HashMap<>();
-        UserDTO userDto = new UserDTO();
-        /*userDto.setName("郭建东");
+        /*UserDTO userDto = new UserDTO();
+        *//*userDto.setName("郭建东");
         userDto.setUserid("1");
-        userDto.setMobile("13333431780");*/
+        userDto.setMobile("13333431780");*//*
         userDto.setName("郭建东");
         userDto.setUserid("1");
-        userDto.setMobile("18335184320");
+        userDto.setMobile("18335184320");*/
         map.put("userDto",userDto);
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("mobile",userDto.getMobile());

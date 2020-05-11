@@ -24,12 +24,12 @@
 </div>
 	<script type="text/javascript" th:inline="javascript">
 		$(function(){
-		    /*var corpid = [[${corpid}]];
+		    var corpid = [[${corpid}]];
             dd.runtime.permission.requestAuthCode({
                 corpId: corpid,
                 onSuccess: function(result) {
                     console.log("result===="+result)
-                    console.log("result.code================="+result.code)*/
+                    console.log("result.code================="+result.code)
                     $.ajax({
                         url : "/satisfaction/login",
                         type : "POST",
@@ -37,9 +37,9 @@
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                             'Access-Control-Allow-Origin': '*'
                         },
-                        /*data : {
+                        data : {
                             authCode :result.code
-                        },*/
+                        },
                         success : function(r) {
                             if(r.code=='500'){
                                 alert(r.msg);
@@ -56,9 +56,9 @@
                             $("#department").append(html);
                         }
                     });
-            /*},
+            },
             onFail : function(err) {}
-            })*/
+            })
 		});
 	</script>
 </body>

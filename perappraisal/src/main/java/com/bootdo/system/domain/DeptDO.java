@@ -1,7 +1,9 @@
 package com.bootdo.system.domain;
 
-import java.io.Serializable;
+import com.bootdo.satisfaction.domain.UserDTO;
 
+import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -24,6 +26,7 @@ public class DeptDO implements Serializable {
 	private Integer orderNum;
 	//是否删除  -1：已删除  0：正常
 	private Integer delFlag;
+    private List<UserDO> userDTOList;
 
 	/**
 	 * 设置：
@@ -86,7 +89,15 @@ public class DeptDO implements Serializable {
 		return delFlag;
 	}
 
-	@Override
+    public List<UserDO> getUserDTOList() {
+        return userDTOList;
+    }
+
+    public void setUserDTOList(List<UserDO> userDTOList) {
+        this.userDTOList = userDTOList;
+    }
+
+    @Override
 	public String toString() {
 		return "DeptDO{" +
 				"deptId=" + deptId +
