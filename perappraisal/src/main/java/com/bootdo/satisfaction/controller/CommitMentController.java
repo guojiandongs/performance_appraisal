@@ -94,7 +94,7 @@ public class CommitMentController {
     @ResponseBody
     public R login(@RequestParam(required=false) String authCode, HttpServletRequest request) {
 
-        /*String accessToken;
+        String accessToken;
 
         // 获取accessToken
         ServiceResult<String> accessTokenSr = tokenService.getAccessToken("commitment");
@@ -112,11 +112,11 @@ public class CommitMentController {
         }
 
         // 获取用户详情
-        UserDTO userDto = getUser(accessToken, userIdSr.getResult());*/
-        UserDTO userDto = new UserDTO();
+        UserDTO userDto = getUser(accessToken, userIdSr.getResult());
+        /*UserDTO userDto = new UserDTO();
         userDto.setName("郭建东");
         userDto.setUserid("21312312312");
-        userDto.setMobile("18335184320");
+        userDto.setMobile("18335184320");*/
         List<DeptDO> departmentList = deptService.list(new HashMap<>());
         //List<DepartmentDTO> departmentList = listDepartment();
         Map<String,Object> map = new HashMap<>();
@@ -352,20 +352,22 @@ public class CommitMentController {
             String[] optionArray = options.split(",");
             for (int i = 0; i < optionArray.length; i++) {
                 String commitmentContentStr = optionArray[i];
-                String[] commitmentContentArray = commitmentContentStr.split("_");
                 PerformanceCommitmentEvaluateDO evaluateDO = new PerformanceCommitmentEvaluateDO();
-                String commitmentId = commitmentContentArray[0];
-                String commitmentContent = commitmentContentArray[1];
-                String departmentId = commitmentContentArray[2];
-                String departmentName = commitmentContentArray[3];
-                String userName = commitmentContentArray[4];
-                String userId = commitmentContentArray[5];
-                evaluateDO.setCommitmentId(Integer.parseInt(commitmentId));
-                evaluateDO.setCommitmentContent(commitmentContent);
-                evaluateDO.setCommitmentDepartmentId(Integer.parseInt(departmentId));
-                evaluateDO.setCommitmentDepartmentName(departmentName);
-                evaluateDO.setCommitmentUserId(userId);
-                evaluateDO.setCommitmentUserName(userName);
+                if(!commitmentContentStr.equals("")){
+                    String[] commitmentContentArray = commitmentContentStr.split("_");
+                    String commitmentId = commitmentContentArray[0];
+                    String commitmentContent = commitmentContentArray[1];
+                    String departmentId = commitmentContentArray[2];
+                    String departmentName = commitmentContentArray[3];
+                    String userName = commitmentContentArray[4];
+                    String userId = commitmentContentArray[5];
+                    evaluateDO.setCommitmentId(Integer.parseInt(commitmentId));
+                    evaluateDO.setCommitmentContent(commitmentContent);
+                    evaluateDO.setCommitmentDepartmentId(Integer.parseInt(departmentId));
+                    evaluateDO.setCommitmentDepartmentName(departmentName);
+                    evaluateDO.setCommitmentUserId(userId);
+                    evaluateDO.setCommitmentUserName(userName);
+                }
                 evaluateDO.setAppraisalUserId(userDto.getUserid());
                 evaluateDO.setCommitmentDate(new Date());
                 performanceCommitmentEvaluateService.save(evaluateDO);
@@ -376,6 +378,7 @@ public class CommitMentController {
             return R.ok(map);
         }catch (Exception e){
             System.out.println("添加考核失败原因====="+e);
+            e.printStackTrace();
             return R.error("提交失败，请稍后再试！");
         }
     }
