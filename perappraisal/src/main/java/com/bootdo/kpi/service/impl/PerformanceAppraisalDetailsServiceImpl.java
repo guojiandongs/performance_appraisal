@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -81,19 +82,20 @@ public class PerformanceAppraisalDetailsServiceImpl implements PerformanceApprai
 		xssfWorkbook.setSheetName(0,"考核记录");
 		//创建表头
 		XSSFRow head = sheet.createRow(0);
-		String[] heads = {"序号","被考核人","被考核人部门","考核分数"};
+		String[] heads = {"序号","被考核人","被考核人部门","考核平均分"};
 		for(int i = 0;i < heads.length;i++){
 			XSSFCell cell = head.createCell(i);
 			cell.setCellValue(heads[i]);
 		}
 
 		List<PerformanceAppraisalDetailsDO> list = performanceAppraisalDetailsDao.excelExport();
+		DecimalFormat df = new DecimalFormat("0.00");
 		for (int i = 0;i < list.size();i++) {
 			XSSFRow row = sheet.createRow(i+1);
 			row.createCell(0).setCellValue(list.get(i).getId());
 			row.createCell(1).setCellValue(list.get(i).getUserName());
 			row.createCell(2).setCellValue(list.get(i).getExamineeUserDept());
-			row.createCell(3).setCellValue(list.get(i).getAppraisalScore());
+			row.createCell(3).setCellValue(df.format(list.get(i).getAvgScore()));
 		}
 
 		//准备将Excel的输出流通过response输出到页面下载

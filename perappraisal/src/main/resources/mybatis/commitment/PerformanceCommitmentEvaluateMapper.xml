@@ -106,6 +106,7 @@
 				count(1) commitment_Count
 		FROM performance_commitment_evaluate d
 		group by d.commitment_content,d.commitment_user_name
+		order by d.commitment_content
     </select>
 
 </mapper>

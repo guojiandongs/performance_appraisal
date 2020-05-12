@@ -41,10 +41,21 @@ public class PerformanceAppraisalDetailsDO implements Serializable {
     private String userName;
     //被考核人部门
     private String examineeUserDept;
+	//考核平均分数
+	private Double avgScore;
+
+	public Double getAvgScore() {
+		return avgScore;
+	}
+
+	public void setAvgScore(Double avgScore) {
+		this.avgScore = avgScore;
+	}
 
 	public String getExamineeUserDept() {
 		return examineeUserDept;
 	}
+
 
 	public void setExamineeUserDept(String examineeUserDept) {
 		this.examineeUserDept = examineeUserDept;
