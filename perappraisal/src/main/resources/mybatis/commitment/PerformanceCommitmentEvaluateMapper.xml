@@ -99,4 +99,13 @@
 		</foreach>
 	</delete>
 
+	<select id="excelExport" resultType="com.bootdo.commitment.domain.PerformanceCommitmentEvaluateDO">
+		SELECT d.commitment_content ,
+				d.commitment_user_name,
+				d.commitment_department_name,
+				count(1) commitment_Count
+		FROM performance_commitment_evaluate d
+		group by d.commitment_content,d.commitment_user_name
+    </select>
+
 </mapper>

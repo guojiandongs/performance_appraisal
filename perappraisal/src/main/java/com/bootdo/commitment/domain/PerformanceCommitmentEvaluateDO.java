@@ -33,7 +33,17 @@ public class PerformanceCommitmentEvaluateDO implements Serializable {
 	private String appraisalUserId;
 	//考评时间
 	private Date commitmentDate;
+	//考评时间
+	private Integer commitmentCount;
 
+
+	public Integer getCommitmentCount() {
+		return commitmentCount;
+	}
+
+	public void setCommitmentCount(Integer commitmentCount) {
+		this.commitmentCount = commitmentCount;
+	}
 
 	/**
 	 * 设置：唯一标识

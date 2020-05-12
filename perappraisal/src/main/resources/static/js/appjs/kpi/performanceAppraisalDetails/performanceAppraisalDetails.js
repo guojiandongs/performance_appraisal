@@ -92,6 +92,9 @@ function load() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
+function exportExcel() {
+    location.href=prefix + "/excel";
+}
 function add() {
 	layer.open({
 		type : 2,

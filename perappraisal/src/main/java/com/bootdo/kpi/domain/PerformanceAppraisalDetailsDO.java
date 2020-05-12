@@ -39,6 +39,16 @@ public class PerformanceAppraisalDetailsDO implements Serializable {
     private String opinion;
     //被考核人名字
     private String userName;
+    //被考核人部门
+    private String examineeUserDept;
+
+	public String getExamineeUserDept() {
+		return examineeUserDept;
+	}
+
+	public void setExamineeUserDept(String examineeUserDept) {
+		this.examineeUserDept = examineeUserDept;
+	}
 
 	/**
 	 * 设置：序号

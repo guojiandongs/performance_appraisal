@@ -29,4 +29,6 @@ public interface PerformanceCommitmentEvaluateDao {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	List<PerformanceCommitmentEvaluateDO> excelExport();
 }

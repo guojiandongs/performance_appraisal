@@ -2,6 +2,8 @@ package com.bootdo.commitment.service;
 
 import com.bootdo.commitment.domain.PerformanceCommitmentEvaluateDO;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +29,6 @@ public interface PerformanceCommitmentEvaluateService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+    void exportExcel(HttpServletResponse response) throws IOException;
 }

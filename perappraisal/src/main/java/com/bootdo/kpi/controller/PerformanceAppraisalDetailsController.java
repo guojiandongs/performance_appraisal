@@ -1,5 +1,6 @@
 package com.bootdo.kpi.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import com.bootdo.kpi.service.PerformanceAppraisalDetailsService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 
@@ -113,5 +116,15 @@ public class PerformanceAppraisalDetailsController {
 		performanceAppraisalDetailsService.batchRemove(ids);
 		return R.ok();
 	}
-	
+
+	/**
+	 * 导出
+	 */
+	@RequestMapping( "/excel")
+	@ResponseBody
+	@RequiresPermissions("kpi:performanceAppraisalDetails:performanceAppraisalDetails")
+	public void excel(HttpServletResponse response) throws IOException {
+		performanceAppraisalDetailsService.exportExcel(response);
+	}
+
 }

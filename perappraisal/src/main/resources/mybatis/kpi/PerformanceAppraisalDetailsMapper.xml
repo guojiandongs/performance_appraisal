@@ -126,4 +126,15 @@
 		</where>
 			GROUP BY d.appraisal_id,t.name,d.appraisal_user_id)a group by a.name
     </select>
+
+    <select id="excelExport" resultType="com.bootdo.kpi.domain.PerformanceAppraisalDetailsDO">
+        SELECT (@i:=@i+1)  id, u.username user_name,dept.`name` examinee_User_Dept,sum(d.appraisal_score) appraisal_Score
+		FROM performance_appraisal_details d
+		left join sys_user u
+		on d.examinee_user_id = u.user_id
+		left join sys_dict dept
+		on u.dept_id = dept.id,
+		(select @i:=0)  t2
+		group by u.username ,dept.`name`
+    </select>
 </mapper>

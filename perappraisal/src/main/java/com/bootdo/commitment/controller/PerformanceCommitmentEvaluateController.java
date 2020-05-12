@@ -1,5 +1,6 @@
 package com.bootdo.commitment.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import com.bootdo.commitment.service.PerformanceCommitmentEvaluateService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 承诺书评价
@@ -112,6 +115,16 @@ public class PerformanceCommitmentEvaluateController {
 	public R remove(@RequestParam("ids[]") Integer[] ids){
 		performanceCommitmentEvaluateService.batchRemove(ids);
 		return R.ok();
+	}
+
+	/**
+	 * 导出
+	 */
+	@RequestMapping( "/excel")
+	@ResponseBody
+	@RequiresPermissions("commitment:performanceCommitmentEvaluate:performanceCommitmentEvaluate")
+	public void excel(HttpServletResponse response) throws IOException {
+		performanceCommitmentEvaluateService.exportExcel(response);
 	}
 	
 }

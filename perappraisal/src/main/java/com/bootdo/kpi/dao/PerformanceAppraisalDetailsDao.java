@@ -33,4 +33,6 @@ public interface PerformanceAppraisalDetailsDao {
 	int batchRemove(Integer[] ids);
 
 	List<DetailTotal>  total(Map<String, Object> map);
+
+	List<PerformanceAppraisalDetailsDO> excelExport();
 }

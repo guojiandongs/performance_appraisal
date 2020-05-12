@@ -4,6 +4,8 @@ import com.bootdo.kpi.domain.DetailTotal;
 import com.bootdo.kpi.domain.PerformanceAppraisalDetailsDO;
 import com.bootdo.kpi.domain.PerformanceAppraisalUserDO;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,4 +33,6 @@ public interface PerformanceAppraisalDetailsService {
 	int batchRemove(Integer[] ids);
 
     List<DetailTotal>  total(Map<String, Object> map);
+
+    void exportExcel(HttpServletResponse response) throws IOException;
 }
