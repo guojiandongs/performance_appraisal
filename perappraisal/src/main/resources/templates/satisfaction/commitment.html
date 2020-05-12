@@ -48,14 +48,16 @@
 <script type="text/javascript"  th:include="portal/HomePageWechat/layout::asideJS"></script>
 <body>
 <form id="saveCommitmentForm">
-    <th:block th:each="content,conSate:${contentList}">
-        <a href="#" class="list-group-item active" th:text="${content.commitmentContent}">
-        </a>
-        <div th:id="department+${conSate.index}">
+    <div id="checkall">
+        <th:block th:each="content,conSate:${contentList}">
+            <a href="#" class="list-group-item active" th:text="${content.commitmentContent}">
+            </a>
+            <div th:id="department+${conSate.index}">
 
-        </div>
-        <input type="hidden" id="iscommitment" value="false"/>
-    </th:block>
+            </div>
+            <input type="hidden" id="iscommitment" value="false"/>
+        </th:block>
+    </div>
 </form>
 <div class="btn">
     <button id="button_id" type="button" th:onclick="'saveCommitment()'">确认提交</button>
@@ -71,12 +73,12 @@
 </div>
 <script type="text/javascript" th:inline="javascript">
     $(function(){
-       /* var corpid = [[${corpid}]];
+        var corpid = [[${corpid}]];
         dd.runtime.permission.requestAuthCode({
             corpId: corpid,
             onSuccess: function(result) {
                 console.log("result===="+result)
-                console.log("result.code================="+result.code)*/
+                console.log("result.code================="+result.code)
                 $.ajax({
                     url : "/commitment/login",
                     type : "POST",
@@ -84,9 +86,9 @@
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                         'Access-Control-Allow-Origin': '*'
                     },
-                    /*data : {
+                    data : {
                         authCode :result.code
-                    },*/
+                    },
                     success : function(r) {
                         if(r.code=='500'){
                             alert(r.msg);
@@ -134,20 +136,22 @@
                                         if(j!=0&&j%4==0){
                                             html+='<br/>'
                                         }
-                                            html+='<input style="margin-left: 10px" type="checkbox" value="'+contentList[d].id+"_"+contentList[d].commitmentContent+"_"+departmentList[k].deptId+"_"+departmentList[k].name+"_"+userList[j].name+"_"+userList[j].userId+'" name="checkbox">'+
+                                            html+='<input style="margin-left: 10px" type="checkbox" onchange="useronchange();" value="'+contentList[d].id+"_"+contentList[d].commitmentContent+"_"+departmentList[k].deptId+"_"+departmentList[k].name+"_"+userList[j].name+"_"+userList[j].userId+'" name="checkbox">'+
                                                 userList[j].name
                                             '</>'
                                     });
                                 });
                                 $("#department"+d).append(html);
                             });
+                            var html = '<input onchange="checkonchange()" style="margin-left: 10px;" id="checkboxall" type="checkbox" name="checkboxall" value="所有员工都不符合"/>所有员工都不符合';
+                            $("#checkall").append(html);
                         }
                     }
-                /*});
+                });
             },
             onFail : function(err) {
                 layer.msg("err========="+err);
-            }*/
+            }
         })
     });
 
@@ -165,8 +169,9 @@
                 options += $(this).val() + ",";
             }
         });
-        if(options.length==0){
-            layer.msg("请至少勾选一个选项！");
+        var ischecked = $("input[name='checkboxall']:checked").is(':checked');
+        if(options.length==0&&!ischecked){
+            layer.msg("请至少勾选一名员工！,或勾选所有员工都不符合");
             return;
         }
         $("#loginbut").removeClass("div-not-click");
@@ -190,6 +195,14 @@
                 }
             }
         })
+    }
+
+    function useronchange(){
+        $("[name='checkboxall']").prop("checked", false);
+    }
+
+    function checkonchange(){
+        $("[name='checkbox']").prop("checked", false);
     }
 </script>
 </body>
